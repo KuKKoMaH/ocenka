@@ -1,0 +1,24 @@
+mixin table( )
+  .table__container
+    .table__title
+      .table__number №
+      .table__address Адрес квартиры
+      .table__date Срок действия
+      .table__certificate № Сертификата
+  
+    .table__rows
+
+    .table__template
+      .table__row
+        .table__cell.table__number
+          .table__label №
+          .table__value {{i}}
+        .table__cell.table__address
+          .table__label Адрес квартиры
+          .table__value {{address}}
+        .table__cell.table__date
+          .table__label Срок действия
+          .table__value {{expirationDate}}
+        .table__cell.table__certificate
+          .table__label № Сертификата
+          .table__value {{id}}

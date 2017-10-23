@@ -1,0 +1,10 @@
+include ../popup/popup
+
++popup()#popup-confirm
+  .popup__text Подтвердите номера телефона
+  .popup__desc На указанный номер отправлено беслпатное СМС-сообшение с кодом проверки подлинности номера.
+  form(novalidate)
+    .popup__input: +input('Код')
+    +button('input', true)(value='Подтвердить')
+    .popup__error
+  .popup__footer: a.popup__resend Отправить повторно

@@ -1,0 +1,12 @@
+include ../input/input
+- var items = ['1. Оформление заказа', '2. оплата', '3. загрузка документов']
+
+mixin form(step)
+  .form
+    .form__wrapper
+      .form__header
+        each item, i in items
+          .form__title(class=(i === step && 'form__title--active'))= item
+      .form__body
+        if(block)
+          block

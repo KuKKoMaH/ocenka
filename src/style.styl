@@ -1,0 +1,86 @@
+/*!!
+ * Theme Name: odobreno
+ */
+
+@import "owl.carousel/dist/assets/owl.carousel.css";
+@import "magnific-popup/dist/magnific-popup.css";
+@import "baron/baron.css";
+@import "bootstrap-datepicker/dist/css/bootstrap-datepicker.standalone.css";
+@import "suggestions-jquery/dist/css/suggestions.css";
+
+@import "stylus/_vars.styl";
+@import "stylus/_mixins.styl";
+@import "stylus/_grid.styl";
+
+@font-face {
+  font-family: 'DIN Pro Cond';
+  src: url('fonts/subset-DINPro-CondensedBold.eot');
+  src: url('fonts/subset-DINPro-CondensedBold.eot?#iefix') format('embedded-opentype'),
+          url('fonts/subset-DINPro-CondensedBold.woff2') format('woff2'),
+          url('fonts/subset-DINPro-CondensedBold.woff') format('woff'),
+          url('fonts/subset-DINPro-CondensedBold.ttf') format('truetype'),
+          url('fonts/subset-DINPro-CondensedBold.svg#DINPro-CondensedBold') format('svg');
+  font-weight: bold;
+  font-style: normal;
+}
+
+
+html
+  margin: 0
+  padding: 0
+  font-family: 'Ubuntu', sans-serif
+  font-size: $font-size
+  line-height: $line-height
+  height: 100%
+
+body
+  margin: 0
+  padding: 0
+  background: #F0F5F8
+  -webkit-font-smoothing: antialiased
+  -webkit-text-size-adjust: 100%
+  -ms-text-size-adjust: 100%
+  min-height: 100%
+  position: relative
+  display: flex
+  flex-direction: column
+
+::-webkit-scrollbar
+  width: 0
+
+*, *:before, *:after
+  box-sizing: border-box
+
+img
+  max-width: 100%
+  height: auto
+
+a
+  color: inherit
+  text-decoration: none
+  //&:hover
+button
+  color: inherit
+
+
+@import "modules/header/header.styl"
+@import "modules/menu/menu.styl"
+@import "modules/input/input.styl"
+@import "modules/button/button.styl"
+@import "modules/last/last.styl"
+@import "modules/video/video.styl"
+@import "modules/works/works.styl"
+@import "modules/advantages/advantages.styl"
+@import "modules/footer/footer.styl"
+@import "modules/popup/popup.styl"
+@import "modules/registry/registry.styl"
+@import "modules/search/search.styl"
+@import "modules/form/form.styl"
+@import "modules/done/done.styl"
+@import "modules/profile/profile.styl"
+@import "modules/pagination/pagination.styl"
+@import "modules/docs/docs.styl"
+@import "modules/table/table.styl"
+@import "modules/partners/partners.styl"
+@import "modules/partners-slider/partners-slider.styl"
+@import "modules/register/register.styl"

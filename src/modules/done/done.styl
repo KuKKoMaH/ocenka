@@ -1,0 +1,44 @@
+.done
+  text-align: center
+
+  &__title
+    font-size: 46px
+    font-weight: bold
+    color: #4476b0
+
+  &__logo
+    display: inline-block
+    vertical-align: sub
+    background-image: url(sprite-logo-big.svg)
+    margin-right: 16px
+
+    @media (max-width: $breakpoint-sm - 1)
+      display: block
+      margin: 0 auto
+
+  &__text
+    font-size: 19px
+    font-weight: 300
+    color: #505050
+    line-height: 1.4
+    margin: 20px auto 100px
+    max-width: 440px
+
+    @media (max-width: $breakpoint-sm - 1)
+      margin-bottom: 20px
+
+
+  &__button
+    display: inline-block
+    vertical-align: middle
+    background: #f0f5f8
+    height: 64px
+    line-height: 64px
+    color: #879eae
+    font-size: 15px
+    font-weight: 500
+    text-transform: uppercase
+    border-radius: 4px
+    padding: 0 34px
+    margin: 15px 15px
+    cursor: pointer

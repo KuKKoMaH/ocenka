@@ -1,0 +1,24 @@
+doctype html
+html
+  head
+    title Hello
+    meta(http-equiv="X-UA-Compatible" content="IE=edge")
+    meta(http-equiv="content-type" content="text/html; charset=utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    link(href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,700&amp;subset=cyrillic" rel="stylesheet")
+    link(rel="stylesheet" media="all" href="style.css")
+    //link(rel="shortcut icon" href="/favicon.ico")
+
+  body
+    block body
+    .popups
+      include ../modules/popup-login/popup-login
+      include ../modules/popup-confirm/popup-confirm
+
+  script.
+    var JS_PUBLIC_PATH = 'js/';
+    var SUGGEST_KEY = "fdd27007fe8069d376aa269885162a16ef0e55d4";
+    var API_URL = 'https://test-odobreno.srg-it.ru/';
+    var ITEMS_PER_PAGE = 20;
+    var PARTNERS = { 1: "TEST", 2: "TEST2", 3: "TEST3" }
+  script(src='js/app.js')

@@ -1,0 +1,70 @@
+include ../form/form
+
++form(2)
+  .form__spinner
+  .form__error Заказ не найден
+  form#form-docs.form__form(action='order_done.html' novalidate)
+    .form__order Заказ № 3333
+    .docs__row
+      .docs__wrapper
+        .docs__title Правоустанавливающие документы
+        .docs__doc
+          .docs__name Свидетельство о государственной регистрации права
+          .docs__desc (выданное до 15.07.2016)
+        .docs__doc
+          .docs__name Основание / договор приеобретения
+          .docs__desc в том числе: договор кули продажи недвижимого имущества, договор участия в долевом строительстве, договор уступки прав требования по  договору участия в долевом строительстве, договор участия в жилищно-строительном кооперативе, инвестиционный договор, другие аналогичные договоры, а также договор дарения, договор меня, договор передачи (приватизация), решение суда, свидетельство о наследстве и пр.
+        .docs__doc
+          .docs__name Иные правоустанавливающие документы
+          .docs__desc перечисленные в Свидетельстве а государственной регистрации права собственности на недвижимое имущество, или в Выписке из Единого государственного реестра прав на недвижимоеимущество и сделок с ним (далее – ЕГРП), или в Выписке из Единого государственного реестра недвижимости (далее – ЕГРН).
+      .docs__aside#LEGAL_DOCUMENT
+        .docs__upload
+          input.docs__input(type='file')
+          |Прикрепить#[br]документы
+        //.docs__item
+        //  |Договор 2017.doc
+        //  button.docs__delete
+        //.docs__item
+        //  |Договор 2017.doc Договор 2017.doc Договор 2017.doc
+        //  button.docs__delete
+        //.docs__item
+        //  |Договор 2017.doc
+        //  button.docs__delete
+    .docs__row
+      .docs__wrapper
+        .docs__title Технические документы
+        .docs__doc
+          .docs__name Поэтажный план БТИ
+          .docs__desc (документ включает в себя все помещения, находящиеся в указанной квартире с отмеченными на нем несущими стенами, проемами (оконнымы и дверными), перегородками и др.)
+        .docs__doc
+          .docs__name Экспликация
+          .docs__desc (документ в виде таблицы, в котором расписаны наименование и площади всех помещений)
+        .docs__doc
+          .docs__name Технический паспорт
+          .docs__desc Документ, содержащий в себе поэтажный план квартиры и список всех помещений с указанием их площади и назначения.
+      .docs__aside#TECHNICAL_DOCUMENT
+        .docs__upload
+          input.docs__input(type='file')
+          |Прикрепить#[br]документы
+        //.docs__item
+        //  | Договор 2017.doc
+        //  button.docs__delete
+        //.docs__item
+        //  | Договор 2017.doc Договор 2017.doc Договор 2017.doc
+        //  button.docs__delete
+        //.docs__item
+        //  | Договор 2017.doc
+        //  button.docs__delete
+    .form__checkbox
+      input(type='checkbox' id='form-legalPersonOwner')
+      label(for='form-legalPersonOwner') Собственником является юридическое лицо
+    .form__checkbox
+      input(type='checkbox' id='form-minorOwner')
+      label(for='form-minorOwner') Собственником является несовершеннолетнее лицо
+    .form__checkbox
+      input(type='checkbox' id='form-onerousTransaction')
+      label(for='form-onerousTransaction') Объект недвижимости был приобретен продавцом в период брака на основании возмездной сделки
+    .docs__row
+      .docs__wrapper
+      .docs__aside
+        button.form__button#form-confirm Готово

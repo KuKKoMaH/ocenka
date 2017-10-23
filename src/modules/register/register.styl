@@ -1,0 +1,162 @@
+.register
+  display: block
+  flex: 1
+  background: url(register_bg.jpg) 50% 50%
+  background-size: cover
+  padding-top: 35px
+  color: #ffffff
+  @media (max-width: $breakpoint-md - 1)
+    padding: 35px 8px 0
+
+  &__block
+    display: flex
+    align-items: center
+
+    @media (max-width: $breakpoint-md - 1)
+      flex-direction: column-reverse
+
+  &__left
+    width: 450px
+    max-width: 450px
+    flex: 1 0 auto
+    @media (max-width: $breakpoint-md - 1)
+      width: 100%
+      max-width: 100%
+  &__right
+    flex: 1
+    overflow: hidden
+    padding-left: 30px
+    @media (max-width: $breakpoint-md - 1)
+      width: 100%
+      padding: 0
+
+  &__logo,
+  &__vtb
+    display: inline-block
+    vertical-align: middle
+
+  &__logo
+    background: url(../menu/sprite-logo-white.svg)
+
+  &__vtb
+    float: right
+    background: url(../header/sprite-vtb-small.svg)
+
+  &__title
+    font-size: 50px
+    line-height: 1.2
+    font-weight: 300
+
+    @media (max-width: $breakpoint-md - 1)
+      text-align: center
+
+  &__input
+    display: block
+    width: 100%
+    background: rgba(#004fa5, .1)
+    border: 2px solid #fff
+    border-radius: 10px
+    font-size: 21px
+    font-family: inherit
+    line-height: 1
+    padding: 19px 25px
+    outline: 0
+    margin-bottom: 20px
+    color: #595959
+
+  &__button
+    display: block
+    width: 100%
+    border: 0
+    background: #0f933e
+    color: #ffffff
+    height: 64px
+    line-height: 1.4
+    font-size: 25px
+    font-family: inherit
+    font-weight: bold
+    border-radius: 10px
+    anim()
+    cursor: pointer
+    outline: 0
+
+    &:hover
+      background: #289C2D
+
+    &:disabled
+      background: #A2D5A6
+      cursor: auto
+
+  &__link
+    font-size: 21px
+    text-decoration: underline
+    display: inline-block
+    margin-top: 60px
+
+
+    &:hover
+      text-decoration: none
+
+    @media (max-width: $breakpoint-md - 1)
+      display: block
+      text-align: center
+
+  &__partners
+    font-size: 25px
+    margin-top: 8px
+    margin-bottom: 20px
+    margin-left: 20px
+
+
+  .wpcf7-form-control-wrap
+    position: relative
+    display: block
+
+  .wpcf7-not-valid-tip
+    display: block
+    top: 100%
+    font-size: 14px
+    line-height: 1
+    position: absolute
+    left: 10px
+
+  .wpcf7-response-output
+    display: none !important
+
+  .ajax-loader
+    position: absolute
+
+  &-popup
+    position: relative
+    display: block
+    background: #ffffff
+    max-width: 610px
+    margin: 0 auto
+    text-align: center
+    padding: 60px 0
+
+    &:after
+      content: ''
+      display: block
+      position: absolute
+      background: url(baloon.png)
+      width: 445px
+      height: 576px
+      left: 100%
+      margin-left: -65px
+      top: 0
+      margin-top: -105px
+      z-index: 1000
+
+      @media (max-width: $breakpoint-md - 1)
+        display: none
+        background: none
+
+    &__title
+      font-size: 29px
+      color: #0068ff
+      margin-bottom: 28px
+
+    &__text
+      font-size: 25px
+

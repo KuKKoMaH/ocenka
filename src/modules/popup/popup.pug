@@ -1,0 +1,8 @@
+include ../input/input
+include ../button/button
+
+mixin popup()
+  .popup&attributes(attributes)
+    .popup__close
+    if block
+      block

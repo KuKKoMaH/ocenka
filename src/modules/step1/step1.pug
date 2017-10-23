@@ -1,0 +1,47 @@
+include ../form/form
+
++form(0)
+  .form__spinner
+  .form__error Заказ не найден
+  form#form-order(action='order_step3.html' novalidate).form__form
+    .form__order Заказ № 3333
+    .form__label
+      | Введите данные объекта
+      .form__mark: .form__mark-content Время показа объекта будет дополнительно согласовано с Вами нашим специалистом.
+    .form__row.form__container
+      .form__address: +input('Адрес')(id='form-address' disabled)
+      .form__apart: +input('Квартира')(id='form-flat' disabled)
+    .form__row.form__container
+      +input('Предполагаемая цена продажи')(id='form-sellingPrice')
+    .form__label Введите ваши данные
+    .form__row.form__container
+      .form__half: +input('Фамилия')(id='form-name')
+      .form__half: +input('Имя')(id='form-surname')
+    .form__row.form__container
+      .form__half: +input('Отчество')(id='form-patronymic')
+      .form__half: +input('Номер телефона')(type='phone' id='form-phone' disabled)
+    .form__row.form__container
+      .form__half
+        .form__label Время показа объекта
+        .form__container
+          .form__half: +input('Дата')(id='form-date')
+          .form__half: +input('Время', false, true)(id='form-time')
+            option(value='')
+            option(value='FROM_9_TO_12') С 9 до 12
+            option(value='FROM_12_TO_16') С 12 до 16
+            option(value='FROM_16_TO_19') С 16 до 19
+      .form__half
+        .form__label Код партнера
+        +input('Введите код партнера')(id='form-partner')
+    .form__label Комментарий к заказу
+    .form__row: +input('Введите ваш коментарий')(id='form-comment')
+    .form__checkbox
+      input(type='checkbox' id='form-offer')
+      label(for='form-offer') Текст для оферты
+    .form__row.form__container
+      .form__half
+        .form_calc Стоимость услуги: #[span.form__price 1000] руб.
+      .form__half
+        .form__buttons
+          button.form__button#form-bonus Оплатить бонусам
+          button.form__button#form-pay Перейти к оплате

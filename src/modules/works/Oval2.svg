@@ -1,0 +1,14 @@
+<svg id="d9f08a7a-2841-45f8-8ae7-310534d992d7" data-name="Слой 1" xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 225 249">
+    <title>Oval2</title>
+    <g id="2721557d-1847-4504-94c0-cef9fda59ade" data-name="Symbols">
+        <g id="8634851e-d610-41d0-bbd3-f94597bd0332" data-name="Oval">
+            <circle cx="112.5" cy="136.5" r="111.5" fill="none" stroke="#227eba" stroke-width="2"/>
+            <rect id="f3b9c5e8-d4f7-402b-9818-127cd5ca67ac" data-name="Rectangle-5" x="84" width="55" height="44" rx="1"
+                  ry="1" fill="#3d4360"/>
+            <path id="418ac8d9-5bb2-4e38-b22c-4c514b3a3300" data-name="ШАГ-1-Copy"
+                  d="M103.3,30H92.12V21h2v7.29h2.55V21h2v7.29h2.55V21h2Zm8.11,0q-.14-.47-.32-1l-.34-1h-3.51l-.34,1q-.18.49-.32,1h-2.11q.51-1.46,1-2.69t.89-2.33q.44-1.09.86-2.07t.88-1.92H110q.44.94.87,1.92t.86,2.07q.44,1.09.89,2.33t1,2.69ZM109,23q-.06.2-.19.53l-.3.78-.37,1q-.2.53-.41,1.12h2.56l-.4-1.12q-.19-.53-.37-1l-.31-.78Zm7.8,7h-2V21h6.15v1.72h-4.12Zm8.67-7.14q.38-.16.79-.36t.8-.44q.39-.24.75-.51a5.13,5.13,0,0,0,.64-.57h1.35v9h-1.94V23.51A5.9,5.9,0,0,1,127,24q-.48.21-.94.37Z"
+                  transform="translate(1)" fill="#457ec2"/>
+        </g>
+    </g>
+</svg>

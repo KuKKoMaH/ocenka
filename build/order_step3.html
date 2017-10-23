@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,700&amp;amp;subset=cyrillic" rel="stylesheet">
+    <link rel="stylesheet" media="all" href="style.css">
+    <!--link(rel="shortcut icon" href="/favicon.ico")-->
+  </head>
+  <body>
+    <div class="menu menu--full">
+      <div class="w">
+        <div class="menu__images"><a class="menu__logo" href=".."></a>
+          <div class="menu__vtb"></div>
+        </div>
+        <button class="menu__hamburger"></button>
+        <div class="menu__wrapper">
+          <button class="menu__close"></button>
+          <ul>
+            <li class="menu__active"><a href="registry.html">Реестр объектов</a></li>
+            <li><a href="#works">Как это работает</a></li>
+            <li><a href="#advantages">Наши преимущества</a></li>
+          </ul>
+          <div class="menu__item"><a class="menu__button" href="order_step1.html">ЗАКАЗАТЬ</a></div>
+          <div class="menu__item"><a class="menu__cabinet" href="/profile.html">Личный кабинет</a></div>
+        </div>
+      </div>
+    </div>
+        <div class="form">
+          <div class="form__wrapper">
+            <div class="form__header">
+              <div class="form__title">1. Оформление заказа</div>
+              <div class="form__title">2. оплата</div>
+              <div class="form__title form__title--active">3. загрузка документов</div>
+            </div>
+            <div class="form__body">
+              <div class="form__spinner"></div>
+              <div class="form__error">Заказ не найден</div>
+              <form class="form__form" id="form-docs" action="order_done.html" novalidate="order_done.html">
+                <div class="form__order">Заказ № 3333</div>
+                <div class="docs__row">
+                  <div class="docs__wrapper">
+                    <div class="docs__title">Правоустанавливающие документы</div>
+                    <div class="docs__doc">
+                      <div class="docs__name">Свидетельство о государственной регистрации права</div>
+                      <div class="docs__desc">(выданное до 15.07.2016)</div>
+                    </div>
+                    <div class="docs__doc">
+                      <div class="docs__name">Основание / договор приеобретения</div>
+                      <div class="docs__desc">в том числе: договор кули продажи недвижимого имущества, договор участия в долевом строительстве, договор уступки прав требования по  договору участия в долевом строительстве, договор участия в жилищно-строительном кооперативе, инвестиционный договор, другие аналогичные договоры, а также договор дарения, договор меня, договор передачи (приватизация), решение суда, свидетельство о наследстве и пр.</div>
+                    </div>
+                    <div class="docs__doc">
+                      <div class="docs__name">Иные правоустанавливающие документы</div>
+                      <div class="docs__desc">перечисленные в Свидетельстве а государственной регистрации права собственности на недвижимое имущество, или в Выписке из Единого государственного реестра прав на недвижимоеимущество и сделок с ним (далее – ЕГРП), или в Выписке из Единого государственного реестра недвижимости (далее – ЕГРН).</div>
+                    </div>
+                  </div>
+                  <div class="docs__aside" id="LEGAL_DOCUMENT">
+                    <div class="docs__upload">
+                      <input class="docs__input" type="file">Прикрепить<br>документы
+                    </div>
+                    <!--.docs__item-->
+                    <!--  |Договор 2017.doc-->
+                    <!--  button.docs__delete-->
+                    <!--.docs__item-->
+                    <!--  |Договор 2017.doc Договор 2017.doc Договор 2017.doc-->
+                    <!--  button.docs__delete-->
+                    <!--.docs__item-->
+                    <!--  |Договор 2017.doc-->
+                    <!--  button.docs__delete-->
+                  </div>
+                </div>
+                <div class="docs__row">
+                  <div class="docs__wrapper">
+                    <div class="docs__title">Технические документы</div>
+                    <div class="docs__doc">
+                      <div class="docs__name">Поэтажный план БТИ</div>
+                      <div class="docs__desc">(документ включает в себя все помещения, находящиеся в указанной квартире с отмеченными на нем несущими стенами, проемами (оконнымы и дверными), перегородками и др.)</div>
+                    </div>
+                    <div class="docs__doc">
+                      <div class="docs__name">Экспликация</div>
+                      <div class="docs__desc">(документ в виде таблицы, в котором расписаны наименование и площади всех помещений)</div>
+                    </div>
+                    <div class="docs__doc">
+                      <div class="docs__name">Технический паспорт</div>
+                      <div class="docs__desc">Документ, содержащий в себе поэтажный план квартиры и список всех помещений с указанием их площади и назначения.</div>
+                    </div>
+                  </div>
+                  <div class="docs__aside" id="TECHNICAL_DOCUMENT">
+                    <div class="docs__upload">
+                      <input class="docs__input" type="file">Прикрепить<br>документы
+                    </div>
+                    <!--.docs__item-->
+                    <!--  | Договор 2017.doc-->
+                    <!--  button.docs__delete-->
+                    <!--.docs__item-->
+                    <!--  | Договор 2017.doc Договор 2017.doc Договор 2017.doc-->
+                    <!--  button.docs__delete-->
+                    <!--.docs__item-->
+                    <!--  | Договор 2017.doc-->
+                    <!--  button.docs__delete-->
+                  </div>
+                </div>
+                <div class="form__checkbox">
+                  <input type="checkbox" id="form-legalPersonOwner">
+                  <label for="form-legalPersonOwner">Собственником является юридическое лицо</label>
+                </div>
+                <div class="form__checkbox">
+                  <input type="checkbox" id="form-minorOwner">
+                  <label for="form-minorOwner">Собственником является несовершеннолетнее лицо</label>
+                </div>
+                <div class="form__checkbox">
+                  <input type="checkbox" id="form-onerousTransaction">
+                  <label for="form-onerousTransaction">Объект недвижимости был приобретен продавцом в период брака на основании возмездной сделки</label>
+                </div>
+                <div class="docs__row">
+                  <div class="docs__wrapper"></div>
+                  <div class="docs__aside">
+                    <button class="form__button" id="form-confirm">Готово</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+    <footer class="footer footer--line">
+      <div class="w">
+        <div class="c c6">
+          <div>
+            <div class="footer__logo"></div>
+            <div class="footer__vtb"></div>
+          </div>
+          <div class="footer__copyright">© 2017 «Одобрено», «ВТБ», все права защищены</div>
+        </div>
+        <div class="c c6">
+          <div class="footer__icons"><a class="footer__icon footer__icon--vk" href="#"></a><a class="footer__icon footer__icon--fb" href="#"></a><a class="footer__icon footer__icon--ins" href="#"></a><a class="footer__icon footer__icon--tw" href="#"></a></div>
+        </div>
+        <div class="c c12">
+          <div class="footer__links"><a class="footer__link" href="#">О компании</a> <a class="footer__link" href="#">Пользовательское соглашение</a> <a class="footer__link" href="#">Политика конфиденциальности</a> <a class="footer__link" href="#">Способы оплаты</a></div>
+        </div>
+      </div>
+    </footer>
+    <div class="popups">
+            <div class="popup" id="popup-register">
+              <div class="popup__close"></div>
+              <div class="popup__text">Войти в личный кабинет</div>
+              <form novalidate="" action="profile.html">
+                <div class="popup__input">
+                        <div class="input">
+                          <input class="input__input" value="" required="" type="phone">
+                          <label class="input__label">Телефон</label>
+                          <div class="input__error"></div>
+                        </div>
+                </div>
+                      <input class="button button--block" type="submit" value="Войти">
+                      
+              </form>
+            </div>
+            <div class="popup" id="popup-confirm">
+              <div class="popup__close"></div>
+              <div class="popup__text">Подтвердите номера телефона</div>
+              <div class="popup__desc">На указанный номер отправлено беслпатное СМС-сообшение с кодом проверки подлинности номера.</div>
+              <form novalidate="">
+                <div class="popup__input">
+                        <div class="input">
+                          <input class="input__input" value="" required="">
+                          <label class="input__label">Код</label>
+                          <div class="input__error"></div>
+                        </div>
+                </div>
+                      <input class="button button--block" type="submit" value="Подтвердить">
+                      
+                <div class="popup__error"></div>
+              </form>
+              <div class="popup__footer"><a class="popup__resend">Отправить повторно</a></div>
+            </div>
+    </div>
+  </body>
+  <script>
+    var JS_PUBLIC_PATH = 'js/';
+    var SUGGEST_KEY = "fdd27007fe8069d376aa269885162a16ef0e55d4";
+    var API_URL = 'https://test-odobreno.srg-it.ru/';
+    var ITEMS_PER_PAGE = 20;
+    var PARTNERS = { 1: "TEST", 2: "TEST2", 3: "TEST3" }
+  </script>
+  <script src="js/app.js"></script>
+</html>

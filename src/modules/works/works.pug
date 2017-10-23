@@ -1,0 +1,20 @@
+include ../button/button
+section.works#works
+  .works__title Как это работает
+  .w.works__items
+    .c.c4.works__item
+      .works__image
+        img(src='modules/works/icon1.svg')
+      .works__name Заявка
+      .works__text Вы заполняете заявку, прикладываете необходимые документы и проводите оплату удобным способом
+    .c.c4.works__item
+      .works__image
+        img(src='modules/works/icon2.svg')
+      .works__name Осмотр
+      .works__text Мы проводим осмотр объекта в удобное для Вас время
+    .c.c4.works__item
+      .works__image
+        img(src='modules/works/icon3.svg')
+      .works__name Одобрено
+      .works__text Сертификат «Одобрено» высылаем на Вашу электронную почту
+  +button('a')(href='#header') Заполнить заявку

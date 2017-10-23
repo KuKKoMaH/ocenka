@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,700&amp;amp;subset=cyrillic" rel="stylesheet">
+    <link rel="stylesheet" media="all" href="style.css">
+    <!--link(rel="shortcut icon" href="/favicon.ico")-->
+  </head>
+  <body>
+    <div class="menu menu--full">
+      <div class="w">
+        <div class="menu__images"><a class="menu__logo" href=".."></a>
+          <div class="menu__vtb"></div>
+        </div>
+        <button class="menu__hamburger"></button>
+        <div class="menu__wrapper">
+          <button class="menu__close"></button>
+          <ul>
+            <li class="menu__active"><a href="registry.html">Реестр объектов</a></li>
+            <li><a href="#works">Как это работает</a></li>
+            <li><a href="#advantages">Наши преимущества</a></li>
+          </ul>
+          <div class="menu__item"><a class="menu__button" href="order_step1.html">ЗАКАЗАТЬ</a></div>
+          <div class="menu__item"><a class="menu__cabinet" href="/profile.html">Личный кабинет</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="search">
+      <div class="w">
+            <div class="input input--search">
+              <input class="input__input" value="" required="" id="registry-search">
+              <label class="input__label">Поиск по адресу или сертификату</label>
+              <div class="input__error"></div>
+            </div>
+      </div>
+    </div>
+    <div class="registry">
+      <div class="w">
+        <div class="table__container" id="registry-table">
+          <div class="table__title">
+            <div class="table__number">№</div>
+            <div class="table__address">Адрес квартиры</div>
+            <div class="table__date">Срок действия</div>
+            <div class="table__certificate">№ Сертификата</div>
+          </div>
+          <div class="table__rows"></div>
+          <div class="table__template">
+            <div class="table__row">
+              <div class="table__cell table__number">
+                <div class="table__label">№</div>
+                <div class="table__value">{{i}}</div>
+              </div>
+              <div class="table__cell table__address">
+                <div class="table__label">Адрес квартиры</div>
+                <div class="table__value">{{address}}</div>
+              </div>
+              <div class="table__cell table__date">
+                <div class="table__label">Срок действия</div>
+                <div class="table__value">{{validUntil}}</div>
+              </div>
+              <div class="table__cell table__certificate">
+                <div class="table__label">№ Сертификата</div>
+                <div class="table__value"><a href="#">{{id}}</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="pagination">
+          <!--a.pagination__prev Пред.-->
+          <!--a.pagination__page 1-->
+          <!--a.pagination__page 2-->
+          <!--a.pagination__page 3-->
+          <!--a.pagination__page 4-->
+          <!--a.pagination__page.pagination__page--active 5-->
+          <!--.pagination__sep ...-->
+          <!--a.pagination__page 6-->
+          <!--a.pagination__next След.-->
+        </div>
+      </div>
+    </div>
+    <footer class="footer footer--line">
+      <div class="w">
+        <div class="c c6">
+          <div>
+            <div class="footer__logo"></div>
+            <div class="footer__vtb"></div>
+          </div>
+          <div class="footer__copyright">© 2017 «Одобрено», «ВТБ», все права защищены</div>
+        </div>
+        <div class="c c6">
+          <div class="footer__icons"><a class="footer__icon footer__icon--vk" href="#"></a><a class="footer__icon footer__icon--fb" href="#"></a><a class="footer__icon footer__icon--ins" href="#"></a><a class="footer__icon footer__icon--tw" href="#"></a></div>
+        </div>
+        <div class="c c12">
+          <div class="footer__links"><a class="footer__link" href="#">О компании</a> <a class="footer__link" href="#">Пользовательское соглашение</a> <a class="footer__link" href="#">Политика конфиденциальности</a> <a class="footer__link" href="#">Способы оплаты</a></div>
+        </div>
+      </div>
+    </footer>
+    <div class="popups">
+            <div class="popup" id="popup-register">
+              <div class="popup__close"></div>
+              <div class="popup__text">Войти в личный кабинет</div>
+              <form novalidate="" action="profile.html">
+                <div class="popup__input">
+                        <div class="input">
+                          <input class="input__input" value="" required="" type="phone">
+                          <label class="input__label">Телефон</label>
+                          <div class="input__error"></div>
+                        </div>
+                </div>
+                      <input class="button button--block" type="submit" value="Войти">
+                      
+              </form>
+            </div>
+            <div class="popup" id="popup-confirm">
+              <div class="popup__close"></div>
+              <div class="popup__text">Подтвердите номера телефона</div>
+              <div class="popup__desc">На указанный номер отправлено беслпатное СМС-сообшение с кодом проверки подлинности номера.</div>
+              <form novalidate="">
+                <div class="popup__input">
+                        <div class="input">
+                          <input class="input__input" value="" required="">
+                          <label class="input__label">Код</label>
+                          <div class="input__error"></div>
+                        </div>
+                </div>
+                      <input class="button button--block" type="submit" value="Подтвердить">
+                      
+                <div class="popup__error"></div>
+              </form>
+              <div class="popup__footer"><a class="popup__resend">Отправить повторно</a></div>
+            </div>
+    </div>
+  </body>
+  <script>
+    var JS_PUBLIC_PATH = 'js/';
+    var SUGGEST_KEY = "fdd27007fe8069d376aa269885162a16ef0e55d4";
+    var API_URL = 'https://test-odobreno.srg-it.ru/';
+    var ITEMS_PER_PAGE = 20;
+    var PARTNERS = { 1: "TEST", 2: "TEST2", 3: "TEST3" }
+  </script>
+  <script src="js/app.js"></script>
+</html>

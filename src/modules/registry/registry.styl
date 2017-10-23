@@ -1,0 +1,72 @@
+.registry
+  flex: 1
+  position: relative
+  display: flex
+  flex-direction: column
+
+  @media (max-width: $breakpoint-sm - 1)
+    display: block
+
+  .w
+    flex: 1
+    position: relative
+
+  &__container
+    width: 100%
+    background: #ffffff
+    border-radius: 3px
+    box-shadow: 0 21px 32px rgba(#233C4C, .05)
+    overflow: auto
+    font-size: 12px
+    padding: 22px 44px
+
+    @media (max-width: $breakpoint-sm - 1)
+      background-color: transparent
+      padding: 0
+      box-shadow: none
+
+  &__title,
+  &__row
+    display: flex
+    cf()
+
+  &__title
+    padding-bottom: 28px
+    border-bottom: 1px solid #ECEAEA
+    @media (max-width: $breakpoint-sm - 1)
+      display: none
+
+  &__row
+    margin: 37px 0 0
+    @media (max-width: $breakpoint-sm - 1)
+      background: #ffffff
+      flex-direction: column
+      margin: 7px
+      padding: 17px 22px
+
+  &__cell
+    @media (max-width: $breakpoint-sm - 1)
+      display: flex
+      min-width: 100%
+      margin-top: 12px
+
+      &:first-child
+        margin-top: 0
+
+  &__label
+    display: none
+    min-width: 120px
+    @media (max-width: $breakpoint-sm - 1)
+      display: block
+
+  &__value
+    flex: 1
+
+  &__number
+    width: 50px
+  &__address
+    flex: 1
+  &__date
+    width: 150px
+  &__certificate
+    width: 120px

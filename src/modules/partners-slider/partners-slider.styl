@@ -1,0 +1,50 @@
+.partners-slider
+  position: relative
+  padding: 0 20px
+  overflow: hidden
+
+  img
+    display: block
+    margin: 0 auto
+    width: auto !important
+
+  .owl-carousel
+    width: 100%
+
+  .owl-prev, .owl-next
+    position: absolute
+    top: 50%
+    z-index: 1
+    width: 20px
+    height: 50px
+    margin-top: -25px
+
+    &:before, &:after
+      content: ''
+      display: block
+      background: #ffffff
+      width: 1px
+      height: 25px
+      position: absolute
+      left: 50%
+
+    &:before
+      top: 50%
+      margin-top: -2px
+    &:after
+      bottom: 50%
+      margin-bottom: -2px
+
+  .owl-prev
+    right: 100%
+    &:before
+      transform: rotate(-30deg)
+    &:after
+      transform: rotate(30deg)
+
+  .owl-next
+    left: 100%
+    &:before
+      transform: rotate(30deg)
+    &:after
+      transform: rotate(-30deg)

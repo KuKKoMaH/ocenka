@@ -1,0 +1,23 @@
+wrapper()
+  font-size: 0
+
+  > *
+    font-size: $font-size
+
+col(cols = 1, gutters = both)
+  min-height: 1px
+  display: inline-block
+  vertical-align: top
+  padding-left: $gutter-half
+  padding-right: $gutter-half
+  font-size: $font-size
+  width: 100%
+
+cf()
+  &:after
+    content: ''
+    display: table
+    clear: both
+
+anim(duration = .1s)
+  transition: all duration ease-out

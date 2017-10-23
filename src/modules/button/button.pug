@@ -1,0 +1,6 @@
+mixin button(tag, fullWidth)
+  - if(!tag) tag = 'button'
+  - className = fullWidth && 'button--block'
+  #{tag}.button(href=href type='submit' class=className)&attributes(attributes)
+    if block
+      block

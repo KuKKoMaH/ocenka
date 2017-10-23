@@ -1,0 +1,169 @@
+.profile
+  margin-left: 250px
+  margin-right: 50px
+  max-width: $container-lg
+
+  @media (max-width: $breakpoint-sm - 1)
+    margin-left: 0
+    margin-right: 0
+
+  &__wrapper
+    position: fixed
+    left: 0
+    top: 112px
+    height: 100%
+    width: 200px
+    background: #fff
+    box-shadow: 0 21px 32px rgba(#233C4C, .05)
+
+    @media (max-width: $breakpoint-sm - 1)
+      max-width: 460px
+      position: static
+      width: auto
+      background-color: transparent
+      box-shadow: none
+      margin: 0 auto
+
+  &__logo
+    padding: 24px 0 48px
+    position: fixed
+    top: 0
+    left: 0
+    width: 200px
+    background: #fff
+
+    @media (max-width: $breakpoint-sm - 1)
+      position: static
+      width: 100%
+      padding: 14px 0
+
+    &:after
+      content: ''
+      display: block
+      margin: 0 auto
+      background-image: url(../menu/sprite-logo-color.svg)
+
+  &__info
+    text-align: center
+    padding: 0 20px
+    margin-bottom: 40px
+
+    @media (max-width: $breakpoint-sm - 1)
+      margin-bottom: 20px
+
+  &__profile
+    text-align: center
+
+  &__avatar
+    overflow: hidden
+    border: 3px solid #227EBA
+    border-radius: 50%
+    display: block
+    margin: 0 auto 28px
+    width: 114px
+    max-width: 114px
+    height: 114px
+
+    @media (max-width: $breakpoint-sm - 1)
+      margin-bottom: 8px
+
+    img
+      display: block
+
+  &__name
+    color: #4476B0
+    font-size: 18px
+    margin-bottom: 12px
+
+    @media (max-width: $breakpoint-sm - 1)
+      margin-bottom: 4px
+
+  &__text
+    font-size: 12px
+    font-weight: 300
+    color: #898989
+
+  &__bonus
+    color: #227eba
+    font-size: 18px
+    margin-left: 8px
+    font-weight: 500
+
+  &__stats
+    padding: 0 20px
+    width: 100%
+    color: #505050
+    font-size: 12px
+
+    @media (max-width: $breakpoint-sm - 1)
+      width: 200px
+      margin: 0 auto
+
+    td
+      padding-bottom: 12px
+      vertical-align: top
+
+      @media (max-width: $breakpoint-sm - 1)
+        padding-bottom: 4px
+
+  &__count
+    width: 1px
+    font-weight: bold
+    font-size: 14px
+    color: #227eba
+
+  &__menu
+    display: flex
+    align-items: center
+    margin: 24px 0
+    @media (max-width: $breakpoint-sm - 1)
+      padding: 0 8px
+      margin: 24px auto 12px
+      max-width: 460px
+      justify-content: center
+
+  &__title
+    flex: 1
+    color: #4476b0
+    font-size: 17px
+
+    @media (max-width: $breakpoint-sm - 1)
+      display: none
+
+  &__button
+    height: 42px
+    line-height: 38px
+    border: 2px solid #227EBA
+    background: #227eba
+    margin: 0
+    padding: 0 20px
+    color: #ffffff
+    anim()
+    border-radius: 21px
+    cursor: pointer
+
+    &:hover
+      color: #227eba
+      background-color: transparent
+
+    @media (max-width: $breakpoint-sm - 1)
+      display: none
+
+  &__logout
+    color: #227eba
+    font-size: 14px
+    margin-left: 23px
+    background-color: transparent
+    border: 0
+    padding: 0
+    cursor: pointer
+
+    @media (max-width: $breakpoint-sm - 1)
+      margin-left: 0
+
+    &:before
+      content: ''
+      display: inline-block
+      vertical-align: middle
+      background-image: url(../menu/sprite-cabinet-blue.svg)
+      margin-right: 8px

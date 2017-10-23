@@ -1,0 +1,45 @@
+.w
+  wrapper()
+  margin-left: auto
+  margin-right: auto
+  max-width: 100%
+  @media (min-width: $breakpoint-sm) and (max-width $breakpoint-md - 1)
+    width: $container-sm
+  @media (min-width: $breakpoint-md) and (max-width $breakpoint-lg - 1)
+    width: $container-md
+  @media (min-width: $breakpoint-lg)
+    width: $container-lg
+
+.wf
+  wrapper()
+  margin-left: -($gutter-half)
+  margin-right: -($gutter-half)
+
+  &:after
+    content: ''
+    display: table
+    clear: both
+
+  &.wc
+    .c
+      vertical-align: middle
+  &.wb
+    .c
+      vertical-align: bottom
+
+.c
+  col()
+
+for $col in (1..$cols-number)
+  .c{$col}
+    @media (min-width: $breakpoint-sm)
+      width: round((100 / $cols-number * $col) %, 3)
+  .c{$col}-md
+    @media (min-width: $breakpoint-md) and (max-width: $breakpoint-lg - 1)
+      width: round((100 / $cols-number * $col) %, 3)
+  .c{$col}-sm
+    @media (min-width: $breakpoint-sm) and (max-width: $breakpoint-md - 1)
+      width: round((100 / $cols-number * $col) %, 3)
+  .c{$col}-xs
+    @media (max-width: $breakpoint-sm - 1)
+      width: round((100 / $cols-number * $col) %, 3)

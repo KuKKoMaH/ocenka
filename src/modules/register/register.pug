@@ -1,0 +1,21 @@
+.register
+  .w: .register__block
+    .register__left
+      .register__logo
+      .register__vtb
+      h1.register__title Станьте партнером «Одобрено»
+      form
+        input.register__input(placeholder='Ваше имя')
+        input.register__input(placeholder='Компания')
+        input.register__input(placeholder='Телефон')
+        input.register__button(type='submit' value='Отправить заявку')
+  .w: .register__block
+    .register__left
+      a.register__link(href='#') Вернуться на сайт «Одобрено»
+    .register__right
+      .register__partners Наши партнеры
+      include ../partners-slider/partners-slider
+.popups
+  #register-popup.register-popup
+    .register-popup__title Спасибо! Ваша заявка принята.
+    .register-popup__text В ближайшее время с Вами свяжется наш специалист.

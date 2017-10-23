@@ -1,0 +1,240 @@
+.form
+  flex: 1 0 auto
+  display: flex
+  align-items: center
+  justify-content: center
+  padding: 20px 0
+
+  &__wrapper
+    background: #ffffff
+    box-shadow: 0 21px 32px rgba(#233C4C, .05)
+    max-width: 815px
+    width: 100%
+    border-radius: 3px
+
+  &__header
+    border-bottom: 1px solid #D0E2ED
+    padding: 35px 84px 0
+    min-height: 66px
+    cf()
+
+    @media (max-width: $breakpoint-sm - 1)
+      padding-left: 12px
+      padding-right: 12px
+
+  &__title
+    float: left
+    color: #505050
+    font-size: 13px
+    border-bottom: 3px solid transparent
+    margin-right: 35px
+    padding-bottom: 8px
+    text-transform: uppercase
+
+    &--active
+      color: #2973a8
+      border-bottom: 3px solid #227EBA
+
+  &__body
+    padding: 24px 84px 44px
+
+    @media (max-width: $breakpoint-sm - 1)
+      padding-left: 12px
+      padding-right: 12px
+
+  &__order
+    font-size: 12px
+    color: #a5b7c4
+    margin-bottom: 25px
+
+  &__label
+    font-size: 15px
+    color: #505050
+    margin-bottom: 17px
+
+  &__mark
+    display: inline-block
+    //position: relative
+
+    &:before
+      content: '?'
+      display: inline-block
+      vertical-align: middle
+      text-align: center
+      width: 22px
+      height: 22px
+      background: #f1f5f7
+      border-radius: 50%
+      color: #618aa1
+      anim()
+
+    &--active
+      &:before
+        background: #237eba
+        color: #fff
+
+      .form__mark-content
+        opacity: 1
+        pointer-events: all
+
+    &-content
+      position: absolute
+      background: #ffffff
+      border: 2px solid #237eba
+      z-index: 1000
+      padding: 28px
+      border-radius: 8px
+      opacity: 0
+      pointer-events: none
+      width: 300px
+      //top: 13px
+      //left: 13px
+      margin-top: -10px
+      margin-left: 12px
+      anim()
+
+  &__container
+    display: flex
+    flex-direction: row
+    align-items: flex-end
+    margin-left: -6px
+    margin-right: -6px
+
+    @media (max-width: $breakpoint-sm - 1)
+      display: block
+
+    & > div
+      padding: 0 6px
+      flex: 1
+
+      @media (max-width: $breakpoint-sm - 1)
+        margin-bottom: 12px
+
+  &__row
+    margin-bottom: 22px
+
+  &__apart
+    max-width: 110px
+
+    @media (max-width: $breakpoint-sm - 1)
+      max-width: none
+
+  &__calc
+    font-size: 15px
+    color: #505050
+
+  &__price
+    font-size: 33px
+    font-weight: bold
+    display: inline-block
+    margin-left: 20px
+    line-height: 1
+
+  &__buttons
+    display: flex
+    margin: 0 -7px
+
+  &__button
+    background: #4caf50
+    display: block
+    width: 100%
+    height: 64px
+    border-radius: 4px
+    border: 2px solid #4caf50
+    font-size: 15px
+    color: #ffffff
+    font-weight: bold
+    padding: 0 8px
+    margin: 0 7px
+    anim(.15s)
+    cursor: pointer
+
+    &:hover
+      background-color: transparent
+      color: #4caf50
+
+    &:disabled
+      background: #C5DCC6
+      border-color: #C5DCC6
+
+      &:hover
+        color: #ffffff
+
+  &__checkbox
+    position: relative
+
+    input
+      display: none
+
+    input:checked + label:before
+      background-image: url(sprite-checkox-checked.svg)
+
+    label
+      display: block
+      vertical-align: middle
+      color: #898989
+      font-size: 13px
+      line-height: 18px
+      padding-left: 25px
+      margin-top: 20px
+      &:before
+        content: ''
+        display: inline-block
+        position: absolute
+        left: 0
+        top: 0
+        background-image: url(sprite-checkox.svg)
+        margin-right: 15px
+
+      a
+        text-decoration: underline
+
+  &__form,
+  &__error
+    display: none
+
+  &__error
+    text-align: center
+    color: #e94c36
+
+  &__spinner
+    margin: 60px auto;
+    font-size: 10px;
+    position: relative;
+    text-indent: -9999em;
+    border-top: 1.1em solid rgba(#505050, 0.2);
+    border-right: 1.1em solid rgba(#505050, 0.2);
+    border-bottom: 1.1em solid rgba(#505050, 0.2);
+    border-left: 1.1em solid #505050;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-animation: load8 1.1s infinite linear;
+    animation: load8 1.1s infinite linear;
+
+    &,
+    &:after
+      border-radius: 50%
+      width: 10em
+      height: 10em
+
+@-webkit-keyframes load8 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes load8 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}

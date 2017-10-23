@@ -1,0 +1,11 @@
+mixin input(placeholder, search, select)
+  - var className = 'input' + (search ? ' input--search' : '') + (select ? ' input--select' : '')
+  div(class=className)
+    if(select)
+      select.input__select(required)&attributes(attributes)
+        if (block)
+          block
+    else
+      input.input__input(value='' required)&attributes(attributes)
+    label.input__label= placeholder
+    .input__error

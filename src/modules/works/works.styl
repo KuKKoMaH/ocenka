@@ -1,0 +1,33 @@
+$baseClass = '.works';
+.works
+  background: #3d4360
+  padding: 70px 0
+  text-align: center
+
+  &__title
+    margin: 0
+    padding-bottom: 70px
+    color: #ffffff
+    font-size: 22px
+    text-transform: uppercase
+
+  &__items
+    margin-bottom: 55px
+
+  &__item
+    &:hover
+      {$baseClass}__name,
+      {$baseClass}__text
+        color: #ffffff
+
+  &__name
+    font-size: 16px
+    color: #457ec2
+    text-transform: uppercase
+    margin-bottom: 9px
+    anim()
+
+  &__text
+    font-size: 17px
+    color: #a5b7cc
+    anim()

@@ -1,0 +1,50 @@
+.popups
+  display: none
+
+.popup
+  position: relative
+  max-width: 360px
+  background: #ffffff
+  border-radius: 3px
+  margin: 0 auto
+  padding: 34px 40px
+
+  @media (max-width: $breakpoint-sm - 1)
+    padding: 34px 15px
+
+  &__text
+    color: #2973a8
+    font-size: 19px
+    margin-bottom: 18px
+
+  &__desc
+    color: #505050
+    font-size: 13px
+    margin-bottom: 20px
+
+  &__input
+    margin-bottom: 20px
+
+  .mfp-close
+    background-image: url(sprite-close.svg)
+    position: absolute
+    font-size: 0
+    margin-right: 16px
+    margin-top: 16px
+
+  &__error
+    font-size: 13px
+    font-weight: 300
+    color: #e94c36
+
+  &__footer
+    text-align: center
+
+  &__resend
+    color: #99aab6
+    font-size: 13px
+    margin-top: 8px
+    display: inline-block
+    cursor: pointer
+    &:hover
+      text-decoration: underline

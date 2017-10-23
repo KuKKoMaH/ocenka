@@ -1,0 +1,84 @@
+.docs
+  display: block
+  color: #505050
+
+  &__row
+    display: flex
+    flex-direction: row
+    align-items: flex-start
+
+    & > div
+      flex:1
+
+  &__aside
+    max-width: 200px
+    padding-left: 30px
+
+  &__wrapper
+    margin-bottom: 35px
+
+  &__doc
+    margin-bottom: 15px
+
+  &__title
+    font-size: 17px
+    margin-bottom: 24px
+
+  &__name
+    color: #227eba
+    font-size: 15px
+    margin-bottom: 4px
+
+  &__desc
+    font-size: 13px
+    text-align: justify
+
+  &__upload
+    position: relative
+    text-align: center
+    color: #227eba
+    font-size: 15px
+    margin-bottom: 30px
+    cursor: pointer
+    overflow: hidden
+
+    &:before
+      content: ''
+      display: block
+      vertical-align: middle
+      margin: 0 auto 15px
+      background-image: url(sprite-upload.svg)
+
+  &__input
+    position: absolute
+    right: 0
+    top: 0
+    width: 200%
+    height: 200%
+    opacity: 0
+    cursor: pointer
+
+  &__item
+    font-size: 13px
+    position: relative
+    padding-right: 15px
+    margin-bottom: 8px
+
+  &__delete
+    position: absolute
+    right: 0
+    top: 0
+    border: 0
+    background-color: transparent
+    margin: 0
+    padding: 3px
+    opacity: .7
+    cursor: pointer
+    anim()
+
+    &:hover
+      opacity: 1
+    &:after
+      content: ''
+      display: block
+      background-image: url(sprite-delete.svg)

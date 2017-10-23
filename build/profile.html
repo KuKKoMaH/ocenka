@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,700&amp;amp;subset=cyrillic" rel="stylesheet">
+    <link rel="stylesheet" media="all" href="style.css">
+    <!--link(rel="shortcut icon" href="/favicon.ico")-->
+  </head>
+  <body>
+    <div class="profile"><a class="profile__logo" href="index.html"></a>
+      <div class="profile__menu">
+        <div class="profile__title">Личный кабинет</div><a class="profile__button" href="index.html">Заказать</a><a class="profile__logout" href="index.html">Выйти</a>
+      </div>
+      <div class="profile__wrapper">
+        <div class="profile__info">
+          <div class="profile__avatar"><img src="img/modules-profile-avatar.jpg"></div>
+          <div class="profile__profile">
+            <div class="profile__name"></div>
+            <div class="profile__text">Бонусные баллы: <span class="profile__bonus"></span></div>
+          </div>
+        </div>
+        <table class="profile__stats">
+          <tbody>
+            <!--tr#summary-DRAFT-->
+            <!--  td Черновик:-->
+            <!--  td.profile__count-->
+            <!--tr#summary-VERIFICATION-->
+            <!--  td Ожидает проверки документов:-->
+            <!--  td.profile__count-->
+            <!--tr#summary-WAIT_CUSTOMER_DATA-->
+            <!--  td Ожидает исправления документов покупателем:-->
+            <!--  td.profile__count-->
+            <!--tr#summary-INSPECTION-->
+            <!--  td Назначен осмотр:-->
+            <!--  td.profile__count-->
+          </tbody>
+        </table>
+      </div>
+      <div class="table__container" id="profile-table">
+        <div class="table__title">
+          <div class="table__number">№</div>
+          <div class="table__address">Адрес квартиры</div>
+          <div class="table__date">Статус заказа</div>
+          <div class="table__date">Оплата</div>
+          <div class="table__certificate">Документы</div>
+        </div>
+        <div class="table__rows"></div>
+        <div class="table__template">
+          <div class="table__row">
+            <div class="table__cell table__number">
+              <div class="table__label">№</div>
+              <div class="table__value">{{index}}</div>
+            </div>
+            <div class="table__cell table__address">
+              <div class="table__label">Адрес квартиры</div>
+              <div class="table__value">{{address}}</div>
+            </div>
+            <div class="table__cell table__date">
+              <div class="table__label">Статус заказа</div>
+              <div class="table__value">{{status}}</div>
+            </div>
+            <div class="table__cell table__date">
+              <div class="table__label">Оплата</div>
+              <div class="table__value">{{paid}}</div>
+            </div>
+            <div class="table__cell table__certificate">
+              <div class="table__label">Документы</div>
+              <div class="table__value">{{documents}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="footer footer--line">
+        <div class="w">
+          <div class="c c6">
+            <div>
+              <div class="footer__logo"></div>
+              <div class="footer__vtb"></div>
+            </div>
+            <div class="footer__copyright">© 2017 «Одобрено», «ВТБ», все права защищены</div>
+          </div>
+          <div class="c c6">
+            <div class="footer__icons"><a class="footer__icon footer__icon--vk" href="#"></a><a class="footer__icon footer__icon--fb" href="#"></a><a class="footer__icon footer__icon--ins" href="#"></a><a class="footer__icon footer__icon--tw" href="#"></a></div>
+          </div>
+          <div class="c c12">
+            <div class="footer__links"><a class="footer__link" href="#">О компании</a> <a class="footer__link" href="#">Пользовательское соглашение</a> <a class="footer__link" href="#">Политика конфиденциальности</a> <a class="footer__link" href="#">Способы оплаты</a></div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <div class="popups">
+            <div class="popup" id="popup-register">
+              <div class="popup__close"></div>
+              <div class="popup__text">Войти в личный кабинет</div>
+              <form novalidate="" action="profile.html">
+                <div class="popup__input">
+                        <div class="input">
+                          <input class="input__input" value="" required="" type="phone">
+                          <label class="input__label">Телефон</label>
+                          <div class="input__error"></div>
+                        </div>
+                </div>
+                      <input class="button button--block" type="submit" value="Войти">
+                      
+              </form>
+            </div>
+            <div class="popup" id="popup-confirm">
+              <div class="popup__close"></div>
+              <div class="popup__text">Подтвердите номера телефона</div>
+              <div class="popup__desc">На указанный номер отправлено беслпатное СМС-сообшение с кодом проверки подлинности номера.</div>
+              <form novalidate="">
+                <div class="popup__input">
+                        <div class="input">
+                          <input class="input__input" value="" required="">
+                          <label class="input__label">Код</label>
+                          <div class="input__error"></div>
+                        </div>
+                </div>
+                      <input class="button button--block" type="submit" value="Подтвердить">
+                      
+                <div class="popup__error"></div>
+              </form>
+              <div class="popup__footer"><a class="popup__resend">Отправить повторно</a></div>
+            </div>
+    </div>
+  </body>
+  <script>
+    var JS_PUBLIC_PATH = 'js/';
+    var SUGGEST_KEY = "fdd27007fe8069d376aa269885162a16ef0e55d4";
+    var API_URL = 'https://test-odobreno.srg-it.ru/';
+    var ITEMS_PER_PAGE = 20;
+    var PARTNERS = { 1: "TEST", 2: "TEST2", 3: "TEST3" }
+  </script>
+  <script src="js/app.js"></script>
+</html>

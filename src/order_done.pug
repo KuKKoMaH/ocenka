@@ -1,0 +1,8 @@
+extends pug/_layout
+include modules/popup/popup
+include modules/menu/menu
+
+block body
+  +menu(true)
+  include modules/done/done
+  include modules/footer/footer

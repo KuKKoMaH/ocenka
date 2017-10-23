@@ -1,0 +1,7 @@
+include ../popup/popup
+
++popup()#popup-register
+  .popup__text Войти в личный кабинет
+  form(novalidate action='profile.html')
+    .popup__input: +input('Телефон')(type='phone')
+    +button('input', true)(value='Войти')
