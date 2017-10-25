@@ -5,23 +5,50 @@ include ../form/form
   .form__error Заказ не найден
   form#form-order(action='order_step3.html' novalidate).form__form
     .form__order Заказ № 3333
+
     .form__label
       | Введите данные объекта
       .form__mark: .form__mark-content Время показа объекта будет дополнительно согласовано с Вами нашим специалистом.
     .form__row.form__container
       .form__address: +input('Адрес')(id='form-address' disabled)
       .form__apart: +input('Квартира')(id='form-flat' disabled)
+
     .form__row.form__container
-      +input('Предполагаемая цена продажи')(id='form-sellingPrice')
-    .form__label Введите ваши данные
+      .form__bank
+        .form__label Выберите банк-кредитор
+        +input('Выберите банк', false, true)(id='form-bank')
+          option(value='')
+          option(value='sber') Сбербанк
+          option(value='vtb') ВТБ 24
+          option(value='sber1') Сбербанк
+          option(value='vtb1') ВТБ 24
+          option(value='sber2') Сбербанк
+          option(value='vtb2') ВТБ 24
+          option(value='sber3') Сбербанк
+          option(value='vtb3') ВТБ 24
+          option(value='sber4') Сбербанк
+          option(value='vtb4') ВТБ 24
+      .form__purchasePrice: +input('Предполагаемая цена покупки')(id='form-purchasePrice')
+
+    .form__label
+      |Данные заказчика оценки
+      span.form__aside.form__checkbox
+        input(type='checkbox' id='form-customer-borrower-same')
+        label(for='form-customer-borrower-same') Заказчик и заемщик одно лицо
     .form__row.form__container
-      .form__half: +input('Фамилия')(id='form-name')
-      .form__half: +input('Имя')(id='form-surname')
+      div: +input('ФИО')(id='form-customer-name')
+      div: +input('Серия и номер паспорта')(id='form-customer-passport')
+      div: +input('Номер телефона')(type='phone' id='form-customer-phone')
+
+    #borrower
+      .form__label Данные заемщика
+      .form__row.form__container
+        div: +input('ФИО')(id='form-borrower-name')
+        div: +input('Серия и номер паспорта')(id='form-borrower-passport')
+        div: +input('Номер телефона')(type='phone' id='form-borrower-phone')
+
     .form__row.form__container
-      .form__half: +input('Отчество')(id='form-patronymic')
-      .form__half: +input('Номер телефона')(type='phone' id='form-phone' disabled)
-    .form__row.form__container
-      .form__half
+      .form__time
         .form__label Время показа объекта
         .form__container
           .form__half: +input('Дата')(id='form-date')
@@ -30,18 +57,34 @@ include ../form/form
             option(value='FROM_9_TO_12') С 9 до 12
             option(value='FROM_12_TO_16') С 12 до 16
             option(value='FROM_16_TO_19') С 16 до 19
-      .form__half
-        .form__label Код партнера
-        +input('Введите код партнера')(id='form-partner')
+      .form__company
+        .form__label Выберите оценочную компанию
+        +input('Выберите оценочную компанию', false, true)(id='form-evaluating-company')
+          option()
+          option(value='1' data-data='{"rating": "6"}') Оценочная компания Воробушек
+          option(value='2' data-data='{"rating": "2"}') ОК «Ветер с моря»
+          option(value='3' data-data='{"rating": "5"}') Оценщик
+          option(value='4' data-data='{"rating": "3"}') Оценочка
+          option(value='5' data-data='{"rating": "9"}') ООО «Оценка имущества»
+
     .form__label Комментарий к заказу
     .form__row: +input('Введите ваш коментарий')(id='form-comment')
-    .form__checkbox
+
+
+    .form__row: .form__checkbox
       input(type='checkbox' id='form-offer')
       label(for='form-offer') Текст для оферты
+
     .form__row.form__container
       .form__half
-        .form_calc Стоимость услуги: #[span.form__price 1000] руб.
-      .form__half
-        .form__buttons
-          button.form__button#form-bonus Оплатить бонусам
-          button.form__button#form-pay Перейти к оплате
+        .form__label Стоимость услуги
+        +input('', false, true)(id='form-cost')
+          option(value='1') Квартира — 3500 руб.
+          option(value='2') Комната — 3500 руб.
+          option(value='3') Дом — 3500 руб.
+
+        //.form_calc Стоимость услуги: #[span.form__price 1000] руб.
+      //.form__half
+      .form__buttons
+        button.form__button.form__button--primary#form-bonus Оплатить картой
+        button.form__button#form-pay Оплатить в отделении банка

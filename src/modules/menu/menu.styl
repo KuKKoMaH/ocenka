@@ -1,27 +1,40 @@
-$baseClass = '.menu'
+.menu
+  margin-top: 35px
 
-{$baseClass}
-  @media (max-width: $breakpoint-sm - 1)
-    text-align: center
+  color: #ffffff
+  .w
+    display: flex
+    @media (max-width: $breakpoint-sm - 1)
+      justify-content: center
 
-  &__images
-    float: left
+  &__wrapper
+    display: flex
+    flex: 1
+    align-items: center
+    text-align: right
+    padding-top: 8px
 
-    @media (max-width: $breakpoint-md - 1)
-      float: none
+    @media (max-width: $breakpoint-sm - 1)
       text-align: center
+      display: none
+      position: fixed
+      top: 0
+      right: 0
+      bottom: 0
+      left: 0
+      background: rgba(0,0,0,.8)
+      z-index: 1000
+      transform: translateY(-50px)
+      opacity: 0
+    anim()
 
-  &__logo
-    background-image: url(sprite-logo-white.svg)
-    display: inline-block
-    vertical-align: middle
-
-  &__vtb
-    display: inline-block
-    vertical-align: middle
-    background-image: url(../header/sprite-vtb-small.svg)
-    margin-left: 18px
-    margin-top: 9px
+    &--visible
+      @media (max-width: $breakpoint-sm - 1)
+        display: block
+    &--active
+      @media (max-width: $breakpoint-sm - 1)
+        transform: translateY(0px)
+        opacity: 1
 
   &__hamburger,
   &__close
@@ -39,125 +52,51 @@ $baseClass = '.menu'
   &__hamburger
     position: fixed
     z-index: 100
-    background-image: url(sprite-menu.svg)
+    background-image: url(../img/sprite-menu.svg)
 
   &__close
-    background-image: url(../popup/sprite-close.svg)
+    background-image: url(../img/sprite-close.svg)
 
-  &__wrapper
-    text-align: right
-    font-size: 13px
-    padding-top: 8px
-
-    @media (max-width: $breakpoint-sm - 1)
-      text-align: center
-      display: none
-      position: fixed
-      top: 0
-      right: 0
-      bottom: 0
-      left: 0
-      background: #ffffff
-      z-index: 1000
-      transform: translateY(-50px)
-      opacity: 0
-      anim()
-
-    &--visible
-      @media (max-width: $breakpoint-sm - 1)
-        display: block
-    &--active
-      @media (max-width: $breakpoint-sm - 1)
-        transform: translateY(0px)
-        opacity: 1
-
-    ul
-      display: inline-block
-      padding: 0
-      margin: 0
-
-      @media (max-width: $breakpoint-sm - 1)
-        display: block
-        margin: 40px 0 50px
-
-    li
-      display: inline-block
-      margin-left: 25px
-
-      &:first-child
-        margin-left: 0
-
-      @media (max-width: $breakpoint-lg - 1)
-        margin-left: 5px
-
-      @media (max-width: $breakpoint-md - 1)
-        margin-left: 15px
-
-      @media (max-width: $breakpoint-sm - 1)
-        margin: 0 0 40px
-        display: block
-        color: #227eba
-        font-size: 17px
-
-      a
-        display: block
-        border-bottom: 3px solid transparent
-        text-transform: uppercase
-        padding-bottom: 5px
-        anim()
-
-        @media (max-width: $breakpoint-sm - 1)
-          display: inline-block
-
-  li&__active a,
-  &__wrapper li a:hover
-    border-bottom: 3px solid #fff
-    @media (max-width: $breakpoint-sm - 1)
-      border-bottom: 3px solid #227EBA
-
-  &__item
+  &__logo
+    background-image: url(../img/sprite-logo.svg)
     display: inline-block
-    margin-left: 25px
+    vertical-align: middle
 
-    @media (max-width: $breakpoint-lg - 1)
-      margin-left: 5px
+  ul
+    flex: 1
+    text-align: center
+    padding: 0
+    margin: 0
+
+    @media (max-width: $breakpoint-sm - 1)
+      display: block
+      margin: 40px 0 50px
+
+  li
+    display: inline-block
+    margin: 0 25px
+    font-size: 17px
 
     @media (max-width: $breakpoint-md - 1)
-      margin-left: 25px
+      margin: 0 8px
+      font-size: 15px
 
     @media (max-width: $breakpoint-sm - 1)
+      font-size: 19px
       margin: 0 0 40px
       display: block
 
-  &__button
-    display: inline-block
-    vertical-align: middle
-    background: #fff
-    color: #227eba
-    height: 42px
-    line-height: 40px
-    border-radius: 21px
-    padding: 0 21px
-    cursor: pointer
-    font-weight: bold
-    border: 1px solid #fff
-    outline: 0
-    anim()
+    a
+      display: block
+      opacity: .6
+      anim()
 
-    &:hover
-      background-color: transparent
-      color: #ffffff
+      @media (max-width: $breakpoint-sm - 1)
+        display: inline-block
 
-    @media (max-width: $breakpoint-sm - 1)
-      margin: 0
-      background: #4CAF50
-      color: #ffffff
-      font-size: 16px
-      border: 2px solid #4CAF50
-
-      &:hover
-        background-color: transparent
-        color: #4CAF50
+  &__active a,
+  li a:hover
+    opacity: 1
 
   &__cabinet
     background-color: transparent
@@ -167,53 +106,19 @@ $baseClass = '.menu'
     padding: 0
     margin: 0
     outline: 0
+    text-decoration: underline
+    opacity: .8
+    anim()
+
+    &:hover
+      opacity: 1
+
     &:before
       content: ''
       display: inline-block
-      vertical-align: bottom
-      background-image: url(sprite-cabinet.svg)
-      margin-right: 4px
+      vertical-align: middle
+      background-image: url(../img/sprite-cabinet.svg)
+      margin-right: 14px
 
     @media (max-width: $breakpoint-sm - 1)
-      color: #227eba
       font-size: 17px
-
-      &:before
-        background-image: url(sprite-cabinet-blue.svg)
-
-  &--full
-    background: #fff
-    padding: 23px 0 20px
-    color:  #227eba
-
-    @media (max-width: $breakpoint-md - 1)
-      padding: 8px 0
-    @media (max-width: $breakpoint-sm - 1)
-      text-align: center
-
-    {$baseClass}__logo
-      background-image: url(sprite-logo-color.svg)
-
-    {$baseClass}__cabinet:before
-      background-image: url(sprite-cabinet-blue.svg)
-
-    {$baseClass}__wrapper
-      @media (max-width: $breakpoint-md - 1)
-        padding-top: 0
-
-      li{$baseClass}__active a,
-      li a:hover
-        border-color: #227EBA
-
-    {$baseClass}__button
-      background: #4CAF50
-      color: #ffffff
-      border: 2px solid #4CAF50
-
-      &:hover
-        background-color: transparent
-        color: #4CAF50
-
-    {$baseClass}__hamburger
-      background-image: url(sprite-menu-black.svg)
-      top: 20px

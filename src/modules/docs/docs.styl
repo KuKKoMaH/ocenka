@@ -6,41 +6,55 @@
     display: flex
     flex-direction: row
     align-items: flex-start
+    margin-bottom: 35px
 
     & > div
       flex:1
 
-  &__aside
-    max-width: 200px
-    padding-left: 30px
+    @media (max-width: $breakpoint-sm - 1)
+      flex-direction: column
 
-  &__wrapper
-    margin-bottom: 35px
+  &__aside
+    max-width: 370px
+    padding-left: 100px
+
+    @media (max-width: $breakpoint-sm - 1)
+      max-width: none
+      padding-left: 0
+      width: 100%
 
   &__doc
     margin-bottom: 15px
 
   &__title
-    font-size: 17px
+    font-size: 20px
     margin-bottom: 24px
 
   &__name
-    color: #227eba
-    font-size: 15px
+    color: #4A4A4A
+    font-size: 16px
     margin-bottom: 4px
 
   &__desc
-    font-size: 13px
+    font-size: 15px
+    line-height: 1.55
     text-align: justify
 
   &__upload
+    padding: 95px 0
+    background: #F8F8F8
+    border: 1px solid #EBEBEB
+    border-radius: 8px
     position: relative
     text-align: center
-    color: #227eba
+    color: #E94C36
     font-size: 15px
-    margin-bottom: 30px
+    margin-bottom: 10px
     cursor: pointer
     overflow: hidden
+
+    &:hover
+      text-decoration: underline
 
     &:before
       content: ''

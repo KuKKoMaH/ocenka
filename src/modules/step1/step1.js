@@ -16,7 +16,7 @@ if ($form.length) {
 
       $('#form-address').val(order.address);
       $('#form-flat').val(order.flat);
-      $('#form-sellingPrice').val(order.salePrice);
+      $('#form-purchasePrice').val(order.salePrice);
 
       $('#form-name').val(profile.name);
       $('#form-surname').val(profile.surname);
@@ -27,22 +27,47 @@ if ($form.length) {
       $('#form-partner').val(order.partnerCode);
       $('#form-comment').val(order.comment);
 
-      const $sellingPrice = new Input({
-        $el:       $('#form-sellingPrice').parent(),
-        validator: { 'Введите цену продажи': (val) => !!+val },
+      const $bank = new Input({
+        $el:       $('#form-bank').parent(),
+        type:      'select',
+        validator: { 'Выберите банк': val => !!val },
       });
-      const $name = new Input({
-        $el:       $('#form-name').parent(),
-        validator: { 'Введите имя': val => !!val },
+      const $purchasePrice = new Input({
+        $el:       $('#form-purchasePrice').parent(),
+        type:      'currency',
+        validator: { 'Введите цену продажи': (val) => !!val },
       });
-      const $surname = new Input({
-        $el:       $('#form-surname').parent(),
-        validator: { 'Введите фамилию': val => !!val },
+
+      const $customerName = new Input({
+        $el:       $('#form-customer-name').parent(),
+        validator: { 'Введите ФИО': val => !!val },
       });
-      const $patronymic = new Input({
-        $el:       $('#form-patronymic').parent(),
-        validator: { 'Введите отчество': val => !!val },
+      const $customerPassport = new Input({
+        $el:       $('#form-customer-passport').parent(),
+        type:      'papers',
+        validator: { 'Введите паспортные данные': val => !!val },
       });
+      const $customerPhone = new Input({
+        $el:       $('#form-customer-phone').parent(),
+        type:      'phone',
+        validator: { 'Введите номер телефона': val => !!val },
+      });
+
+      const $borrowerName = new Input({
+        $el:       $('#form-borrower-name').parent(),
+        validator: { 'Введите ФИО': val => customerBorrowerSame || !!val },
+      });
+      const $borrowerPassport = new Input({
+        $el:       $('#form-borrower-passport').parent(),
+        type:      'papers',
+        validator: { 'Введите паспортные данные': val => customerBorrowerSame || !!val },
+      });
+      const $borrowerPhone = new Input({
+        $el:       $('#form-borrower-phone').parent(),
+        type:      'phone',
+        validator: { 'Введите номер телефона': val => customerBorrowerSame || !!val },
+      });
+
       const $date = new Input({
         $el:       $('#form-date').parent(),
         type:      'date',
@@ -50,27 +75,64 @@ if ($form.length) {
       });
       const $time = new Input({
         $el:       $('#form-time').parent(),
+        type:      'select',
         validator: { 'Выберите время': val => !!val },
       });
-      const $partner = new Input({
-        $el: $('#form-partner').parent(),
-        validator: { 'Невереый код партнера': val => !val || !!window.PARTNERS[val] },
+      const $evaluatingCompany = new Input({
+        $el:       $('#form-evaluating-company').parent(),
+        type:      'select',
+        render:    {
+          option: (item, escape) => {
+            return `<div class="option">${escape(item.text)}<span class="option__rating">рейтинг: ${item.rating}</span></div>`;
+          }
+        },
+        validator: { 'Выберите компанию': val => !!val },
       });
+
       const $comment = new Input({
         $el: $('#form-comment').parent(),
       });
+      const $cost = new Input({
+        $el:       $('#form-cost').parent(),
+        type:      'select',
+        validator: { 'Выберите тип объекта': val => !!val },
+      });
 
-      const fields = [$sellingPrice, $name, $surname, $patronymic, $date, $time, $comment];
+      const fields = [
+        $bank,
+        $purchasePrice,
+        $customerName,
+        $customerPassport,
+        $customerPhone,
+        $borrowerName,
+        $borrowerPassport,
+        $borrowerPhone,
+        $date,
+        $time,
+        $evaluatingCompany,
+        $comment,
+        $cost
+      ];
       const $buttons = $('.form__button');
       const $button_pay = $('#form-pay');
       const $button_bonus = $('#form-bonus');
       const $offer = $('#form-offer');
+      const $customerBorrowerSame = $('#form-customer-borrower-same');
+      const $borrower = $('#borrower');
 
       $buttons.attr('disabled', true);
       $offer.on('change', () => {
         $button_pay.attr('disabled', !$offer.prop('checked'));
         if (profile.bonus > 0) $button_bonus.attr('disabled', !$offer.prop('checked'));
       });
+
+      let customerBorrowerSame = null;
+      const onChangeCustomerBorrowerSame = () => {
+        customerBorrowerSame = $customerBorrowerSame.prop('checked');
+        customerBorrowerSame ? $borrower.slideUp() : $borrower.slideDown();
+      };
+      $customerBorrowerSame.on('change', onChangeCustomerBorrowerSame);
+      onChangeCustomerBorrowerSame();
 
       $button_bonus.on('click', (e) => {
         e.preventDefault();
@@ -98,7 +160,7 @@ if ($form.length) {
         // console.log(data);
       });
 
-      function collectOrder () {
+      function collectOrder() {
         if (!$offer.prop('checked')) return null;
         fields.forEach(field => field.validate());
         if (fields.some(field => !field.isValid())) return null;
@@ -111,7 +173,7 @@ if ($form.length) {
           surname:           $surname.getValue(),
           name:              $name.getValue(),
           parentalName:      $patronymic.getValue(),
-          salePrice:         +$sellingPrice.getValue(),
+          salePrice:         +$purchasePrice.getValue(),
           acceptedAgreement: true,
           partnerCode:       $partner.getValue(),
         };

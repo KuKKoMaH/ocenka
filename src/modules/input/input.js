@@ -1,11 +1,14 @@
 import 'suggestions-jquery';
+import 'selectize';
+import Cleave from 'cleave.js';
 
 export default class Input {
-  constructor ({ $el, type, onSelect, validator }) {
+  constructor({ $el, type, onSelect, validator, render }) {
     this.validator = validator;
     this.$el = $el;
     this.$input = $el.find('.input__input, .input__select');
     this.$error = $el.find('.input__error');
+    this.$label = $el.find('.input__label');
 
     this.dirty = false;
     this.errors = [];
@@ -46,15 +49,41 @@ export default class Input {
       });
     }
 
+    if (type === 'select') {
+      this.$input.selectize({
+        onOptionAdd: (value, data) => console.log(value, data),
+        onChange:    this.validate.bind(this),
+        render,
+      });
+      $el.find('.selectize-control').append(this.$label);
+    }
+
+    if (type === 'currency') {
+      new Cleave(this.$input, {
+        delimiter:                  ' ',
+        numeral:                    true,
+        numeralThousandsGroupStyle: 'thousand'
+      });
+    }
+
+    if (type === 'papers') {
+      new Cleave(this.$input, {
+        numericOnly: true,
+        delimiter:   ' ',
+        blocks:      [4, 6],
+      });
+
+    }
+
     this.$input.on('blur', this.validate);
     this.$input.on('input', this.onInput);
   }
 
-  onInput (e) {
+  onInput(e) {
     if (this.dirty) this.validate();
   }
 
-  validate () {
+  validate() {
     this.dirty = true;
 
     const val = this.$input.val();
@@ -73,11 +102,11 @@ export default class Input {
     }
   }
 
-  getValue () {
+  getValue() {
     return this.$input.val();
   }
 
-  isValid () {
+  isValid() {
     return !this.errors.length;
   }
 }

@@ -1,29 +1,17 @@
 mixin profile()
   .profile
     a.profile__logo(href='index.html')
+    .profile__top
+        a.profile__logout(href='index.html') Выйти
     .profile__menu
       .profile__title Личный кабинет
       a.profile__button(href='index.html') Заказать
-      a.profile__logout(href='index.html') Выйти
     .profile__wrapper
       .profile__info
         .profile__avatar: img(src='modules/profile/avatar.jpg')
         .profile__profile
           .profile__name
-          .profile__text Бонусные баллы: #[span.profile__bonus]
-      table.profile__stats
-        tbody
-          //tr#summary-DRAFT
-          //  td Черновик:
-          //  td.profile__count
-          //tr#summary-VERIFICATION
-          //  td Ожидает проверки документов:
-          //  td.profile__count
-          //tr#summary-WAIT_CUSTOMER_DATA
-          //  td Ожидает исправления документов покупателем:
-          //  td.profile__count
-          //tr#summary-INSPECTION
-          //  td Назначен осмотр:
-          //  td.profile__count
+          //.profile__text Бонусные баллы: #[span.profile__bonus]
+      .profile__stats
     if(block)
       block

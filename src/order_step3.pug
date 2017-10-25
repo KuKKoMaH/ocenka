@@ -1,8 +1,9 @@
 extends pug/_layout
 include modules/popup/popup
 include modules/menu/menu
+include modules/footer/footer
 
 block body
   +menu(true)
   include modules/docs/docs
-  include modules/footer/footer
+  +footer()

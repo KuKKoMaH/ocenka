@@ -10,21 +10,16 @@
     <!--link(rel="shortcut icon" href="/favicon.ico")-->
   </head>
   <body>
-    <div class="menu menu--full">
-      <div class="w">
-        <div class="menu__images"><a class="menu__logo" href=".."></a>
-          <div class="menu__vtb"></div>
-        </div>
+    <div class="menu">
+      <div class="w"><a class="menu__logo" href=".."></a>
         <button class="menu__hamburger"></button>
         <div class="menu__wrapper">
           <button class="menu__close"></button>
-          <ul>
-            <li class="menu__active"><a href="registry.html">Реестр объектов</a></li>
+          <ul class="menu__items">
+            <li class="menu__active"><a href="registry.html">Реестр партёров</a></li>
             <li><a href="#works">Как это работает</a></li>
             <li><a href="#advantages">Наши преимущества</a></li>
-          </ul>
-          <div class="menu__item"><a class="menu__button" href="order_step1.html">ЗАКАЗАТЬ</a></div>
-          <div class="menu__item"><a class="menu__cabinet" href="/profile.html">Личный кабинет</a></div>
+          </ul><a class="menu__cabinet" href="/profile.html">Личный кабинет</a>
         </div>
       </div>
     </div>
@@ -62,47 +57,88 @@
                   </div>
                 </div>
                 <div class="form__row form__container">
-                      <div class="input">
-                        <input class="input__input" value="" required="" id="form-sellingPrice">
-                        <label class="input__label">Предполагаемая цена продажи</label>
-                        <div class="input__error"></div>
-                      </div>
+                  <div class="form__bank">
+                    <div class="form__label">Выберите банк-кредитор</div>
+                        <div class="input input--select">
+                          <select class="input__select" required="" id="form-bank">
+                            <option value=""></option>
+                            <option value="sber">Сбербанк</option>
+                            <option value="vtb">ВТБ 24</option>
+                            <option value="sber1">Сбербанк</option>
+                            <option value="vtb1">ВТБ 24</option>
+                            <option value="sber2">Сбербанк</option>
+                            <option value="vtb2">ВТБ 24</option>
+                            <option value="sber3">Сбербанк</option>
+                            <option value="vtb3">ВТБ 24</option>
+                            <option value="sber4">Сбербанк</option>
+                            <option value="vtb4">ВТБ 24</option>
+                          </select>
+                          <label class="input__label">Выберите банк</label>
+                          <div class="input__error"></div>
+                        </div>
+                  </div>
+                  <div class="form__purchasePrice">
+                        <div class="input">
+                          <input class="input__input" value="" required="" id="form-purchasePrice">
+                          <label class="input__label">Предполагаемая цена покупки</label>
+                          <div class="input__error"></div>
+                        </div>
+                  </div>
                 </div>
-                <div class="form__label">Введите ваши данные</div>
+                <div class="form__label">Данные заказчика оценки<span class="form__aside form__checkbox">
+                    <input type="checkbox" id="form-customer-borrower-same">
+                    <label for="form-customer-borrower-same">Заказчик и заемщик одно лицо</label></span></div>
                 <div class="form__row form__container">
-                  <div class="form__half">
+                  <div>
                         <div class="input">
-                          <input class="input__input" value="" required="" id="form-name">
-                          <label class="input__label">Фамилия</label>
+                          <input class="input__input" value="" required="" id="form-customer-name">
+                          <label class="input__label">ФИО</label>
                           <div class="input__error"></div>
                         </div>
                   </div>
-                  <div class="form__half">
+                  <div>
                         <div class="input">
-                          <input class="input__input" value="" required="" id="form-surname">
-                          <label class="input__label">Имя</label>
+                          <input class="input__input" value="" required="" id="form-customer-passport">
+                          <label class="input__label">Серия и номер паспорта</label>
                           <div class="input__error"></div>
                         </div>
                   </div>
-                </div>
-                <div class="form__row form__container">
-                  <div class="form__half">
+                  <div>
                         <div class="input">
-                          <input class="input__input" value="" required="" id="form-patronymic">
-                          <label class="input__label">Отчество</label>
-                          <div class="input__error"></div>
-                        </div>
-                  </div>
-                  <div class="form__half">
-                        <div class="input">
-                          <input class="input__input" value="" required="" type="phone" id="form-phone" disabled="">
+                          <input class="input__input" value="" required="" type="phone" id="form-customer-phone">
                           <label class="input__label">Номер телефона</label>
                           <div class="input__error"></div>
                         </div>
                   </div>
                 </div>
+                <div id="borrower">
+                  <div class="form__label">Данные заемщика</div>
+                  <div class="form__row form__container">
+                    <div>
+                          <div class="input">
+                            <input class="input__input" value="" required="" id="form-borrower-name">
+                            <label class="input__label">ФИО</label>
+                            <div class="input__error"></div>
+                          </div>
+                    </div>
+                    <div>
+                          <div class="input">
+                            <input class="input__input" value="" required="" id="form-borrower-passport">
+                            <label class="input__label">Серия и номер паспорта</label>
+                            <div class="input__error"></div>
+                          </div>
+                    </div>
+                    <div>
+                          <div class="input">
+                            <input class="input__input" value="" required="" type="phone" id="form-borrower-phone">
+                            <label class="input__label">Номер телефона</label>
+                            <div class="input__error"></div>
+                          </div>
+                    </div>
+                  </div>
+                </div>
                 <div class="form__row form__container">
-                  <div class="form__half">
+                  <div class="form__time">
                     <div class="form__label">Время показа объекта</div>
                     <div class="form__container">
                       <div class="form__half">
@@ -126,11 +162,18 @@
                       </div>
                     </div>
                   </div>
-                  <div class="form__half">
-                    <div class="form__label">Код партнера</div>
-                        <div class="input">
-                          <input class="input__input" value="" required="" id="form-partner">
-                          <label class="input__label">Введите код партнера</label>
+                  <div class="form__company">
+                    <div class="form__label">Выберите оценочную компанию</div>
+                        <div class="input input--select">
+                          <select class="input__select" required="" id="form-evaluating-company">
+                            <option></option>
+                            <option value="1" data-data="{&quot;rating&quot;: &quot;6&quot;}">Оценочная компания Воробушек</option>
+                            <option value="2" data-data="{&quot;rating&quot;: &quot;2&quot;}">ОК «Ветер с моря»</option>
+                            <option value="3" data-data="{&quot;rating&quot;: &quot;5&quot;}">Оценщик</option>
+                            <option value="4" data-data="{&quot;rating&quot;: &quot;3&quot;}">Оценочка</option>
+                            <option value="5" data-data="{&quot;rating&quot;: &quot;9&quot;}">ООО «Оценка имущества»</option>
+                          </select>
+                          <label class="input__label">Выберите оценочную компанию</label>
                           <div class="input__error"></div>
                         </div>
                   </div>
@@ -143,42 +186,43 @@
                         <div class="input__error"></div>
                       </div>
                 </div>
-                <div class="form__checkbox">
-                  <input type="checkbox" id="form-offer">
-                  <label for="form-offer">Текст для оферты</label>
+                <div class="form__row">
+                  <div class="form__checkbox">
+                    <input type="checkbox" id="form-offer">
+                    <label for="form-offer">Текст для оферты</label>
+                  </div>
                 </div>
                 <div class="form__row form__container">
                   <div class="form__half">
-                    <div class="form_calc">Стоимость услуги: <span class="form__price">1000</span> руб.</div>
+                    <div class="form__label">Стоимость услуги</div>
+                        <div class="input input--select input--nolabel">
+                          <select class="input__select" required="" id="form-cost">
+                            <option value="1">Квартира — 3500 руб.</option>
+                            <option value="2">Комната — 3500 руб.</option>
+                            <option value="3">Дом — 3500 руб.</option>
+                          </select>
+                          <div class="input__error"></div>
+                        </div>
+                    <!--.form_calc Стоимость услуги: #[span.form__price 1000] руб.-->
                   </div>
-                  <div class="form__half">
-                    <div class="form__buttons">
-                      <button class="form__button" id="form-bonus">Оплатить бонусам</button>
-                      <button class="form__button" id="form-pay">Перейти к оплате</button>
-                    </div>
+                  <!--.form__half-->
+                  <div class="form__buttons">
+                    <button class="form__button form__button--primary" id="form-bonus">Оплатить картой</button>
+                    <button class="form__button" id="form-pay">Оплатить в отделении банка</button>
                   </div>
                 </div>
               </form>
             </div>
           </div>
         </div>
-    <footer class="footer footer--line">
-      <div class="w">
-        <div class="c c6">
-          <div>
-            <div class="footer__logo"></div>
-            <div class="footer__vtb"></div>
-          </div>
-          <div class="footer__copyright">© 2017 «Одобрено», «ВТБ», все права защищены</div>
-        </div>
-        <div class="c c6">
-          <div class="footer__icons"><a class="footer__icon footer__icon--vk" href="#"></a><a class="footer__icon footer__icon--fb" href="#"></a><a class="footer__icon footer__icon--ins" href="#"></a><a class="footer__icon footer__icon--tw" href="#"></a></div>
-        </div>
-        <div class="c c12">
-          <div class="footer__links"><a class="footer__link" href="#">О компании</a> <a class="footer__link" href="#">Пользовательское соглашение</a> <a class="footer__link" href="#">Политика конфиденциальности</a> <a class="footer__link" href="#">Способы оплаты</a></div>
-        </div>
-      </div>
-    </footer>
+            <footer class="footer">
+              <div class="w">
+                <div class="footer__left">
+                  <div class="footer__copyright">© 2017 «Экспресс Оценка», «ВТБ», все права защищены</div>
+                </div>
+                <div class="footer__links"><a class="footer__link" href="#">О компании</a> <a class="footer__link" href="#">Пользовательское соглашение</a> <a class="footer__link" href="#">Политика конфиденциальности</a> <a class="footer__link" href="#">Способы оплаты</a></div>
+              </div>
+            </footer>
     <div class="popups">
             <div class="popup" id="popup-register">
               <div class="popup__close"></div>

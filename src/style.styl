@@ -1,42 +1,33 @@
 /*!!
- * Theme Name: odobreno
+ * Theme Name: ocenka
  */
 
 @import "owl.carousel/dist/assets/owl.carousel.css";
 @import "magnific-popup/dist/magnific-popup.css";
-@import "baron/baron.css";
+//@import "baron/baron.css";
 @import "bootstrap-datepicker/dist/css/bootstrap-datepicker.standalone.css";
 @import "suggestions-jquery/dist/css/suggestions.css";
+//@import "selectize/dist/css/selectize.css";
 
+@import "stylus/_fonts.styl";
 @import "stylus/_vars.styl";
 @import "stylus/_mixins.styl";
 @import "stylus/_grid.styl";
 
-@font-face {
-  font-family: 'DIN Pro Cond';
-  src: url('fonts/subset-DINPro-CondensedBold.eot');
-  src: url('fonts/subset-DINPro-CondensedBold.eot?#iefix') format('embedded-opentype'),
-          url('fonts/subset-DINPro-CondensedBold.woff2') format('woff2'),
-          url('fonts/subset-DINPro-CondensedBold.woff') format('woff'),
-          url('fonts/subset-DINPro-CondensedBold.ttf') format('truetype'),
-          url('fonts/subset-DINPro-CondensedBold.svg#DINPro-CondensedBold') format('svg');
-  font-weight: bold;
-  font-style: normal;
-}
-
-
 html
   margin: 0
   padding: 0
-  font-family: 'Ubuntu', sans-serif
+  font-family: 'DINPro', sans-serif
   font-size: $font-size
   line-height: $line-height
-  height: 100%
+  min-height: 100%
+  display: flex
 
 body
   margin: 0
   padding: 0
-  background: #F0F5F8
+  background: #000 url(../img/bg.jpg) 50% 50% no-repeat;
+  background-size: cover
   -webkit-font-smoothing: antialiased
   -webkit-text-size-adjust: 100%
   -ms-text-size-adjust: 100%
@@ -44,9 +35,14 @@ body
   position: relative
   display: flex
   flex-direction: column
+  flex: 1
+  width: 100%
 
-::-webkit-scrollbar
-  width: 0
+.front-page
+  background: #fafafa
+
+//::-webkit-scrollbar
+//  width: 0
 
 *, *:before, *:after
   box-sizing: border-box
@@ -62,6 +58,25 @@ a
 button
   color: inherit
 
+.line:after,
+.title:after
+  content: ''
+  display: block
+  width: 120px
+  height: 6px
+  margin: 10px auto
+  background: linear-gradient(to right, #E94C36, rgba(0,0,0,0))
+
+.title
+  font-size: 48px
+  line-height: 1
+  font-weight: 400
+  margin: 0 0 50px
+  &:after
+    height: 4px
+
+  @media (max-width: $breakpoint-sm - 1)
+    font-size: 32px
 
 @import "modules/header/header.styl"
 @import "modules/menu/menu.styl"
@@ -83,4 +98,4 @@ button
 @import "modules/table/table.styl"
 @import "modules/partners/partners.styl"
 @import "modules/partners-slider/partners-slider.styl"
-@import "modules/register/register.styl"
+//@import "modules/register/register.styl"

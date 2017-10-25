@@ -3,10 +3,6 @@
   background: url(header-bg.jpg)
   background-size: cover
   color: #fff
-  padding-top: 30px
-
-  @media (max-width: $breakpoint-sm - 1)
-    padding-bottom: 0
 
   &__top
     @media (max-width: $breakpoint-sm - 1)
@@ -14,33 +10,17 @@
 
   &__content
     margin-top: 60px
+    text-align: center
 
     @media (max-width: $breakpoint-sm - 1)
       padding: 0 10px
-      text-align: center
-
-  &__vtb
-    background-image: url(sprite-vtb.svg)
-    float: right
-    margin-top: 68px
-
-    @media (max-width: $breakpoint-md - 1)
-      float: none
-
-    @media (max-width: $breakpoint-sm - 1)
-      display: none
-      //float: none
-      //margin: 0
-      //display: inline-block
-      //vertical-align: bottom
-      //transform: scale(.5)
-      //margin-left: -30px
-      //margin-right: -30px
+      margin-top: 30px
 
   h1
-    font-weight: 400
-    font-size: 58px
-    margin: 0 0 20px
+    ffGotham()
+    font-weight: 500
+    font-size: 53px
+    margin: 0
 
     @media (max-width: $breakpoint-sm - 1)
       font-size: 40px
@@ -48,58 +28,68 @@
       margin-top: 20px
 
   h2
-    font-weight: 300
-    font-size: 25px
+    ffGotham()
+    font-weight: 400
+    font-size: 29px
     margin: 0
     line-height: 1.55
+
+    &:after
+      margin-top: 25px;
+      margin-bottom: 25px;
 
     @media (max-width: $breakpoint-sm - 1)
       font-size: 20px
 
-  &__form
-    //font-size: 0
-    margin: 0 -7px
-    display: flex
+  h3
+    font-weight: 400
+    font-size: 22px
+    margin: 0
+    line-height: 1.4
 
-    @media (max-width: $breakpoint-sm - 1)
-      flex-direction: column
+  &__form
+    margin: 0 -9px
 
     &-wrapper
-      margin-top: 150px
-      padding: 30px 70px
+      position: relative
+      margin: 100px auto -170px
+      padding: 60px 70px 50px
       background: #fff
-      box-shadow: 0 15px 16px rgba(#1A3365, .27)
-      border-radius: 6px
-      margin-bottom: 40px
+      max-width: 620px
+      box-shadow: 0 80px 60px -30px rgba(#C1C1C1, .7)
+      border-radius: 3px
+      z-index: 1
 
-      @media (max-width: $breakpoint-lg - 1)
-        padding: 30px 35px
-        margin-top: 50px
+      //@media (max-width: $breakpoint-lg - 1)
+      //  padding: 30px 35px
+      //  margin-top: 50px
 
       @media (max-width: $breakpoint-sm - 1)
         padding 20px 10px
         border-radius: 0
         margin-bottom: 0px
+        max-width: none
 
     &-title
-      color: #2973a8
+      color: #000
       font-size: 22px
       margin-bottom: 25px
+      text-align: center
 
-      @media (max-width: $breakpoint-sm - 1)
-        text-align: center
-        font-size: 14px
-        line-height: 1.2
-        span
-          display: block
-          font-weight: bold
-          font-size: 23px
+      //@media (max-width: $breakpoint-sm - 1)
+      //  text-align: center
+      //  font-size: 14px
+      //  line-height: 1.2
+      //  span
+      //    display: block
+      //    font-weight: bold
+      //    font-size: 23px
 
     &-input
       //display: inline-block
       //vertical-align: middle
       flex: 1
-      padding: 0 7px
+      padding: 0 9px
 
       @media (max-width: $breakpoint-sm - 1)
         display: block
@@ -111,18 +101,24 @@
       font-weight: 300
       color: #e94c36
 
+  &__row
+    display: flex
+    margin-bottom: 18px
+    @media (max-width: $breakpoint-sm - 1)
+      flex-direction: column
+      margin-bottom: 0
+
   &__flat
     max-width: 95px
-  &__phone
-    max-width: 210px
   &__submit
     max-width: 240px
 
     &-button
+      ffGotham()
       display: block
       width: 100%
       border: 0
-      background: #4caf50
+      background: #E94C36
       color: #ffffff
       height: 64px
       line-height: 1.4
@@ -132,10 +128,12 @@
       anim()
       cursor: pointer
       outline: 0
+      margin: 0
+      padding: 0
 
       &:hover
-        background: #289C2D
+        background: #C84735
 
       &:disabled
-        background: #A2D5A6
+        background: #898989
         cursor: auto

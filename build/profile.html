@@ -11,33 +11,19 @@
   </head>
   <body>
     <div class="profile"><a class="profile__logo" href="index.html"></a>
+      <div class="profile__top"><a class="profile__logout" href="index.html">Выйти</a></div>
       <div class="profile__menu">
-        <div class="profile__title">Личный кабинет</div><a class="profile__button" href="index.html">Заказать</a><a class="profile__logout" href="index.html">Выйти</a>
+        <div class="profile__title">Личный кабинет</div><a class="profile__button" href="index.html">Заказать</a>
       </div>
       <div class="profile__wrapper">
         <div class="profile__info">
           <div class="profile__avatar"><img src="img/modules-profile-avatar.jpg"></div>
           <div class="profile__profile">
             <div class="profile__name"></div>
-            <div class="profile__text">Бонусные баллы: <span class="profile__bonus"></span></div>
+            <!--.profile__text Бонусные баллы: #[span.profile__bonus]-->
           </div>
         </div>
-        <table class="profile__stats">
-          <tbody>
-            <!--tr#summary-DRAFT-->
-            <!--  td Черновик:-->
-            <!--  td.profile__count-->
-            <!--tr#summary-VERIFICATION-->
-            <!--  td Ожидает проверки документов:-->
-            <!--  td.profile__count-->
-            <!--tr#summary-WAIT_CUSTOMER_DATA-->
-            <!--  td Ожидает исправления документов покупателем:-->
-            <!--  td.profile__count-->
-            <!--tr#summary-INSPECTION-->
-            <!--  td Назначен осмотр:-->
-            <!--  td.profile__count-->
-          </tbody>
-        </table>
+        <div class="profile__stats"></div>
       </div>
       <div class="table__container" id="profile-table">
         <div class="table__title">
@@ -73,24 +59,15 @@
           </div>
         </div>
       </div>
-      <footer class="footer footer--line">
-        <div class="w">
-          <div class="c c6">
-            <div>
-              <div class="footer__logo"></div>
-              <div class="footer__vtb"></div>
-            </div>
-            <div class="footer__copyright">© 2017 «Одобрено», «ВТБ», все права защищены</div>
-          </div>
-          <div class="c c6">
-            <div class="footer__icons"><a class="footer__icon footer__icon--vk" href="#"></a><a class="footer__icon footer__icon--fb" href="#"></a><a class="footer__icon footer__icon--ins" href="#"></a><a class="footer__icon footer__icon--tw" href="#"></a></div>
-          </div>
-          <div class="c c12">
-            <div class="footer__links"><a class="footer__link" href="#">О компании</a> <a class="footer__link" href="#">Пользовательское соглашение</a> <a class="footer__link" href="#">Политика конфиденциальности</a> <a class="footer__link" href="#">Способы оплаты</a></div>
-          </div>
-        </div>
-      </footer>
     </div>
+    <footer class="footer">
+      <div class="w">
+        <div class="footer__left">
+          <div class="footer__copyright">© 2017 «Экспресс Оценка», «ВТБ», все права защищены</div>
+        </div>
+        <div class="footer__links"><a class="footer__link" href="#">О компании</a> <a class="footer__link" href="#">Пользовательское соглашение</a> <a class="footer__link" href="#">Политика конфиденциальности</a> <a class="footer__link" href="#">Способы оплаты</a></div>
+      </div>
+    </footer>
     <div class="popups">
             <div class="popup" id="popup-register">
               <div class="popup__close"></div>

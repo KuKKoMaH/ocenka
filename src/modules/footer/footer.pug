@@ -1,22 +1,14 @@
-footer.footer.footer--line
-  .w
-    .c.c6
-      div
+mixin footer(with_line)
+  footer.footer(class=with_line && 'footer--line'): .w
+    .footer__left
+      if(with_line)
         .footer__logo
-        .footer__vtb
-      .footer__copyright © 2017 «Одобрено», «ВТБ», все права защищены
-    .c.c6
-      .footer__icons
-        a.footer__icon.footer__icon--vk(href='#')
-        a.footer__icon.footer__icon--fb(href='#')
-        a.footer__icon.footer__icon--ins(href='#')
-        a.footer__icon.footer__icon--tw(href='#')
-    .c.c12
-      .footer__links
-        a.footer__link(href='#') О компании
-        |!{' '}
-        a.footer__link(href='#') Пользовательское соглашение
-        |!{' '}
-        a.footer__link(href='#') Политика конфиденциальности
-        |!{' '}
-        a.footer__link(href='#') Способы оплаты
+      .footer__copyright © 2017 «Экспресс Оценка», «ВТБ», все права защищены
+    .footer__links
+      a.footer__link(href='#') О компании
+      |!{' '}
+      a.footer__link(href='#') Пользовательское соглашение
+      |!{' '}
+      a.footer__link(href='#') Политика конфиденциальности
+      |!{' '}
+      a.footer__link(href='#') Способы оплаты

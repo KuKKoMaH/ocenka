@@ -5,13 +5,19 @@ header.header#header
   +menu()
   .w
     .header__content
-      h1 Нет нужды ехать в офис
-      h2 –  наши сотрудники узнают всё про недвижимость#[br]которая вас интересует и помогут с ипотекой!
+      h1 Закажите оценку недвижимости
+      h2.line соотвествующую всем требованиям банка за 2 минуты
+      h3
+        |С помощью сервиса Экспресс Оценка вы можете#[br]
+        |заказать оценку у аккредитованной оценочной#[br]
+        |компании в вашем регионе
     .header__form-wrapper
-      .header__form-title #[span Оставить заявку] на проверку недвижимости
+      .header__form-title Заказжите экспресс оценку прямо сейчас
       form.header__form(novalidate action='order_step1.html')
-        .header__form-input.header__address: +input('Адрес')
-        .header__form-input.header__flat: +input('Квартира')
-        .header__form-input.header__phone: +input('Телефон')(type='phone')
-        .header__form-input.header__submit: button.header__submit-button ЗАКАЗАТЬ «ОДОБРЕНО»
+        .header__row
+          .header__form-input.header__address: +input('Адрес объекта')
+          .header__form-input.header__flat: +input('Кв.')
+        .header__row
+          .header__form-input.header__phone: +input('Телефон')(type='phone')
+          .header__form-input.header__submit: button.header__submit-button ЗАКАЗАТЬ ОЦЕНКУ
       .header__form-error

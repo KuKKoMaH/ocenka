@@ -11,13 +11,9 @@ $logout.on('click', (e) => {
 });
 
 const l10nStatus = {
-  CREATION:   'Создан',
-  // DRAFT:              'Черновик',
-  // VERIFICATION:       'Ожидает проверки документов',
-  // WAIT_CUSTOMER_DATA: 'Ожидает исправления документов покупателем',
-  INSPECTION: 'Назначен осмотр',
-  // EXPERT_IN_PROGRESS: 'Осмотр проведен',
-  DONE:       'Выполнен',
+  CREATION:   'Кол-во заказов',
+  INSPECTION: 'Заказов готово',
+  DONE:       'Заказов в работе',
 };
 const statuses = Object.keys(l10nStatus);
 
@@ -30,15 +26,20 @@ const types = Object.keys(l10nTypes);
 if ($table.length) {
   Auth.getProfile().then(
     (profile) => {
-      $('.profile__name').html(`${profile.surname} ${profile.name}`);
-      $('.profile__bonus').html(profile.bonus);
+      $('.profile__name').html(`${profile.surname || ''} ${profile.name || ''}`);
+      // $('.profile__bonus').html(profile.bonus);
     },
     () => (window.location = $logout.attr('href'))
   );
 
   const template = $('.table__template').html();
-  const $summary = $('.profile__stats tbody');
-  const renderSummary = (status, count) => $(`<tr><td>${status}</td><td class="profile__count">${count}</td></tr>`);
+  const $summary = $('.profile__stats');
+  const renderSummary = (status, count) => $(`
+    <div class="profile__stat-row">
+      <span class="profile__stat">${status}</span>
+      <span class="profile__count">${count}</span>
+    </div>
+  `);
   const renderRow = (data) => template.replace(/{{(.*?)}}/g, (placeholder, field) => data[field]);
 
   const summary = statuses.reduce((obj, key) => {
@@ -61,6 +62,7 @@ if ($table.length) {
 
     items.forEach(item => summary[item.status]++);
     statuses.forEach((status) => $summary.append(renderSummary(l10nStatus[status], summary[status])))
+    // statuses.forEach((status) => $summary.append(renderSummary(l10nStatus[status], 123)))
   });
 
   function generateDocuments (fileList) {
@@ -78,7 +80,8 @@ if ($table.length) {
       if(!docs[type]) return;
       result += type + '<br>';
       docs[type].forEach(filename => result += filename + '<br>');
-    })
+    });
+
     return result;
   }
 }

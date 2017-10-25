@@ -1,10 +1,13 @@
 extends pug/_layout
+include modules/footer/footer
+
+block html
+  - var body_class = 'front-page'
 
 block body
   include modules/header/header
-  include modules/last/last
-  include modules/video/vldeo
   include modules/works/works
+  include modules/video/video
   include modules/advantages/advantages
-  include modules/partners/partners
-  include modules/footer/footer
+  include modules/partners-slider/partners-slider
+  +footer(true)

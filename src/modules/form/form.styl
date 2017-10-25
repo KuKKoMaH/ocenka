@@ -8,14 +8,16 @@
   &__wrapper
     background: #ffffff
     box-shadow: 0 21px 32px rgba(#233C4C, .05)
-    max-width: 815px
+    max-width: 1100px
     width: 100%
     border-radius: 3px
 
   &__header
     border-bottom: 1px solid #D0E2ED
-    padding: 35px 84px 0
+    padding: 35px 0 0
     min-height: 66px
+    text-align: center
+    ffGotham()
     cf()
 
     @media (max-width: $breakpoint-sm - 1)
@@ -23,20 +25,21 @@
       padding-right: 12px
 
   &__title
-    float: left
+    //float: left
+    display: inline-block
     color: #505050
     font-size: 13px
     border-bottom: 3px solid transparent
-    margin-right: 35px
+    margin: 0 30px
     padding-bottom: 8px
     text-transform: uppercase
 
     &--active
-      color: #2973a8
-      border-bottom: 3px solid #227EBA
+      color: #E94C36
+      border-bottom: 3px solid #E94C36
 
   &__body
-    padding: 24px 84px 44px
+    padding: 24px 60px 44px
 
     @media (max-width: $breakpoint-sm - 1)
       padding-left: 12px
@@ -50,28 +53,24 @@
   &__label
     font-size: 15px
     color: #505050
-    margin-bottom: 17px
+    margin-bottom: 15px
 
   &__mark
     display: inline-block
     //position: relative
 
     &:before
-      content: '?'
+      content: ''
       display: inline-block
       vertical-align: middle
       text-align: center
-      width: 22px
-      height: 22px
-      background: #f1f5f7
-      border-radius: 50%
-      color: #618aa1
+      background: url(../img/sprite-mark.svg)
       anim()
 
     &--active
-      &:before
-        background: #237eba
-        color: #fff
+      //&:before
+      //  background: #237eba
+      //  color: #fff
 
       .form__mark-content
         opacity: 1
@@ -80,7 +79,7 @@
     &-content
       position: absolute
       background: #ffffff
-      border: 2px solid #237eba
+      border: 2px solid #C1C1C1
       z-index: 1000
       padding: 28px
       border-radius: 8px
@@ -104,8 +103,9 @@
       display: block
 
     & > div
-      padding: 0 6px
       flex: 1
+      & > *
+        padding: 0 6px
 
       @media (max-width: $breakpoint-sm - 1)
         margin-bottom: 12px
@@ -119,6 +119,12 @@
     @media (max-width: $breakpoint-sm - 1)
       max-width: none
 
+  & &__purchasePrice
+    flex: 2
+
+  & &__company
+    flex: 2
+
   &__calc
     font-size: 15px
     color: #505050
@@ -130,35 +136,51 @@
     margin-left: 20px
     line-height: 1
 
-  &__buttons
+  & &__buttons
+    flex: 2
+    text-align: right
     display: flex
-    margin: 0 -7px
+    justify-content: flex-end
+    @media (max-width: $breakpoint-sm - 1)
+      flex-direction: column
+    //margin: 0 -7px
 
-  &__button
-    background: #4caf50
-    display: block
-    width: 100%
+  & &__button
+    background: #898989
+    display: inline-block
+    //width: 100%
     height: 64px
+    padding: 0 30px
     border-radius: 4px
-    border: 2px solid #4caf50
+    border: 0
+    //border: 2px solid #4caf50
     font-size: 15px
     color: #ffffff
-    font-weight: bold
-    padding: 0 8px
+    text-transform: uppercase
     margin: 0 7px
     anim(.15s)
     cursor: pointer
+    ffGotham()
+    font-weight: 500
+
+    @media (max-width: $breakpoint-sm - 1)
+      margin-bottom: 8px
 
     &:hover
-      background-color: transparent
-      color: #4caf50
+      background-color: #656464
 
     &:disabled
-      background: #C5DCC6
-      border-color: #C5DCC6
+      background: #b5b5b5
 
       &:hover
+        background: #b5b5b5
         color: #ffffff
+
+    &--primary
+      background: #e94c36
+
+      &:hover
+        background: #c84735
 
   &__checkbox
     position: relative
@@ -167,7 +189,7 @@
       display: none
 
     input:checked + label:before
-      background-image: url(sprite-checkox-checked.svg)
+      background-image: url(../img/sprite-checkbox-checked.svg)
 
     label
       display: block
@@ -176,14 +198,14 @@
       font-size: 13px
       line-height: 18px
       padding-left: 25px
-      margin-top: 20px
+      //margin-top: 20px
       &:before
         content: ''
         display: inline-block
         position: absolute
         left: 0
         top: 0
-        background-image: url(sprite-checkox.svg)
+        background-image: url(../img/sprite-checkbox.svg)
         margin-right: 15px
 
       a
@@ -196,6 +218,9 @@
   &__error
     text-align: center
     color: #e94c36
+
+  &__aside
+    float: right
 
   &__spinner
     margin: 60px auto;

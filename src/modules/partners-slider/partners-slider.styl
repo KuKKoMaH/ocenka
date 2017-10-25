@@ -17,34 +17,17 @@
     z-index: 1
     width: 20px
     height: 50px
-    margin-top: -25px
+    margin-top: -16px
+    opacity: .2
+    anim()
 
-    &:before, &:after
-      content: ''
-      display: block
-      background: #ffffff
-      width: 1px
-      height: 25px
-      position: absolute
-      left: 50%
-
-    &:before
-      top: 50%
-      margin-top: -2px
-    &:after
-      bottom: 50%
-      margin-bottom: -2px
+    &:hover
+      opacity: .7
 
   .owl-prev
+    background: url(../img/sprite-arrow-left.svg)
     right: 100%
-    &:before
-      transform: rotate(-30deg)
-    &:after
-      transform: rotate(30deg)
 
   .owl-next
+    background: url(../img/sprite-arrow-right.svg)
     left: 100%
-    &:before
-      transform: rotate(30deg)
-    &:after
-      transform: rotate(-30deg)

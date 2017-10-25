@@ -9,240 +9,135 @@
     <link rel="stylesheet" media="all" href="style.css">
     <!--link(rel="shortcut icon" href="/favicon.ico")-->
   </head>
-  <body>
+  <body class="front-page">
     <header class="header" id="header">
           <div class="menu">
-            <div class="w">
-              <div class="menu__images"><a class="menu__logo" href=".."></a>
-                <div class="menu__vtb"></div>
-              </div>
+            <div class="w"><a class="menu__logo" href=".."></a>
               <button class="menu__hamburger"></button>
               <div class="menu__wrapper">
                 <button class="menu__close"></button>
-                <ul>
-                  <li class="menu__active"><a href="registry.html">Реестр объектов</a></li>
+                <ul class="menu__items">
+                  <li class="menu__active"><a href="registry.html">Реестр партёров</a></li>
                   <li><a href="#works">Как это работает</a></li>
                   <li><a href="#advantages">Наши преимущества</a></li>
-                </ul>
-                <div class="menu__item"><a class="menu__button" href="order_step1.html">ЗАКАЗАТЬ</a></div>
-                <div class="menu__item"><a class="menu__cabinet" href="/profile.html">Личный кабинет</a></div>
+                </ul><a class="menu__cabinet" href="/profile.html">Личный кабинет</a>
               </div>
             </div>
           </div>
       <div class="w">
         <div class="header__content">
-          <h1>Нет нужды ехать в офис</h1>
-          <h2>–  наши сотрудники узнают всё про недвижимость<br>которая вас интересует и помогут с ипотекой!</h2>
+          <h1>Закажите оценку недвижимости</h1>
+          <h2 class="line">соотвествующую всем требованиям банка за 2 минуты</h2>
+          <h3>С помощью сервиса Экспресс Оценка вы можете<br>
+            заказать оценку у аккредитованной оценочной<br>
+            компании в вашем регионе
+          </h3>
         </div>
         <div class="header__form-wrapper">
-          <div class="header__form-title"><span>Оставить заявку</span> на проверку недвижимости</div>
+          <div class="header__form-title">Заказжите экспресс оценку прямо сейчас</div>
           <form class="header__form" novalidate="" action="order_step1.html">
-            <div class="header__form-input header__address">
-                  <div class="input">
-                    <input class="input__input" value="" required="">
-                    <label class="input__label">Адрес</label>
-                    <div class="input__error"></div>
-                  </div>
+            <div class="header__row">
+              <div class="header__form-input header__address">
+                    <div class="input">
+                      <input class="input__input" value="" required="">
+                      <label class="input__label">Адрес объекта</label>
+                      <div class="input__error"></div>
+                    </div>
+              </div>
+              <div class="header__form-input header__flat">
+                    <div class="input">
+                      <input class="input__input" value="" required="">
+                      <label class="input__label">Кв.</label>
+                      <div class="input__error"></div>
+                    </div>
+              </div>
             </div>
-            <div class="header__form-input header__flat">
-                  <div class="input">
-                    <input class="input__input" value="" required="">
-                    <label class="input__label">Квартира</label>
-                    <div class="input__error"></div>
-                  </div>
-            </div>
-            <div class="header__form-input header__phone">
-                  <div class="input">
-                    <input class="input__input" value="" required="" type="phone">
-                    <label class="input__label">Телефон</label>
-                    <div class="input__error"></div>
-                  </div>
-            </div>
-            <div class="header__form-input header__submit">
-              <button class="header__submit-button">ЗАКАЗАТЬ «ОДОБРЕНО»</button>
+            <div class="header__row">
+              <div class="header__form-input header__phone">
+                    <div class="input">
+                      <input class="input__input" value="" required="" type="phone">
+                      <label class="input__label">Телефон</label>
+                      <div class="input__error"></div>
+                    </div>
+              </div>
+              <div class="header__form-input header__submit">
+                <button class="header__submit-button">ЗАКАЗАТЬ ОЦЕНКУ</button>
+              </div>
             </div>
           </form>
           <div class="header__form-error"></div>
         </div>
       </div>
     </header>
-    <section class="last">
-      <div class="w">
-        <div class="last__header">Последние одобренные объекты</div>
-        <div class="last__aside">
-              <a class="button last__button--top" href="registry.html" type="registry.html">смотреть весь реестр
-              </a>
-          <div class="last__counter">
-            <div class="last__counter-title">Уже одобрено</div>
-            <div class="last__flip">1</div>
-            <div class="last__flip">2</div>
-            <div class="last__flip">3</div>
-            <div class="last__flip">4</div>
-            <div class="last__flip">5</div>
-          </div>
-          <div class="last__counter">
-            <div class="last__counter-title">Уже продано</div>
-            <div class="last__flip">1</div>
-            <div class="last__flip">2</div>
-            <div class="last__flip">3</div>
-          </div>
-        </div>
-        <div class="last__slider-wrapper">
-          <div class="last__slider owl-carousel">
-            <div class="last__card"><img class="last__image" src="https://placehold.it/194x124">
-              <div class="last__date">10.09.2017</div>
-              <div class="last__title">Москва</div>
-              <div class="last__subtitle">ЖК «Петербург»</div>
-              <div class="last__description">3-х комн. кв.</div>
-            </div>
-            <div class="last__card"><img class="last__image" src="https://placehold.it/194x124">
-              <div class="last__date">10.09.2017</div>
-              <div class="last__title">Москва</div>
-              <div class="last__subtitle">ЖК «Петербург»</div>
-              <div class="last__description">3-х комн. кв.</div>
-            </div>
-            <div class="last__card"><img class="last__image" src="https://placehold.it/194x124">
-              <div class="last__date">10.09.2017</div>
-              <div class="last__title">Москва</div>
-              <div class="last__subtitle">ЖК «Петербург»</div>
-              <div class="last__description">3-х комн. кв.</div>
-            </div>
-            <div class="last__card"><img class="last__image" src="https://placehold.it/194x124">
-              <div class="last__date">10.09.2017</div>
-              <div class="last__title">Москва</div>
-              <div class="last__subtitle">ЖК «Петербург»</div>
-              <div class="last__description">3-х комн. кв.</div>
-            </div>
-            <div class="last__card"><img class="last__image" src="https://placehold.it/194x124">
-              <div class="last__date">10.09.2017</div>
-              <div class="last__title">Москва</div>
-              <div class="last__subtitle">ЖК «Петербург»</div>
-              <div class="last__description">3-х комн. кв.</div>
-            </div>
-            <div class="last__card"><img class="last__image" src="https://placehold.it/194x124">
-              <div class="last__date">10.09.2017</div>
-              <div class="last__title">Москва</div>
-              <div class="last__subtitle">ЖК «Петербург»</div>
-              <div class="last__description">3-х комн. кв.</div>
-            </div>
-            <div class="last__card"><img class="last__image" src="https://placehold.it/194x124">
-              <div class="last__date">10.09.2017</div>
-              <div class="last__title">Москва</div>
-              <div class="last__subtitle">ЖК «Петербург»</div>
-              <div class="last__description">3-х комн. кв.</div>
-            </div>
-          </div>
-        </div>
-            <a class="button last__button--bottom" type="submit">смотреть весь реестр
-            </a>
-      </div>
-    </section>
-    <section class="video">
-      <div class="video__right">
-        <div class="video__content">
-          <div class="video__title">Призыв посмотреть<br>видео «О НАС»</div>
-          <div class="video__text">Текст который объясняет почему<br>стоит посмотреть это видео</div>
-        </div>
-      </div>
-      <div class="video__left">
-        <div class="video__video"></div>
-      </div>
-    </section>
     <section class="works" id="works">
-      <div class="works__title">Как это работает</div>
+      <div class="title">Как это работает</div>
       <div class="w works__items">
         <div class="c c4 works__item">
-          <div class="works__image"><img src="img/modules-works-icon1.svg"></div>
+          <div class="works__image"><img src="img/img-works-1.svg"></div>
           <div class="works__name">Заявка</div>
           <div class="works__text">Вы заполняете заявку, прикладываете необходимые документы и проводите оплату удобным способом</div>
         </div>
         <div class="c c4 works__item">
-          <div class="works__image"><img src="img/modules-works-icon2.svg"></div>
+          <div class="works__image"><img src="img/img-works-2.svg"></div>
           <div class="works__name">Осмотр</div>
           <div class="works__text">Мы проводим осмотр объекта в удобное для Вас время</div>
         </div>
         <div class="c c4 works__item">
-          <div class="works__image"><img src="img/modules-works-icon3.svg"></div>
-          <div class="works__name">Одобрено</div>
-          <div class="works__text">Сертификат «Одобрено» высылаем на Вашу электронную почту</div>
+          <div class="works__image"><img src="img/img-works-3.svg"></div>
+          <div class="works__name">Готово</div>
+          <div class="works__text">Через два дня передаем отчет об оценке в банк</div>
         </div>
       </div>
           <a class="button" href="#header" type="submit">Заполнить заявку
           </a>
     </section>
-    <div class="advantages" id="advantages">
-      <div class="advantages__title">Наши преимущества</div>
-      <div class="w advantages__items">
-        <div class="advantages__item">
-          <div class="advantages__image"><img src="img/modules-advantages-advantage-1.png"></div>
-          <div class="advantages__content">
-            <div class="advantages__name">Увеличение привлекательности объекта для покупателя</div>
-            <div class="advantages__text">Юридический отдел занимается тщательным подбором данных о текущем состоянии дел на предприятии с целью предоставления будущему покупателю достоверной информации о перспективах использования объекта недвижимости в бизнесе.</div>
-          </div>
+    <section class="video">
+      <div class="w">
+        <div class="video__content">
+          <h2 class="title video__title">Видео</h2>
+          <div class="video__text">Посмотрите видео — этот текст описывает видео,<br>рассказывает что вы узанете посмотрев его.</div>
         </div>
-        <div class="advantages__item">
-          <div class="advantages__image"><img src="img/modules-advantages-advantage-2.png"></div>
-          <div class="advantages__content">
-            <div class="advantages__name">Профессиональная фотосъемка для экспонирования</div>
-            <div class="advantages__text">Гиротахометр, в отличие от некоторых других случаев, безусловно не зависит от скорости вращения внутреннего кольца подвеса, что не кажется странным, если вспомнить о том, что мы не исключили из рассмотрения систематический уход.</div>
-          </div>
-        </div>
-        <div class="advantages__item">
-          <div class="advantages__image"><img src="img/modules-advantages-advantage-3.png"></div>
-          <div class="advantages__content">
-            <div class="advantages__name">Размещение объявления на всех «работающих» сайтах в один клик</div>
-            <div class="advantages__text">Гиротахометр, в отличие от некоторых других случаев, безусловно не зависит от скорости вращения внутреннего кольца подвеса, что не кажется странным, если вспомнить о том, что мы не исключили из рассмотрения систематический уход.</div>
-          </div>
-        </div>
-        <div class="advantages__item">
-          <div class="advantages__image"><img src="img/modules-advantages-advantage-4.png"></div>
-          <div class="advantages__content">
-            <div class="advantages__name">Минимизация</div>
-            <div class="advantages__text">Гиротахометр, в отличие от некоторых других случаев, безусловно не зависит от скорости вращения внутреннего кольца подвеса, что не кажется странным, если вспомнить о том, что мы не исключили из рассмотрения систематический уход.</div>
-          </div>
-        </div>
-        <div class="advantages__item">
-          <div class="advantages__image"><img src="img/modules-advantages-advantage-5.png"></div>
-          <div class="advantages__content">
-            <div class="advantages__name">Быстрый выход на сделку</div>
-            <div class="advantages__text">Гиротахометр, в отличие от некоторых других случаев, безусловно не зависит от скорости вращения внутреннего кольца подвеса, что не кажется странным, если вспомнить о том, что мы не исключили из рассмотрения систематический уход.</div>
+        <div class="video__video">
+          <div class="video__container">
+            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0&amp;amp;showinfo=0" frameborder="0" allowfullscreen=""></iframe>
           </div>
         </div>
       </div>
-          <a class="button" href="#header" type="submit">заказать «одобрено»
-          </a>
-    </div>
-    <div class="partners">
-      <div class="partners__title">ПАРТНЕРЫ</div>
-      <div class="w">
-        <div class="partners__block">
-          <div class="partners__slider">
-            <div class="partners-slider">
-              <div class="owl-carousel"><img src="https://placehold.it/200x90"><img src="https://placehold.it/200x90"><img src="https://placehold.it/200x90"><img src="https://placehold.it/200x90"><img src="https://placehold.it/200x90"><img src="https://placehold.it/200x90"></div>
-            </div>
-          </div>
-          <div class="partners__button">
-                <a class="button button--white" href="#header" type="submit">Стать партнером
-                </a>
-          </div>
+    </section>
+    <section class="advantages" id="advantages">
+      <h3 class="title advantages__title">Наши преимущества</h3>
+      <div class="w advantages__items">
+        <div class="c c4 advantages__item">
+          <div class="advantages__image"><img src="img/img-advantage-1.svg"></div>
+          <div class="advantages__name">Гарантия качества</div>
+          <div class="advantages__text">Отчеты об оценке полностью соответствуют требованиям вашего банка</div>
         </div>
+        <div class="c c4 advantages__item">
+          <div class="advantages__image"><img src="img/img-advantage-2.svg"></div>
+          <div class="advantages__name">Короткие сроки</div>
+          <div class="advantages__text">Оформление заявки всего несколько минут в режиме онлайн, сразу отправляется в банк</div>
+        </div>
+        <div class="c c4 advantages__item">
+          <div class="advantages__image"><img src="img/img-advantage-3.svg"></div>
+          <div class="advantages__name">География</div>
+          <div class="advantages__text">При оформлении заказа сможете выбрать проверенную оценочную компанию в вашемрегионе</div>
+        </div>
+      </div>
+          <a class="button" href="#header" type="submit">Заказать «Экспресс-оценку»
+          </a>
+    </section>
+    <div class="partners-slider">
+      <div class="w">
+        <div class="owl-carousel"><img src="img/img-partner-1.png"><img src="img/img-partner-2.png"><img src="img/img-partner-3.png"><img src="img/img-partner-1.png"><img src="img/img-partner-2.png"><img src="img/img-partner-3.png"></div>
       </div>
     </div>
     <footer class="footer footer--line">
       <div class="w">
-        <div class="c c6">
-          <div>
-            <div class="footer__logo"></div>
-            <div class="footer__vtb"></div>
-          </div>
-          <div class="footer__copyright">© 2017 «Одобрено», «ВТБ», все права защищены</div>
+        <div class="footer__left">
+          <div class="footer__logo"></div>
+          <div class="footer__copyright">© 2017 «Экспресс Оценка», «ВТБ», все права защищены</div>
         </div>
-        <div class="c c6">
-          <div class="footer__icons"><a class="footer__icon footer__icon--vk" href="#"></a><a class="footer__icon footer__icon--fb" href="#"></a><a class="footer__icon footer__icon--ins" href="#"></a><a class="footer__icon footer__icon--tw" href="#"></a></div>
-        </div>
-        <div class="c c12">
-          <div class="footer__links"><a class="footer__link" href="#">О компании</a> <a class="footer__link" href="#">Пользовательское соглашение</a> <a class="footer__link" href="#">Политика конфиденциальности</a> <a class="footer__link" href="#">Способы оплаты</a></div>
-        </div>
+        <div class="footer__links"><a class="footer__link" href="#">О компании</a> <a class="footer__link" href="#">Пользовательское соглашение</a> <a class="footer__link" href="#">Политика конфиденциальности</a> <a class="footer__link" href="#">Способы оплаты</a></div>
       </div>
     </footer>
     <div class="popups">

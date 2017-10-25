@@ -1,14 +1,11 @@
-mixin menu(full)
-  .menu(class=full && 'menu--full'): .w
-    .menu__images
-      a.menu__logo(href='..')
-      .menu__vtb
+mixin menu()
+  .menu: .w
+    a.menu__logo(href='..')
     button.menu__hamburger
     .menu__wrapper
       button.menu__close
-      ul
-        li.menu__active: a(href='registry.html') Реестр объектов
+      ul.menu__items
+        li.menu__active: a(href='registry.html') Реестр партёров
         li: a(href='#works') Как это работает
         li: a(href='#advantages') Наши преимущества
-      .menu__item: a.menu__button(href='order_step1.html') ЗАКАЗАТЬ
-      .menu__item: a.menu__cabinet(href='/profile.html') Личный кабинет
+      a.menu__cabinet(href='/profile.html') Личный кабинет

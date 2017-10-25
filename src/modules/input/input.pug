@@ -1,5 +1,5 @@
 mixin input(placeholder, search, select)
-  - var className = 'input' + (search ? ' input--search' : '') + (select ? ' input--select' : '')
+  - var className = 'input' + (search ? ' input--search' : '') + (select ? ' input--select' : '') + (!placeholder ? ' input--nolabel' : '')
   div(class=className)
     if(select)
       select.input__select(required)&attributes(attributes)
@@ -7,5 +7,6 @@ mixin input(placeholder, search, select)
           block
     else
       input.input__input(value='' required)&attributes(attributes)
-    label.input__label= placeholder
+    if(placeholder)
+      label.input__label= placeholder
     .input__error

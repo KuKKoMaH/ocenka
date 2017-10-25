@@ -1,33 +1,42 @@
-$baseClass = '.works';
 .works
-  background: #3d4360
-  padding: 70px 0
+  background: linear-gradient(to bottom, #F0F0F0 0%, #F0F0F0 48%, #fff 48%, #fff 100%)
+  padding: 260px 0 130px
   text-align: center
+
+  @media (max-width: $breakpoint-sm - 1)
+    background: #ffffff
+    padding-top: 50px
 
   &__title
     margin: 0
     padding-bottom: 70px
-    color: #ffffff
     font-size: 22px
     text-transform: uppercase
 
   &__items
     margin-bottom: 55px
 
-  &__item
-    &:hover
-      {$baseClass}__name,
-      {$baseClass}__text
-        color: #ffffff
+  &__image
+    width: 127px
+    height: 127px
+    background: #E94C36
+    border-radius: 50%
+    line-height: 127px
+    margin: 0 auto 20px
+
+    img
+      line-height: 1
+      display: inline-block
+      vertical-align: middle
 
   &__name
-    font-size: 16px
-    color: #457ec2
-    text-transform: uppercase
-    margin-bottom: 9px
+    font-size: 24px
+    color: #33495F
+    margin-bottom: 15px
     anim()
 
   &__text
     font-size: 17px
-    color: #a5b7cc
-    anim()
+    color: #505050
+    max-width: 300px
+    margin: 0 auto

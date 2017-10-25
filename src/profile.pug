@@ -2,6 +2,7 @@ extends pug/_layout
 include modules/popup/popup
 include modules/menu/menu
 include modules/profile/profile
+include modules/footer/footer
 
 block body
   +profile()
@@ -32,4 +33,5 @@ block body
           .table__cell.table__certificate
             .table__label Документы
             .table__value {{documents}}
-    include modules/footer/footer
+
+  +footer()
