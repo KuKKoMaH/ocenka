@@ -1,5 +1,5 @@
 import Input from '../input/input';
-import { getOrder, updateOrder, payBonusOrder, payOrder } from '../../js/api';
+import * as API from '../../js/api';
 import { getParam } from '../../js/history';
 import Auth from '../../js/Auth';
 
@@ -10,8 +10,11 @@ if ($form.length) {
 
   $.when(
     Auth.getProfile(),
-    getOrder(orderId, Auth.token)
-  ).then((profile, [order]) => {
+    API.getOrder(orderId, Auth.token)
+  ).then(( profile, [order] ) => {
+
+      // API.getCompaniesList().then(console.log);
+
       $('.form__form').show();
 
       $('#form-address').val(order.address);
@@ -30,12 +33,13 @@ if ($form.length) {
       const $bank = new Input({
         $el:       $('#form-bank').parent(),
         type:      'select',
+        load:      API.getBanksList,
         validator: { 'Выберите банк': val => !!val },
       });
       const $purchasePrice = new Input({
         $el:       $('#form-purchasePrice').parent(),
         type:      'currency',
-        validator: { 'Введите цену продажи': (val) => !!val },
+        validator: { 'Введите цену продажи': ( val ) => !!val },
       });
 
       const $customerName = new Input({
@@ -82,8 +86,8 @@ if ($form.length) {
         $el:       $('#form-evaluating-company').parent(),
         type:      'select',
         render:    {
-          option: (item, escape) => {
-            return `<div class="option">${escape(item.text)}<span class="option__rating">рейтинг: ${item.rating}</span></div>`;
+          option: ( item, escape ) => {
+            return `<div class="option">${escape(item.name)}<span class="option__rating">рейтинг: ${item.rating}</span></div>`;
           }
         },
         validator: { 'Выберите компанию': val => !!val },
@@ -97,6 +101,9 @@ if ($form.length) {
         type:      'select',
         validator: { 'Выберите тип объекта': val => !!val },
       });
+
+      API.getBanksList().then(banks => $bank.setOptions(banks));
+      API.getCompaniesList().then(companies => $evaluatingCompany.setOptions(companies));
 
       const fields = [
         $bank,
@@ -115,7 +122,7 @@ if ($form.length) {
       ];
       const $buttons = $('.form__button');
       const $button_pay = $('#form-pay');
-      const $button_bonus = $('#form-bonus');
+      const $bank_bonus = $('#form-paybank');
       const $offer = $('#form-offer');
       const $customerBorrowerSame = $('#form-customer-borrower-same');
       const $borrower = $('#borrower');
@@ -123,7 +130,8 @@ if ($form.length) {
       $buttons.attr('disabled', true);
       $offer.on('change', () => {
         $button_pay.attr('disabled', !$offer.prop('checked'));
-        if (profile.bonus > 0) $button_bonus.attr('disabled', !$offer.prop('checked'));
+        $bank_bonus.attr('disabled', !$offer.prop('checked'));
+        // if (profile.bonus > 0) $button_bonus.attr('disabled', !$offer.prop('checked'));
       });
 
       let customerBorrowerSame = null;
@@ -134,17 +142,16 @@ if ($form.length) {
       $customerBorrowerSame.on('change', onChangeCustomerBorrowerSame);
       onChangeCustomerBorrowerSame();
 
-      $button_bonus.on('click', (e) => {
+      $bank_bonus.on('click', ( e ) => {
         e.preventDefault();
         const data = collectOrder();
         if (!data) return;
-        updateOrder(data, Auth.token)
-          .then(() => payBonusOrder(data.id, Auth.token))
-          .then(() => window.location.href = $form.attr('action') + '?order=' + data.id);
-        // ;
+        API.updateOrder(data, Auth.token)
+          .then(() => API.getOrderInvoice(data.id, Auth.token))
+          .then(console.log);
       });
 
-      $form.on('submit', (e) => {
+      $form.on('submit', ( e ) => {
         e.preventDefault();
 
         const data = collectOrder();
@@ -152,11 +159,12 @@ if ($form.length) {
         // const url = `${$form.prop('action')}`;
         if (!data) return;
 
-        updateOrder(data, Auth.token)
+        API.updateOrder(data, Auth.token)
           .catch(err => {
           })
-          .then(() => payOrder(data.id, url, Auth.token))
-          .then((redirect) => (window.location.href = redirect.formUrl))
+          .then(() => API.payOrder(data.id, url, Auth.token))
+          // .then(console.log)
+          .then(( redirect ) => (window.location.href = redirect.url))
         // console.log(data);
       });
 
@@ -166,16 +174,23 @@ if ($form.length) {
         if (fields.some(field => !field.isValid())) return null;
 
         return {
-          id:                order.id,
-          inspectionDate:    $date.getValue(),
-          timeBlock:         $time.getValue(),
-          comment:           $comment.getValue(),
-          surname:           $surname.getValue(),
-          name:              $name.getValue(),
-          parentalName:      $patronymic.getValue(),
-          salePrice:         +$purchasePrice.getValue(),
-          acceptedAgreement: true,
-          partnerCode:       $partner.getValue(),
+          id:                 order.id,
+          bankId:             $bank.getValue(),
+          salePrice:          +$purchasePrice.getValue(),
+          name:               $customerName.getValue(),
+          passport:           $customerPassport.getValue(),
+          phone:              $customerPhone.getValue(),
+          sameBorrower:       customerBorrowerSame,
+          borrower:           customerBorrowerSame ? null : {
+            name:     $borrowerName.getValue(),
+            passport: $borrowerPassport.getValue(),
+            phone:    $borrowerPhone.getValue()
+          },
+          inspectionDate:     $date.getValue(),
+          timeBlock:          $time.getValue(),
+          appraisalCompanyId: $evaluatingCompany.getValue(),
+          comment:            $comment.getValue(),
+          acceptedAgreement:  true,
         };
 
       }

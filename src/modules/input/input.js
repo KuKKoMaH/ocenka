@@ -3,7 +3,7 @@ import 'selectize';
 import Cleave from 'cleave.js';
 
 export default class Input {
-  constructor({ $el, type, onSelect, validator, render }) {
+  constructor( { $el, type, onSelect, validator, render } ) {
     this.validator = validator;
     this.$el = $el;
     this.$input = $el.find('.input__input, .input__select');
@@ -24,7 +24,7 @@ export default class Input {
         type:            'ADDRESS',
         bounds:          'city-house',
         mobileWidth:     767,
-        onSelect:        (suggest) => {
+        onSelect:        ( suggest ) => {
           if (onSelect) onSelect(suggest);
           this.validate();
         }
@@ -50,9 +50,11 @@ export default class Input {
     }
 
     if (type === 'select') {
-      this.$input.selectize({
-        onOptionAdd: (value, data) => console.log(value, data),
+      this.selectize = this.$input.selectize({
         onChange:    this.validate.bind(this),
+        valueField: 'id',
+        labelField: 'title',
+        searchField: ['title'],
         render,
       });
       $el.find('.selectize-control').append(this.$label);
@@ -79,7 +81,7 @@ export default class Input {
     this.$input.on('input', this.onInput);
   }
 
-  onInput(e) {
+  onInput( e ) {
     if (this.dirty) this.validate();
   }
 
@@ -87,7 +89,6 @@ export default class Input {
     this.dirty = true;
 
     const val = this.$input.val();
-    // console.log(val);
     this.errors = [];
     for (const message in this.validator) {
       if (!this.validator[message](val)) this.errors.push(message);
@@ -108,5 +109,9 @@ export default class Input {
 
   isValid() {
     return !this.errors.length;
+  }
+
+  setOptions( options ) {
+    this.selectize[0].selectize.load(callback => callback(options));
   }
 }

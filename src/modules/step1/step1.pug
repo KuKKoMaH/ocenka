@@ -17,17 +17,6 @@ include ../form/form
       .form__bank
         .form__label Выберите банк-кредитор
         +input('Выберите банк', false, true)(id='form-bank')
-          option(value='')
-          option(value='sber') Сбербанк
-          option(value='vtb') ВТБ 24
-          option(value='sber1') Сбербанк
-          option(value='vtb1') ВТБ 24
-          option(value='sber2') Сбербанк
-          option(value='vtb2') ВТБ 24
-          option(value='sber3') Сбербанк
-          option(value='vtb3') ВТБ 24
-          option(value='sber4') Сбербанк
-          option(value='vtb4') ВТБ 24
       .form__purchasePrice: +input('Предполагаемая цена покупки')(id='form-purchasePrice')
 
     .form__label
@@ -60,12 +49,6 @@ include ../form/form
       .form__company
         .form__label Выберите оценочную компанию
         +input('Выберите оценочную компанию', false, true)(id='form-evaluating-company')
-          option()
-          option(value='1' data-data='{"rating": "6"}') Оценочная компания Воробушек
-          option(value='2' data-data='{"rating": "2"}') ОК «Ветер с моря»
-          option(value='3' data-data='{"rating": "5"}') Оценщик
-          option(value='4' data-data='{"rating": "3"}') Оценочка
-          option(value='5' data-data='{"rating": "9"}') ООО «Оценка имущества»
 
     .form__label Комментарий к заказу
     .form__row: +input('Введите ваш коментарий')(id='form-comment')
@@ -86,5 +69,5 @@ include ../form/form
         //.form_calc Стоимость услуги: #[span.form__price 1000] руб.
       //.form__half
       .form__buttons
-        button.form__button.form__button--primary#form-bonus Оплатить картой
-        button.form__button#form-pay Оплатить в отделении банка
+        button.form__button.form__button--primary#form-pay Оплатить картой
+        button.form__button#form-paybank Оплатить в отделении банка
