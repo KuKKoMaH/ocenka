@@ -1,7 +1,9 @@
-mixin input(placeholder, search, select)
-  - var className = 'input' + (search ? ' input--search' : '') + (select ? ' input--select' : '') + (!placeholder ? ' input--nolabel' : '')
+mixin input(placeholder, search, select, textarea)
+  - var className = 'input' + (search ? ' input--search' : '') + (select ? ' input--select' : '') + (!placeholder ? ' input--nolabel' : '') + (textarea ? ' input--textarea' : '')
   div(class=className)
-    if(select)
+    if(textarea)
+      textarea.input__textarea(required)&attributes(attributes)
+    else if(select)
       select.input__select(required)&attributes(attributes)
         if (block)
           block

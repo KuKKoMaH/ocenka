@@ -17,7 +17,9 @@ include ../form/form
       .form__bank
         .form__label Выберите банк-кредитор
         +input('Выберите банк', false, true)(id='form-bank')
-      .form__purchasePrice: +input('Предполагаемая цена покупки')(id='form-purchasePrice')
+      .form__company
+        .form__label Выберите оценочную компанию
+        +input('Выберите оценочную компанию', false, true)(id='form-evaluating-company')
 
     .form__label
       |Данные заказчика оценки
@@ -27,7 +29,7 @@ include ../form/form
     .form__row.form__container
       div: +input('ФИО')(id='form-customer-name')
       div: +input('Серия и номер паспорта')(id='form-customer-passport')
-      div: +input('Номер телефона')(type='phone' id='form-customer-phone')
+      div: +input('Номер телефона')(type='phone' id='form-customer-phone' disabled)
 
     #borrower
       .form__label Данные заемщика
@@ -46,12 +48,10 @@ include ../form/form
             option(value='FROM_9_TO_12') С 9 до 12
             option(value='FROM_12_TO_16') С 12 до 16
             option(value='FROM_16_TO_19') С 16 до 19
-      .form__company
-        .form__label Выберите оценочную компанию
-        +input('Выберите оценочную компанию', false, true)(id='form-evaluating-company')
+      .form__purchasePrice: +input('Предполагаемая цена продажи')(id='form-purchasePrice')
 
     .form__label Комментарий к заказу
-    .form__row: +input('Введите ваш коментарий')(id='form-comment')
+    .form__row: +input('Введите ваш коментарий', false, false, true)(id='form-comment')
 
 
     .form__row: .form__checkbox
@@ -62,9 +62,12 @@ include ../form/form
       .form__half
         .form__label Стоимость услуги
         +input('', false, true)(id='form-cost')
-          option(value='1') Квартира — 3500 руб.
-          option(value='2') Комната — 3500 руб.
-          option(value='3') Дом — 3500 руб.
+          option(value='RESALE') RESALE
+          option(value='NEWBUILING') NEWBUILING
+          option(value='APARTMENTS') APARTMENTS
+          option(value='HOUSE') HOUSE
+          option(value='LAND') LAND
+          option(value='COTTAGE') COTTAGE
 
         //.form_calc Стоимость услуги: #[span.form__price 1000] руб.
       //.form__half

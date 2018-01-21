@@ -13,5 +13,4 @@ mixin profile()
           .profile__name
           //.profile__text Бонусные баллы: #[span.profile__bonus]
       .profile__stats
-    if(block)
-      block
+    include ../profile-table/profile-table

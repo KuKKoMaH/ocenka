@@ -25,36 +25,82 @@
         </div>
         <div class="profile__stats"></div>
       </div>
-      <div class="table__container" id="profile-table">
-        <div class="table__title">
-          <div class="table__number">№</div>
-          <div class="table__address">Адрес квартиры</div>
-          <div class="table__date">Статус заказа</div>
-          <div class="table__date">Оплата</div>
-          <div class="table__certificate">Документы</div>
+      <div class="profile-table" id="profile-table">
+        <div class="profile-table__header">
+          <div class="profile-table__toggle"></div>
+          <div class="profile-table__number">№</div>
+          <div class="profile-table__date">Дата регистрации заказа</div>
+          <div class="profile-table__address">Адрес объекта недвижимости</div>
+          <div class="profile-table__show">Дата и время показа</div>
+          <div class="profile-table__status">Статус заказа</div>
+          <div class="profile-table__payment">Оплата</div>
+          <div class="profile-table__documents">Документы</div>
         </div>
-        <div class="table__rows"></div>
-        <div class="table__template">
-          <div class="table__row">
-            <div class="table__cell table__number">
-              <div class="table__label">№</div>
-              <div class="table__value">{{index}}</div>
+        <div class="profile-table__body"></div>
+        <div class="profile-table__template">
+          <div class="profile-table__item">
+            <div class="profile-table__row">
+              <div class="profile-table__cell profile-table__toggle"></div>
+              <div class="profile-table__cell profile-table__number">
+                <div class="profile-table__label">№</div>
+                <div class="profile-table__value">{{index}}</div>
+              </div>
+              <div class="profile-table__cell profile-table__date">
+                <div class="profile-table__label">Дата регистрации заказа</div>
+                <div class="profile-table__value">{{date}}</div>
+              </div>
+              <div class="profile-table__cell profile-table__address">
+                <div class="profile-table__label">Адрес объекта недвижимости</div>
+                <div class="profile-table__value">{{address}}</div>
+              </div>
+              <div class="profile-table__cell profile-table__show">
+                <div class="profile-table__label">Дата и время показа</div>
+                <div class="profile-table__value">{{show}}</div>
+              </div>
+              <div class="profile-table__cell profile-table__status">
+                <div class="profile-table__label">Статус заказа</div>
+                <div class="profile-table__value">{{status}}</div>
+              </div>
+              <div class="profile-table__cell profile-table__payment">
+                <div class="profile-table__label">Оплата</div>
+                <div class="profile-table__value">{{paid}}</div>
+              </div>
+              <div class="profile-table__cell profile-table__documents">
+                <div class="profile-table__label">Документы</div>
+                <div class="profile-table__value">{{documents}}</div>
+              </div>
             </div>
-            <div class="table__cell table__address">
-              <div class="table__label">Адрес квартиры</div>
-              <div class="table__value">{{address}}</div>
-            </div>
-            <div class="table__cell table__date">
-              <div class="table__label">Статус заказа</div>
-              <div class="table__value">{{status}}</div>
-            </div>
-            <div class="table__cell table__date">
-              <div class="table__label">Оплата</div>
-              <div class="table__value">{{paid}}</div>
-            </div>
-            <div class="table__cell table__certificate">
-              <div class="table__label">Документы</div>
-              <div class="table__value">{{documents}}</div>
+            <div class="profile-table__info-wrapper">
+              <div class="profile-table__info">
+                <div class="profile-table__info-col">
+                  <div class="profile-table__info-row">
+                    <div class="profile-table__info-label">Банк:</div>
+                    <div class="profile-table__info-value">{{bank}}</div>
+                  </div>
+                  <div class="profile-table__info-row">
+                    <div class="profile-table__info-label">Тип оценки:</div>
+                    <div class="profile-table__info-value">Простая</div>
+                  </div>
+                  <div class="profile-table__info-row">
+                    <div class="profile-table__info-label">Оценочная компания:</div>
+                    <div class="profile-table__info-value">{{appraisalCompany}}</div>
+                  </div>
+                </div>
+                <div class="profile-table__info-col">
+                  <div class="profile-table__info-row">
+                    <div class="profile-table__info-label">Контакты оценочной компании:</div>
+                    <div class="profile-table__info-value">84 Osinski Circle Apt. 992</div>
+                  </div>
+                  <div class="profile-table__info-row">
+                    <div class="profile-table__info-label">Комментарий:</div>
+                    <div class="profile-table__info-value">{{comment}}</div>
+                  </div>
+                  <div class="profile-table__info-row">
+                    <div class="profile-table__info-label">Срок:</div>
+                    <div class="profile-table__info-value">03-25-2017</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -107,7 +153,8 @@
   <script>
     var JS_PUBLIC_PATH = 'js/';
     var SUGGEST_KEY = "fdd27007fe8069d376aa269885162a16ef0e55d4";
-    var API_URL = 'https://fa.srg-it.ru/';
+    var API_URL = 'https://test-fa.srg-it.ru/';
+    // var API_URL = 'https://fa.srg-it.ru/';
     var ITEMS_PER_PAGE = 20;
     var PARTNERS = { 1: "TEST", 2: "TEST2", 3: "TEST3" }
   </script>

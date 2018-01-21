@@ -32,6 +32,14 @@ export const createOrder = ( data, token ) => {
   return fetch({ method: 'POST', url: 'order/create', data: { ...data }, options: { token } });
 };
 
+export const createDraft = ( data, token ) => {
+  return fetch({ method: 'POST', url: 'order/draft', data: { ...data }, options: { token } });
+};
+
+export const updateDraft = ( data, token ) => {
+  return fetch({ method: 'PUT', url: `order/draft/${data.id}`, data: { ...data }, options: { token } });
+};
+
 export const updateOrder = ( data, token ) => {
   return fetch({ method: 'POST', url: `order/${data.id}/appendDetails`, data, options: { token } });
 };
@@ -49,8 +57,8 @@ export const payOrder = ( id, url, token ) => {
   });
 };
 
-export const confirmPayment = ( id, orderId, q, status, token ) => {
-  return fetch({ method: 'GET', url: `order/${id}/updatePayStatus`, data: { q, orderId, status }, options: { token } });
+export const confirmPayment = ( id, reference, status, token ) => {
+  return fetch({ method: 'GET', url: `order/updatePayStatus`, data: { id, reference, status }, options: { token } });
 };
 
 export const confirmOrder = ( id, data, token ) => {
@@ -61,17 +69,17 @@ export const getCertificates = ( address, size, page ) => {
   return fetch({ method: 'GET', url: 'certificate/list', data: { address, size, page } });
 };
 
-export const getCompaniesList = () => {
-  return fetch({ method: 'GET', url: 'order/select/appraisalCompany' });
+export const getCompaniesList = ( address, id ) => {
+  return fetch({ method: 'GET', url: 'order/select/appraisalCompany', data: { Address: address, id } });
 };
 
 export const getBanksList = () => {
   return fetch({ method: 'GET', url: 'order/select/bank' }).then(banks => Object.keys(banks).map(( bankId ) => ({
-    id:    bankId,
-    title: banks[bankId],
+    id:   bankId,
+    name: banks[bankId],
   })));
 };
 
-export const getOrderInvoice = (orderId, token) => {
+export const getOrderInvoice = ( orderId, token ) => {
   return fetch({ method: 'GET', url: `order/${orderId}/invoice`, options: { token } });
 };

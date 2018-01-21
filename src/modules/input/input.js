@@ -3,10 +3,11 @@ import 'selectize';
 import Cleave from 'cleave.js';
 
 export default class Input {
-  constructor( { $el, type, onSelect, validator, render } ) {
+  constructor( { $el, type, onSelect, onChange, validator, render } ) {
     this.validator = validator;
     this.$el = $el;
-    this.$input = $el.find('.input__input, .input__select');
+    this.type = type;
+    this.$input = $el.find('.input__input, .input__select, .input__textarea');
     this.$error = $el.find('.input__error');
     this.$label = $el.find('.input__label');
 
@@ -44,17 +45,21 @@ export default class Input {
         this.$input.datepicker({
           language:  'ru',
           format:    'dd.mm.yyyy',
-          autoclose: true
+          autoclose: true,
+          startDate: '+1d',
         }).on('changeDate', this.validate);
       });
     }
 
     if (type === 'select') {
       this.selectize = this.$input.selectize({
-        onChange:    this.validate.bind(this),
-        valueField: 'id',
-        labelField: 'title',
-        searchField: ['title'],
+        onChange:    ( value ) => {
+          this.validate();
+          if (onChange) onChange(this.getValue());
+        },
+        valueField:  'id',
+        labelField:  'name',
+        searchField: ['name'],
         render,
       });
       $el.find('.selectize-control').append(this.$label);
@@ -74,7 +79,13 @@ export default class Input {
         delimiter:   ' ',
         blocks:      [4, 6],
       });
+    }
 
+    if (type === 'textarea') {
+      require.ensure([], () => {
+        const autosize = require('autosize');
+        autosize(this.$input[0]);
+      });
     }
 
     this.$input.on('blur', this.validate);
@@ -105,6 +116,13 @@ export default class Input {
 
   getValue() {
     return this.$input.val();
+  }
+
+  setValue( value ) {
+    if (this.type === 'select') {
+      console.log(value);
+      this.selectize[0].selectize.setValue(value);
+    }
   }
 
   isValid() {

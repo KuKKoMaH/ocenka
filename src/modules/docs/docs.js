@@ -12,7 +12,7 @@ if ($form.length) {
   const orderId = getParam('order');
 
   getOrder(orderId, Auth.token).then((order) => {
-    confirmPayment(orderId, getParam('orderId'), getParam('operation'), true, Auth.token);
+    confirmPayment(getParam('id'), getParam('reference'), true, Auth.token);
 
     $('.form__form').show();
 

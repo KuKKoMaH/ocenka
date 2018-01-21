@@ -1,5 +1,5 @@
 import Input from '../input/input';
-import { login, createOrder } from '../../js/api';
+import { createDraft } from '../../js/api';
 import Auth from '../../js/Auth';
 
 let currentAddress = null;
@@ -16,7 +16,7 @@ const $address = new Input({
 
 const $flat = new Input({
   $el:       $('.header__flat .input'),
-  validator: { 'Введите номер': (val) => !!val },
+  validator: { 'Введите номер': ( val ) => !!val },
 });
 
 const $phone = new Input({
@@ -29,7 +29,7 @@ const fields = [$address, $flat, $phone];
 const $button = $('.header__submit button');
 const $error = $('.header__form-error');
 
-$('.header__form').on('submit', (e) => {
+$('.header__form').on('submit', ( e ) => {
   e.preventDefault();
 
   fields.forEach(field => field.validate());
@@ -39,17 +39,18 @@ $('.header__form').on('submit', (e) => {
   const data = {
     address:     currentAddress.value,
     houseNumber: currentAddress.data.house,
-    flatNumber:  $flat.getValue(),
+    flatNumber:  +$flat.getValue(),
     fiasGuid:    currentAddress.data.fias_id,
-    lat:         currentAddress.data.geo_lat,
-    lon:         currentAddress.data.geo_lon,
+    lat:         +currentAddress.data.geo_lat,
+    lon:         +currentAddress.data.geo_lon,
   };
   $button.attr('disabled', 'disabled');
   $error.html('');
 
   Auth.auth(phone)
     .then(() => {
-      createOrder(data, Auth.token).then((order) => (window.location.href = e.target.action + '?order=' + order.id))
+      createDraft(data, Auth.token).then(( order ) => (window.location.href = e.target.action + '?order=' + order.id))
     })
+    .catch(err => $error.html(err.responseJSON.message))
     .always(() => $button.removeAttr('disabled'));
 });

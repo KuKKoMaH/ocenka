@@ -1,0 +1,150 @@
+.profile-table
+  width: 100%
+  background: #ffffff
+  border-radius: 3px
+  box-shadow: 0 21px 32px rgba(#233C4C, .05)
+  //overflow: auto
+  font-size: 12px
+
+  @media (max-width: $breakpoint-sm - 1)
+    background-color: transparent
+    padding: 0
+    box-shadow: none
+
+  &__template
+    display: none
+
+  &__label
+    display: none
+    min-width: 120px
+    font-size: 11px
+    @media (max-width: $breakpoint-sm - 1)
+      display: block
+
+  &__item
+    @media (max-width: $breakpoint-sm - 1)
+      margin: 7px
+      border-radius: 4px
+      overflow: hidden
+
+  &__header,
+  &__body
+    padding: 0 12px
+
+  &__header,
+  &__row
+    display: flex
+    cf()
+
+  &__header
+    height: 53px
+    align-items: center
+    border-bottom: 1px solid rgba(#979797, .2)
+
+    @media (max-width: $breakpoint-sm - 1)
+      display: none
+
+  &__body
+    padding-top: 20px
+    padding-bottom: 20px
+    @media (max-width: $breakpoint-sm - 1)
+      padding: 0
+
+  &__row
+    padding: 12px 0
+    cursor: pointer
+    &:hover,
+    &--active
+      background: #F5F2EB
+      anim()
+
+    @media (max-width: $breakpoint-sm - 1)
+      background: #ffffff
+      flex-direction: column
+      padding: 17px 22px
+      position: relative
+
+  &__cell
+    @media (max-width: $breakpoint-sm - 1)
+      display: flex
+      min-width: 100%
+      margin-top: 12px
+
+      &:first-child
+        margin-top: 0
+
+  &__info
+    background: #fbfbfb
+    display: flex
+    padding: 18px 0 18px 90px
+    color: #505050
+    @media (max-width: $breakpoint-sm - 1)
+      padding: 17px 22px
+      flex-direction: column
+
+
+    &-wrapper
+      max-height: 0
+      overflow: hidden
+      anim()
+
+    &-col
+      flex: 1
+
+    &-row
+      display: flex
+      flex-direction: row
+      margin-bottom: 14px
+    &-label
+      width: 30%
+      min-width: 200px
+      font-size: 13px
+      @media (max-width: $breakpoint-sm - 1)
+        min-width: auto
+        max-width: 120px
+        font-size: 11px
+    &-value
+      font-size: 14px
+      @media (max-width: $breakpoint-sm - 1)
+        font-size: 12px
+
+  &__toggle
+    width: 30px
+    position: relative
+    @media (max-width: $breakpoint-sm - 1)
+      position: static
+    &:after
+      content: ''
+      display: block
+      position: absolute
+      left: 50%
+      top: 5px
+      transform: translateX(-50%)
+      background: url(../../img/sprite-toggle.svg)
+      anim()
+
+      ^[0]__row--active &
+        transform: translateX(-50%) rotate(180deg)
+
+      ^[0]__header &
+        display: none
+
+      @media (max-width: $breakpoint-sm - 1)
+        left: auto
+        right: 8px
+        top: 16px
+  &__number
+    width: 50px
+  &__address
+    flex: 1
+    padding-right: 12px
+  &__date
+    width: 150px
+  &__show
+    width: 120px
+  &__status
+    width: 120px
+  &__payment
+    width: 80px
+  &__documents
+    width: 150px

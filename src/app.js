@@ -7,6 +7,7 @@ import 'jquery.maskedinput/src/jquery.maskedinput';
 import './js/$.debounce';
 import './modules/header/header';
 import './modules/menu/menu';
+import './modules/invoice/invoice';
 // import './modules/works/works';
 import './modules/last/last';
 import './modules/step1/step1';

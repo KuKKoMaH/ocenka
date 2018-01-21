@@ -42,6 +42,7 @@
     "run-sequence": "^2.1.0"
   },
   "dependencies": {
+    "autosize": "^4.0.0",
     "baron": "^2.3.1",
     "blueimp-file-upload": "^9.19.1",
     "bootstrap-datepicker": "^1.7.1",

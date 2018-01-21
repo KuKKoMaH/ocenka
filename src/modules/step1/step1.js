@@ -12,22 +12,23 @@ if ($form.length) {
     Auth.getProfile(),
     API.getOrder(orderId, Auth.token)
   ).then(( profile, [order] ) => {
-
-      // API.getCompaniesList().then(console.log);
-
       $('.form__form').show();
 
       $('#form-address').val(order.address);
-      $('#form-flat').val(order.flat);
-      $('#form-purchasePrice').val(order.salePrice);
+      $('#form-flat').val(order.flatNumber);
 
-      $('#form-name').val(profile.name);
-      $('#form-surname').val(profile.surname);
-      $('#form-patronymic').val(profile.parentalName);
-      $('#form-phone').val(profile.phone).mask('+7 (999) 999-99-99');
+      $('#form-customer-name').val(order.customerName);
+      $('#form-customer-passport').val(order.customerPassport);
+      $('#form-customer-phone').val(order.customerPhone).mask('+7 (999) 999-99-99');
+
+      $('#form-borrower-name').val(order.borrowerName);
+      $('#form-borrower-passport').val(order.borrowerPassport);
+      $('#form-borrower-phone').val(order.borrowerPhone).mask('+7 (999) 999-99-99');
+
       if (order.inspectionDate) $('#form-date').val(order.inspectionDate.reverse().join('.'));
-      if (order.timeBlock) $('#form-time').val(order.timeBlock);
-      $('#form-partner').val(order.partnerCode);
+      if (order.inspectionTimeBlock) $('#form-time').val(order.inspectionTimeBlock);
+      $('#form-purchasePrice').val(order.objectSalePrice);
+
       $('#form-comment').val(order.comment);
 
       const $bank = new Input({
@@ -35,11 +36,21 @@ if ($form.length) {
         type:      'select',
         load:      API.getBanksList,
         validator: { 'Выберите банк': val => !!val },
+        onChange:  ( value ) => {
+          if (!value) return $evaluatingCompany.setOptions([]);
+          API.getCompaniesList(getAddress(), value).then(companies => $evaluatingCompany.setOptions(companies));
+        }
       });
-      const $purchasePrice = new Input({
-        $el:       $('#form-purchasePrice').parent(),
-        type:      'currency',
-        validator: { 'Введите цену продажи': ( val ) => !!val },
+
+      const $evaluatingCompany = new Input({
+        $el:    $('#form-evaluating-company').parent(),
+        type:   'select',
+        render: {
+          option: ( item, escape ) => {
+            return `<div class="option">${escape(item.name)}<span class="option__rating">рейтинг: ${item.rating}</span></div>`;
+          }
+        },
+        // validator: { 'Выберите компанию': val => !!val },
       });
 
       const $customerName = new Input({
@@ -82,19 +93,15 @@ if ($form.length) {
         type:      'select',
         validator: { 'Выберите время': val => !!val },
       });
-      const $evaluatingCompany = new Input({
-        $el:       $('#form-evaluating-company').parent(),
-        type:      'select',
-        render:    {
-          option: ( item, escape ) => {
-            return `<div class="option">${escape(item.name)}<span class="option__rating">рейтинг: ${item.rating}</span></div>`;
-          }
-        },
-        validator: { 'Выберите компанию': val => !!val },
+      const $purchasePrice = new Input({
+        $el:       $('#form-purchasePrice').parent(),
+        type:      'currency',
+        validator: { 'Введите цену продажи': ( val ) => !!val },
       });
 
       const $comment = new Input({
-        $el: $('#form-comment').parent(),
+        $el:  $('#form-comment').parent(),
+        type: 'textarea',
       });
       const $cost = new Input({
         $el:       $('#form-cost').parent(),
@@ -102,8 +109,10 @@ if ($form.length) {
         validator: { 'Выберите тип объекта': val => !!val },
       });
 
-      API.getBanksList().then(banks => $bank.setOptions(banks));
-      API.getCompaniesList().then(companies => $evaluatingCompany.setOptions(companies));
+      API.getBanksList().then(banks => {
+        $bank.setOptions(banks);
+        if (order.bankId) $bank.setValue(order.bankId);
+      });
 
       const fields = [
         $bank,
@@ -146,26 +155,25 @@ if ($form.length) {
         e.preventDefault();
         const data = collectOrder();
         if (!data) return;
-        API.updateOrder(data, Auth.token)
-          .then(() => API.getOrderInvoice(data.id, Auth.token))
-          .then(console.log);
+        window.open('/invoice.html?orderId=' + data.id);
+        // API.updateOrder(data, Auth.token)
+        // .then(() => API.getOrderInvoice(data.id, Auth.token))
+        // .then(console.log);
       });
 
       $form.on('submit', ( e ) => {
         e.preventDefault();
 
         const data = collectOrder();
+        if (!data) return;
         const url = `${$form.prop('action')}?order=${orderId}`;
         // const url = `${$form.prop('action')}`;
-        if (!data) return;
 
-        API.updateOrder(data, Auth.token)
+        API.updateDraft(data, Auth.token)
           .catch(err => {
           })
-          .then(() => API.payOrder(data.id, url, Auth.token))
-          // .then(console.log)
-          .then(( redirect ) => (window.location.href = redirect.url))
-        // console.log(data);
+          // .then(() => API.payOrder(data.id, url, Auth.token))
+          // .then(( redirect ) => (window.location.href = redirect.url))
       });
 
       function collectOrder() {
@@ -174,25 +182,37 @@ if ($form.length) {
         if (fields.some(field => !field.isValid())) return null;
 
         return {
-          id:                 order.id,
-          bankId:             $bank.getValue(),
-          salePrice:          +$purchasePrice.getValue(),
-          name:               $customerName.getValue(),
-          passport:           $customerPassport.getValue(),
-          phone:              $customerPhone.getValue(),
-          sameBorrower:       customerBorrowerSame,
-          borrower:           customerBorrowerSame ? null : {
-            name:     $borrowerName.getValue(),
-            passport: $borrowerPassport.getValue(),
-            phone:    $borrowerPhone.getValue()
-          },
-          inspectionDate:     $date.getValue(),
-          timeBlock:          $time.getValue(),
-          appraisalCompanyId: $evaluatingCompany.getValue(),
-          comment:            $comment.getValue(),
-          acceptedAgreement:  true,
+          id:                  order.id,
+          address:             order.address,
+          fiasGuid:            order.fiasGuid,
+          houseNumber:         order.houseNumber,
+          flatNumber:          order.flatNumber,
+          lat:                 order.lat,
+          lon:                 order.lon,
+          bankId:              $bank.getValue(),
+          appraisalCompanyId:  $evaluatingCompany.getValue(),
+          objectSalePrice:     $purchasePrice.getValue(),
+          customerName:        $customerName.getValue(),
+          customerPassport:    $customerPassport.getValue(),
+          borrowerName:        (customerBorrowerSame ? $customerName : $borrowerName).getValue(),
+          borrowerPassport:    (customerBorrowerSame ? $customerPassport : $borrowerPassport).getValue(),
+          borrowerPhone:       (customerBorrowerSame ? $customerPhone : $borrowerPhone).getValue(),
+          inspectionDate:      $date.getValue(),
+          inspectionTimeBlock: $time.getValue(),
+          comment:             $comment.getValue(),
+          objectType:          $cost.getValue(),
         };
+      }
 
+      function getAddress() {
+        return {
+          address:     order.address,
+          fiasGuid:    order.fiasGuid,
+          houseNumber: order.houseNumber,
+          flatNumber:  order.flatNumber,
+          lat:         order.lat,
+          lon:         order.lon,
+        }
       }
     }
   )

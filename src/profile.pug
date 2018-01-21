@@ -6,32 +6,4 @@ include modules/footer/footer
 
 block body
   +profile()
-    .table__container#profile-table
-      .table__title
-        .table__number №
-        .table__address Адрес квартиры
-        .table__date Статус заказа
-        .table__date Оплата
-        .table__certificate Документы
-
-      .table__rows
-
-      .table__template
-        .table__row
-          .table__cell.table__number
-            .table__label №
-            .table__value {{index}}
-          .table__cell.table__address
-            .table__label Адрес квартиры
-            .table__value {{address}}
-          .table__cell.table__date
-            .table__label Статус заказа
-            .table__value {{status}}
-          .table__cell.table__date
-            .table__label Оплата
-            .table__value {{paid}}
-          .table__cell.table__certificate
-            .table__label Документы
-            .table__value {{documents}}
-
   +footer()
