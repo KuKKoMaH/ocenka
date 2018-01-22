@@ -28,8 +28,8 @@ export const getOrderList = ( token ) => {
   return fetch({ method: 'GET', url: `order/list`, options: { token } });
 };
 
-export const createOrder = ( data, token ) => {
-  return fetch({ method: 'POST', url: 'order/create', data: { ...data }, options: { token } });
+export const createOrder = ( draftId, token ) => {
+  return fetch({ method: 'POST', url: `order/${draftId}`, options: { token } });
 };
 
 export const createDraft = ( data, token ) => {
@@ -48,21 +48,21 @@ export const payBonusOrder = ( id, token ) => {
   return fetch({ method: 'POST', url: `order/${id}/payWithBonus`, options: { token } });
 };
 
-export const payOrder = ( id, url, token ) => {
+export const payOrder = ( id, returnUrl, failUrl, token ) => {
+  return fetch({ method: 'GET', url: `order/${id}/payWithCard`, data: { returnUrl, failUrl }, options: { token } });
+};
+
+export const confirmPayment = ( id, payment_id, reference, status, token ) => {
   return fetch({
     method:  'GET',
-    url:     `order/${id}/payWithCard`,
-    data:    { returnUrl: url, failUrl: url },
+    url:     `order/updatePayStatus`,
+    data:    { id, payment_id, reference, status },
     options: { token }
   });
 };
 
-export const confirmPayment = ( id, reference, status, token ) => {
-  return fetch({ method: 'GET', url: `order/updatePayStatus`, data: { id, reference, status }, options: { token } });
-};
-
-export const confirmOrder = ( id, data, token ) => {
-  return fetch({ method: 'POST', url: `order/${id}/updateListDetailsAndSendOrderToSRG`, data, options: { token } });
+export const confirmOrder = ( data, token ) => {
+  return fetch({ method: 'POST', url: `order/updateListDetailsAndSendOrderToSRG`, data, options: { token } });
 };
 
 export const getCertificates = ( address, size, page ) => {

@@ -11,26 +11,27 @@ const types = [
 if ($form.length) {
   const orderId = getParam('order');
 
-  getOrder(orderId, Auth.token).then((order) => {
-    confirmPayment(getParam('id'), getParam('reference'), true, Auth.token);
+  getOrder(orderId, Auth.token).then(( order ) => {
+    confirmPayment(getParam('order'), getParam('id'), getParam('reference'), true, Auth.token);
 
     $('.form__form').show();
 
-    $form.on('submit', (e) => {
+    $form.on('submit', ( e ) => {
       e.preventDefault();
       const data = {
+        id:                 orderId,
         legalPersonOwner:   $('#form-legalPersonOwner').prop('checked'),
         minorOwner:         $('#form-minorOwner').prop('checked'),
         onerousTransaction: $('#form-onerousTransaction').prop('checked')
       };
-      confirmOrder(orderId, data, Auth.token)
-        .then(() => (window.location.href = $form.attr('action')))
+      confirmOrder(data, Auth.token)
+      // .then(() => (window.location.href = $form.attr('action')))
     });
 
     if (Array.isArray(order.attachedFileList)) {
-      types.forEach((type) => {
+      types.forEach(( type ) => {
         const $el = $(`#${type}`);
-        order.attachedFileList.forEach((file) => {
+        order.attachedFileList.forEach(( file ) => {
           if (file.fileType !== type) return;
           $el.append(createFile(file));
         });
@@ -43,7 +44,7 @@ if ($form.length) {
   require.ensure([], () => {
     require('blueimp-file-upload');
 
-    types.forEach((type) => {
+    types.forEach(( type ) => {
       const $el = $(`#${type}`);
 
       $el.find('.docs__input').fileupload({
@@ -52,7 +53,7 @@ if ($form.length) {
           token: Auth.token,
         },
         paramName: 'file',
-        done:      (e, data) => {
+        done:      ( e, data ) => {
           const response = data.result;
           response.files.map(file => $el.append(createFile(file)));
         },
@@ -61,10 +62,10 @@ if ($form.length) {
     });
   });
 
-  function createFile (file) {
+  function createFile( file ) {
     const $button = $('<button class="docs__delete"></button>');
     const $el = $(`<div class="docs__item">${file.originalFilename}</div>`);
-    $button.on('click', (e) => {
+    $button.on('click', ( e ) => {
       e.preventDefault();
       deleteFile(file.filePath, Auth.token).then(() => $el.remove());
     });

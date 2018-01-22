@@ -25,10 +25,10 @@ if ($form.length) {
       $('#form-borrower-passport').val(order.borrowerPassport);
       $('#form-borrower-phone').val(order.borrowerPhone).mask('+7 (999) 999-99-99');
 
-      if (order.inspectionDate) $('#form-date').val(order.inspectionDate.reverse().join('.'));
+      if (order.inspectionDate) $('#form-date').val(order.inspectionDate);
       if (order.inspectionTimeBlock) $('#form-time').val(order.inspectionTimeBlock);
-      $('#form-purchasePrice').val(order.objectSalePrice);
 
+      $('#form-purchasePrice').val(order.objectSalePrice);
       $('#form-comment').val(order.comment);
 
       const $bank = new Input({
@@ -113,6 +113,7 @@ if ($form.length) {
         $bank.setOptions(banks);
         if (order.bankId) $bank.setValue(order.bankId);
       });
+      if (order.objectType) $cost.setValue(order.objectType);
 
       const fields = [
         $bank,
@@ -149,6 +150,11 @@ if ($form.length) {
         customerBorrowerSame ? $borrower.slideUp() : $borrower.slideDown();
       };
       $customerBorrowerSame.on('change', onChangeCustomerBorrowerSame);
+      if (
+        order.customerName === order.borrowerName &&
+        order.customerPassport === order.borrowerPassport &&
+        order.customerPhone === order.borrowerPhone
+      ) $customerBorrowerSame.prop('checked', true);
       onChangeCustomerBorrowerSame();
 
       $bank_bonus.on('click', ( e ) => {
@@ -167,13 +173,16 @@ if ($form.length) {
         const data = collectOrder();
         if (!data) return;
         const url = `${$form.prop('action')}?order=${orderId}`;
+        const successUrl = url + '&success=true';
+        const failUrl = url + '&success=false';
         // const url = `${$form.prop('action')}`;
 
         API.updateDraft(data, Auth.token)
+          .then(() => API.createOrder(data.id))
+          .then(() => API.payOrder(data.id, successUrl, failUrl, Auth.token))
+          .then(( redirect ) => (window.location.href = redirect.url))
           .catch(err => {
           })
-          // .then(() => API.payOrder(data.id, url, Auth.token))
-          // .then(( redirect ) => (window.location.href = redirect.url))
       });
 
       function collectOrder() {
