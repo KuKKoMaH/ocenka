@@ -115,6 +115,10 @@ if ($form.length) {
       });
       if (order.objectType) $cost.setValue(order.objectType);
 
+      API.getTypes(Auth.token).then(types => {
+        $cost.setOptions(types);
+      });
+
       const fields = [
         $bank,
         $purchasePrice,
@@ -179,7 +183,7 @@ if ($form.length) {
 
         API.updateDraft(data, Auth.token)
           .then(() => API.createOrder(data.id))
-          .then(() => API.payOrder(data.id, successUrl, failUrl, Auth.token))
+          .then(() => API.payOrder(data.id, successUrl, failUrl, 100, Auth.token))
           .then(( redirect ) => (window.location.href = redirect.url))
           .catch(err => {
           })
@@ -200,7 +204,7 @@ if ($form.length) {
           lon:                 order.lon,
           bankId:              $bank.getValue(),
           appraisalCompanyId:  $evaluatingCompany.getValue(),
-          objectSalePrice:     $purchasePrice.getValue(),
+          objectSalePrice:     +$purchasePrice.getValue().replace(/ /g, ''),
           customerName:        $customerName.getValue(),
           customerPassport:    $customerPassport.getValue(),
           borrowerName:        (customerBorrowerSame ? $customerName : $borrowerName).getValue(),
@@ -215,12 +219,13 @@ if ($form.length) {
 
       function getAddress() {
         return {
-          address:     order.address,
-          fiasGuid:    order.fiasGuid,
-          houseNumber: order.houseNumber,
-          flatNumber:  order.flatNumber,
-          lat:         order.lat,
-          lon:         order.lon,
+          address:        order.address,
+          fiasGuid:       order.fiasGuid,
+          fiasRegionGuid: order.fiasRegionGuid,
+          houseNumber:    order.houseNumber,
+          flatNumber:     order.flatNumber,
+          lat:            order.lat,
+          lon:            order.lon,
         }
       }
     }

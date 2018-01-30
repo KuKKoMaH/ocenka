@@ -48,8 +48,8 @@ export const payBonusOrder = ( id, token ) => {
   return fetch({ method: 'POST', url: `order/${id}/payWithBonus`, options: { token } });
 };
 
-export const payOrder = ( id, returnUrl, failUrl, token ) => {
-  return fetch({ method: 'GET', url: `order/${id}/payWithCard`, data: { returnUrl, failUrl }, options: { token } });
+export const payOrder = ( id, returnUrl, failUrl, price, token ) => {
+  return fetch({ method: 'GET', url: `order/${id}/payWithCard`, data: { returnUrl, failUrl, price }, options: { token } });
 };
 
 export const confirmPayment = ( id, payment_id, reference, status, token ) => {
@@ -69,8 +69,8 @@ export const getCertificates = ( address, size, page ) => {
   return fetch({ method: 'GET', url: 'certificate/list', data: { address, size, page } });
 };
 
-export const getCompaniesList = ( address, id ) => {
-  return fetch({ method: 'GET', url: 'order/select/appraisalCompany', data: { Address: address, id } });
+export const getCompaniesList = ( address, bankId ) => {
+  return fetch({ method: 'GET', url: 'order/select/appraisalCompany', data: { ...address, bankId } });
 };
 
 export const getBanksList = () => {
@@ -82,4 +82,8 @@ export const getBanksList = () => {
 
 export const getOrderInvoice = ( orderId, token ) => {
   return fetch({ method: 'GET', url: `order/${orderId}/invoice`, options: { token } });
+};
+
+export const getTypes = ( token ) => {
+  return fetch({ method: 'GET', url: `order/type`, options: { token } });
 };

@@ -37,12 +37,13 @@ $('.header__form').on('submit', ( e ) => {
 
   const phone = $phone.getValue();
   const data = {
-    address:     currentAddress.value,
-    houseNumber: currentAddress.data.house,
-    flatNumber:  +$flat.getValue(),
-    fiasGuid:    currentAddress.data.fias_id,
-    lat:         +currentAddress.data.geo_lat,
-    lon:         +currentAddress.data.geo_lon,
+    address:        currentAddress.value,
+    houseNumber:    currentAddress.data.house,
+    flatNumber:     +$flat.getValue(),
+    fiasGuid:       currentAddress.data.fias_id,
+    fiasRegionGuid: currentAddress.data.region_fias_id,
+    lat:            +currentAddress.data.geo_lat,
+    lon:            +currentAddress.data.geo_lon,
   };
   $button.attr('disabled', 'disabled');
   $error.html('');

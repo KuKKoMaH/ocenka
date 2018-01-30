@@ -2,7 +2,7 @@ import Cookies from 'js-cookie';
 import { login, confirm, getProfile, sendCode } from './api';
 
 class Auth {
-  constructor () {
+  constructor() {
     this.phone = null;
     this.userId = null;
 
@@ -27,12 +27,12 @@ class Auth {
     }
   }
 
-  getProfile () {
+  getProfile() {
     if (this.profile) return $.Deferred.reslove(this.profile);
     return this.profileDef;
   }
 
-  auth (phone) {
+  auth( phone ) {
     this.phone = phone;
     // if (this.token && this.phone === phone) return $.Deferred().resolve(this.token);
     return login(phone)
@@ -44,7 +44,7 @@ class Auth {
     this.setToken(null, null);
   }
 
-  setToken (phone, token) {
+  setToken( phone, token ) {
     if (!phone || !token) {
       Cookies.remove('auth');
       return null;
@@ -60,7 +60,7 @@ class Auth {
    * @param {string} userId
    * @return {Promise.<string>}
    */
-  showConfirmPopup (userId) {
+  showConfirmPopup( userId ) {
     this.userId = userId;
     const def = $.Deferred();
     const $popup = $('#popup-confirm');
@@ -73,17 +73,24 @@ class Auth {
       items:     { src: '#popup-confirm' },
       type:      'inline',
       callbacks: {
-        close: () => {
+        close:      () => {
           $form.off('submit.confirm');
           if (!success) def.reject('auth_reject');
+        },
+        beforeOpen: function () {
+          if ($(window).width() < 700) {
+            this.st.focus = false;
+          } else {
+            this.st.focus = '#auth-password';
+          }
         }
       }
     }, 0);
 
-    $form.on('submit.confirm', (e) => {
+    $form.on('submit.confirm', ( e ) => {
       e.preventDefault();
       $error.html('');
-      confirm(userId, $code.val()).then((res) => {
+      confirm(userId, $code.val()).then(( res ) => {
         if (!res.correct) return $error.html('Введен неверный код');
         success = true;
         $.magnificPopup.close();
@@ -95,7 +102,7 @@ class Auth {
   }
 
   resendCode() {
-    if(!this.userId || !this.phone) return;
+    if (!this.userId || !this.phone) return;
     return sendCode(this.userId, this.phone);
   }
 }

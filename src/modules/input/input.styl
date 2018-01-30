@@ -112,7 +112,11 @@
 
     .item
       display: inline-block
+      max-width: 95%
       line-height: 1
+      text-overflow: ellipsis
+      white-space: nowrap
+      overflow: hidden
 
     input
       outline: 0
@@ -145,12 +149,15 @@
     .option
       anim()
       height: 45px
-      line-height: 45px
+      line-height: 1.2
       font-size: 15px
       color: #505050
       padding: 0 25px
+      display: flex
+      flex-direction: row
+      align-items: center
 
-    .option__rating
+  .option__rating
       float: right
       font-size: 13px
       color: #898989
