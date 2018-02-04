@@ -20,6 +20,10 @@ export const getOrder = ( orderId, token ) => {
   return fetch({ method: 'GET', url: `order/${orderId}`, options: { token } });
 };
 
+export const getDraft = ( orderId, token ) => {
+  return fetch({ method: 'GET', url: `order/draft/${orderId}`, options: { token } });
+};
+
 export const deleteFile = ( filePath, token ) => {
   return fetch({ method: 'DELETE', url: `order/file/${filePath}`, options: { token } });
 };
@@ -49,14 +53,19 @@ export const payBonusOrder = ( id, token ) => {
 };
 
 export const payOrder = ( id, returnUrl, failUrl, price, token ) => {
-  return fetch({ method: 'GET', url: `order/${id}/payWithCard`, data: { returnUrl, failUrl, price }, options: { token } });
+  return fetch({
+    method:  'GET',
+    url:     `order/${id}/payWithCard`,
+    data:    { returnUrl, failUrl, price },
+    options: { token }
+  });
 };
 
-export const confirmPayment = ( id, payment_id, reference, status, token ) => {
+export const confirmPayment = ( id, operation, reference, status, token ) => {
   return fetch({
     method:  'GET',
     url:     `order/updatePayStatus`,
-    data:    { id, payment_id, reference, status },
+    data:    { id, operation, reference, status },
     options: { token }
   });
 };
@@ -85,5 +94,10 @@ export const getOrderInvoice = ( orderId, token ) => {
 };
 
 export const getTypes = ( token ) => {
-  return fetch({ method: 'GET', url: `order/type`, options: { token } });
+  return fetch({ method: 'GET', url: `order/select/type`, options: { token } }).then(types => {
+    return Object.keys(types).map(( typeId ) => ({
+      id:   typeId,
+      name: types[typeId],
+    }));
+  });
 };

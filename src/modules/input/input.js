@@ -120,7 +120,6 @@ export default class Input {
 
   setValue( value ) {
     if (this.type === 'select') {
-      console.log(value);
       this.selectize[0].selectize.setValue(value);
     }
   }

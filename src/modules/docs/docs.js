@@ -1,5 +1,5 @@
 import { getParam } from '../../js/history';
-import { getOrder, confirmOrder, confirmPayment, deleteFile } from '../../js/api';
+import * as API from '../../js/api';
 import Auth from '../../js/Auth';
 
 const $form = $('#form-docs');
@@ -11,8 +11,11 @@ const types = [
 if ($form.length) {
   const orderId = getParam('order');
 
-  getOrder(orderId, Auth.token).then(( order ) => {
-    confirmPayment(getParam('order'), getParam('id'), getParam('reference'), true, Auth.token);
+  API.getDraft(orderId, Auth.token).then(( order ) => {
+    const id = getParam('id');
+    const operation = getParam('operation');
+    const reference = getParam('reference');
+    if (id && operation && reference) API.confirmPayment(id, operation, reference, true, Auth.token);
 
     $('.form__form').show();
 
@@ -24,7 +27,7 @@ if ($form.length) {
         minorOwner:         $('#form-minorOwner').prop('checked'),
         onerousTransaction: $('#form-onerousTransaction').prop('checked')
       };
-      confirmOrder(data, Auth.token)
+      API.confirmOrder(data, Auth.token)
       // .then(() => (window.location.href = $form.attr('action')))
     });
 
@@ -67,7 +70,7 @@ if ($form.length) {
     const $el = $(`<div class="docs__item">${file.originalFilename}</div>`);
     $button.on('click', ( e ) => {
       e.preventDefault();
-      deleteFile(file.filePath, Auth.token).then(() => $el.remove());
+      API.deleteFile(file.filePath, Auth.token).then(() => $el.remove());
     });
     $el.append($button);
     return $el;

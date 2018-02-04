@@ -10,8 +10,10 @@ if ($form.length) {
 
   $.when(
     Auth.getProfile(),
-    API.getOrder(orderId, Auth.token)
+    API.getDraft(orderId, Auth.token)
   ).then(( profile, [order] ) => {
+      let appraisalCompanies = null;
+
       $('.form__form').show();
 
       $('#form-address').val(order.address);
@@ -38,19 +40,22 @@ if ($form.length) {
         validator: { 'Выберите банк': val => !!val },
         onChange:  ( value ) => {
           if (!value) return $evaluatingCompany.setOptions([]);
-          API.getCompaniesList(getAddress(), value).then(companies => $evaluatingCompany.setOptions(companies));
+          API.getCompaniesList(getAddress(), value).then(companies => {
+            appraisalCompanies = companies;
+            $evaluatingCompany.setOptions(companies);
+          });
         }
       });
 
       const $evaluatingCompany = new Input({
-        $el:    $('#form-evaluating-company').parent(),
-        type:   'select',
-        render: {
+        $el:       $('#form-evaluating-company').parent(),
+        type:      'select',
+        render:    {
           option: ( item, escape ) => {
             return `<div class="option">${escape(item.name)}<span class="option__rating">рейтинг: ${item.rating}</span></div>`;
           }
         },
-        // validator: { 'Выберите компанию': val => !!val },
+        validator: { 'Выберите компанию': val => !!val },
       });
 
       const $customerName = new Input({
@@ -117,6 +122,7 @@ if ($form.length) {
 
       API.getTypes(Auth.token).then(types => {
         $cost.setOptions(types);
+        if (order.realtyType) $cost.setValue(order.realtyType);
       });
 
       const fields = [
@@ -141,7 +147,7 @@ if ($form.length) {
       const $customerBorrowerSame = $('#form-customer-borrower-same');
       const $borrower = $('#borrower');
 
-      $buttons.attr('disabled', true);
+      $buttons.attr('disabled', !$offer.prop('checked'));
       $offer.on('change', () => {
         $button_pay.attr('disabled', !$offer.prop('checked'));
         $bank_bonus.attr('disabled', !$offer.prop('checked'));
@@ -165,7 +171,9 @@ if ($form.length) {
         e.preventDefault();
         const data = collectOrder();
         if (!data) return;
-        window.open('/invoice.html?orderId=' + data.id);
+        API.updateDraft(data, Auth.token)
+          .then(() => (window.location.href = '/invoice.html?order=' + data.id));
+
         // API.updateOrder(data, Auth.token)
         // .then(() => API.getOrderInvoice(data.id, Auth.token))
         // .then(console.log);
@@ -180,10 +188,12 @@ if ($form.length) {
         const successUrl = url + '&success=true';
         const failUrl = url + '&success=false';
         // const url = `${$form.prop('action')}`;
+        const companyId = +$evaluatingCompany.getValue();
+        const company = appraisalCompanies.find(c => c.id === companyId);
 
         API.updateDraft(data, Auth.token)
-          .then(() => API.createOrder(data.id))
-          .then(() => API.payOrder(data.id, successUrl, failUrl, 100, Auth.token))
+        // .then(() => API.createOrder(data.id))
+          .then(() => API.payOrder(data.id, successUrl, failUrl, company.price, Auth.token))
           .then(( redirect ) => (window.location.href = redirect.url))
           .catch(err => {
           })
@@ -213,7 +223,7 @@ if ($form.length) {
           inspectionDate:      $date.getValue(),
           inspectionTimeBlock: $time.getValue(),
           comment:             $comment.getValue(),
-          objectType:          $cost.getValue(),
+          realtyType:          $cost.getValue(),
         };
       }
 
