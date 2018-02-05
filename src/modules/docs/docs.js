@@ -9,7 +9,7 @@ const types = [
 ];
 
 if ($form.length) {
-  const orderId = getParam('order');
+  const orderId = getParam('order') || getParam('reference');
 
   API.getDraft(orderId, Auth.token).then(( order ) => {
     const id = getParam('id');
@@ -21,14 +21,14 @@ if ($form.length) {
 
     $form.on('submit', ( e ) => {
       e.preventDefault();
-      const data = {
-        id:                 orderId,
-        legalPersonOwner:   $('#form-legalPersonOwner').prop('checked'),
-        minorOwner:         $('#form-minorOwner').prop('checked'),
-        onerousTransaction: $('#form-onerousTransaction').prop('checked')
-      };
-      API.confirmOrder(data, Auth.token)
-      // .then(() => (window.location.href = $form.attr('action')))
+      // const data = {
+      //   id:                 orderId,
+      //   legalPersonOwner:   $('#form-legalPersonOwner').prop('checked'),
+      //   minorOwner:         $('#form-minorOwner').prop('checked'),
+      //   onerousTransaction: $('#form-onerousTransaction').prop('checked')
+      // };
+      API.createOrder(orderId, Auth.token)
+        .then(() => (window.location.href = $form.attr('action')))
     });
 
     if (Array.isArray(order.attachedFileList)) {

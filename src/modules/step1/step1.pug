@@ -62,15 +62,8 @@ include ../form/form
       .form__half
         .form__label Тип объекта
         +input('Выберите тип объекта', false, true)(id='form-cost')
-          //option(value='RESALE') RESALE
-          //option(value='NEWBUILING') NEWBUILING
-          //option(value='APARTMENTS') APARTMENTS
-          //option(value='HOUSE') HOUSE
-          //option(value='LAND') LAND
-          //option(value='COTTAGE') COTTAGE
-
-        //.form_calc Стоимость услуги: #[span.form__price 1000] руб.
-      //.form__half
       .form__buttons
         button.form__button.form__button--primary#form-pay Оплатить картой
         button.form__button#form-paybank Оплатить в отделении банка
+    .form__row
+      .form__response

@@ -13,6 +13,7 @@ if ($form.length) {
     API.getDraft(orderId, Auth.token)
   ).then(( profile, [order] ) => {
       let appraisalCompanies = null;
+      const $errorContainer = $('.form__response');
 
       $('.form__form').show();
 
@@ -48,14 +49,14 @@ if ($form.length) {
       });
 
       const $evaluatingCompany = new Input({
-        $el:       $('#form-evaluating-company').parent(),
-        type:      'select',
-        render:    {
+        $el:    $('#form-evaluating-company').parent(),
+        type:   'select',
+        render: {
           option: ( item, escape ) => {
             return `<div class="option">${escape(item.name)}<span class="option__rating">рейтинг: ${item.rating}</span></div>`;
           }
         },
-        validator: { 'Выберите компанию': val => !!val },
+        // validator: { 'Выберите компанию': val => !!val },
       });
 
       const $customerName = new Input({
@@ -172,7 +173,11 @@ if ($form.length) {
         const data = collectOrder();
         if (!data) return;
         API.updateDraft(data, Auth.token)
-          .then(() => (window.location.href = '/invoice.html?order=' + data.id));
+          .then(() => (window.location.href = 'invoice.html?order=' + data.id))
+          .catch(err => {
+            const errorText = err && err.responseJSON && err.responseJSON.message || 'Неизвестная ошибка';
+            $errorContainer.html(errorText);
+          })
 
         // API.updateOrder(data, Auth.token)
         // .then(() => API.getOrderInvoice(data.id, Auth.token))
@@ -184,18 +189,16 @@ if ($form.length) {
 
         const data = collectOrder();
         if (!data) return;
-        const url = `${$form.prop('action')}?order=${orderId}`;
-        const successUrl = url + '&success=true';
-        const failUrl = url + '&success=false';
-        // const url = `${$form.prop('action')}`;
-        const companyId = +$evaluatingCompany.getValue();
-        const company = appraisalCompanies.find(c => c.id === companyId);
-
+        const url = `${$form.prop('action')}`;
+        const successUrl = url + '?success=true';
+        const failUrl = url + '?success=false';
+        console.log(successUrl, failUrl);
         API.updateDraft(data, Auth.token)
-        // .then(() => API.createOrder(data.id))
-          .then(() => API.payOrder(data.id, successUrl, failUrl, company.price, Auth.token))
+          .then(() => API.payOrder(data.id, successUrl, failUrl, Auth.token))
           .then(( redirect ) => (window.location.href = redirect.url))
           .catch(err => {
+            const errorText = err && err.responseJSON && err.responseJSON.message || 'Неизвестная ошибка';
+            $errorContainer.html(errorText);
           })
       });
 
@@ -213,7 +216,8 @@ if ($form.length) {
           lat:                 order.lat,
           lon:                 order.lon,
           bankId:              $bank.getValue(),
-          appraisalCompanyId:  $evaluatingCompany.getValue(),
+          // appraisalCompanyId:  $evaluatingCompany.getValue(),
+          appraisalCompanyId:  1,
           objectSalePrice:     +$purchasePrice.getValue().replace(/ /g, ''),
           customerName:        $customerName.getValue(),
           customerPassport:    $customerPassport.getValue(),

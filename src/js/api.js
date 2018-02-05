@@ -52,11 +52,11 @@ export const payBonusOrder = ( id, token ) => {
   return fetch({ method: 'POST', url: `order/${id}/payWithBonus`, options: { token } });
 };
 
-export const payOrder = ( id, returnUrl, failUrl, price, token ) => {
+export const payOrder = ( id, returnUrl, failUrl, token ) => {
   return fetch({
     method:  'GET',
     url:     `order/${id}/payWithCard`,
-    data:    { returnUrl, failUrl, price },
+    data:    { returnUrl, failUrl },
     options: { token }
   });
 };
