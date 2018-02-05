@@ -56,7 +56,7 @@ if ($form.length) {
             return `<div class="option">${escape(item.name)}<span class="option__rating">рейтинг: ${item.rating}</span></div>`;
           }
         },
-        // validator: { 'Выберите компанию': val => !!val },
+        validator: { 'Выберите компанию': val => !!val },
       });
 
       const $customerName = new Input({
@@ -216,8 +216,8 @@ if ($form.length) {
           lat:                 order.lat,
           lon:                 order.lon,
           bankId:              $bank.getValue(),
-          // appraisalCompanyId:  $evaluatingCompany.getValue(),
-          appraisalCompanyId:  1,
+          appraisalCompanyId:  $evaluatingCompany.getValue(),
+          // appraisalCompanyId:  1,
           objectSalePrice:     +$purchasePrice.getValue().replace(/ /g, ''),
           customerName:        $customerName.getValue(),
           customerPassport:    $customerPassport.getValue(),
