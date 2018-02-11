@@ -1,2 +1,5 @@
-form.form#invoice(action='order_step3.html' novalidate)
-  button.form__button К загрузке документов
+.invoice
+  img.invoice__image(src='https://placehold.it/1654x2339')
+.form.invoice__form#invoice
+  a.form__button.form__button--primary(href='https://placehold.it/1654x2339' target='blank') Скачать квитанцию
+  a.form__button#toDocs(href='order_step3.html') К загрузке документов

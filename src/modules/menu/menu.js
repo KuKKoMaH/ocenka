@@ -1,15 +1,17 @@
 import Auth from '../../js/Auth';
 
-$('.menu__cabinet').on('click', (e) => {
-  if (!Auth.token) {
-    e.preventDefault();
-    $.magnificPopup.open({
+$('.menu__cabinet').on('click', ( e ) => {
+  console.log(e.target.href);
+  e.preventDefault();
+  Auth.getProfile().then(
+    () => (window.location = e.target.href),
+    () => $.magnificPopup.open({
       items: {
         src:  '#popup-register',
         type: 'inline'
       }
-    });
-  }
+    })
+  );
 });
 
 const $menu = $('.menu__wrapper');
@@ -22,12 +24,12 @@ $('.menu__hamburger, .menu__close').on('click', () => {
 });
 $menu.find('a').on('click', close);
 
-function close () {
+function close() {
   $menu.removeClass(activeClass);
   setTimeout(() => $menu.removeClass(visibleClass), 100);
 }
 
-function open () {
+function open() {
   $menu.addClass(visibleClass);
   requestAnimationFrame(() => $menu.addClass(activeClass));
 }

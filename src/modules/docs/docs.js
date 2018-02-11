@@ -11,12 +11,33 @@ const types = [
 if ($form.length) {
   const orderId = getParam('order') || getParam('reference');
 
-  API.getDraft(orderId, Auth.token).then(( order ) => {
+  Auth.getProfile()
+    .then(loadOrder)
+    .catch(() => {
+      Auth.showLoginPopup().then(
+        loadOrder,
+        () => (window.location = '.')
+      );
+    });
+
+  function loadOrder() {
+    const orderId = getParam('order');
+    API.getDraft(orderId, Auth.token).then(
+      processOrder,
+      () => {
+        $('.form__spinner').hide();
+        $('.form__error').show();
+      }
+    );
+  }
+
+  function processOrder(order) {
     const id = getParam('id');
     const operation = getParam('operation');
     const reference = getParam('reference');
     if (id && operation && reference) API.confirmPayment(id, operation, reference, true, Auth.token);
 
+    $('.form__spinner').hide()
     $('.form__form').show();
 
     $form.on('submit', ( e ) => {
@@ -40,9 +61,7 @@ if ($form.length) {
         });
       });
     }
-  })
-    .catch(() => $('.form__error').show())
-    .always(() => $('.form__spinner').hide());
+  }
 
   require.ensure([], () => {
     require('blueimp-file-upload');

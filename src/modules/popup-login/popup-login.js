@@ -9,10 +9,9 @@ if ($form.length) {
     type:      'phone',
     validator: { 'Введите телефон': val => !!val },
   });
-
-  $form.on('submit', (e) => {
-    e.preventDefault();
-
-    Auth.auth($phone.getValue()).then(() => (window.location.href = e.target.action));
-  })
+  // $form.on('submit', (e) => {
+  //   e.preventDefault();
+  //
+  //   Auth.auth($phone.getValue()).then(() => (window.location.href = e.target.action));
+  // })
 }

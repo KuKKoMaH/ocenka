@@ -1,3 +1,4 @@
+import * as API from "../../js/api";
 import { getOrderList } from '../../js/api';
 import Auth from '../../js/Auth';
 import dateFormatter from "../../js/dateFormatter";
@@ -31,62 +32,67 @@ const l10nTypes = {
 const types = Object.keys(l10nTypes);
 
 if ($table.length) {
-  Auth.getProfile().then(
-    ( profile ) => {
-      $('.profile__name').html(`${profile.surname || ''} ${profile.name || ''}`);
-      // $('.profile__bonus').html(profile.bonus);
-    },
-    () => (window.location = $logout.attr('href'))
-  );
+  Auth.getProfile()
+    .then(process)
+    .catch(() => {
+      Auth.showLoginPopup().then(
+        () => Auth.getProfile().then(process),
+        () => (window.location = '.')
+      );
+    });
 
-  const template = $('.profile-table__template').html();
-  const $summary = $('.profile__stats');
-  const renderSummary = ( status, count ) => $(`
-    <div class="profile__stat-row">
-      <span class="profile__stat">${status}</span>
-      <span class="profile__count">${count}</span>
-    </div>
-  `);
-  const renderRow = ( data ) => template.replace(/{{(.*?)}}/g, ( placeholder, field ) => data[field]);
+  function process( profile ) {
+    $('.profile__name').html(`${profile.surname || ''} ${profile.name || ''}`);
 
-  const summary = statuses.reduce(( obj, key ) => {
-    obj[key] = 0;
-    return obj;
-  }, {});
+    const template = $('.profile-table__template').html();
+    const $summary = $('.profile__stats');
+    const renderSummary = ( status, count ) => $(`
+      <div class="profile__stat-row">
+        <span class="profile__stat">${status}</span>
+        <span class="profile__count">${count}</span>
+      </div>
+    `);
+    const renderRow = ( data ) => template.replace(/{{(.*?)}}/g, ( placeholder, field ) => data[field]);
 
-  getOrderList(Auth.token).done(( items ) => {
-    $rows.html('');
-    $pagination.html('');
-    items
-      .map(( item, i ) => ({
-        index:            i + 1,
-        date:             '',
-        show:             `${dateFormatter(item.inspectionDate)} ${l10nTimeBlock[item.timeBlock]}`,
-        address:          `${item.address} кв. ${item.flat}`,
-        status:           l10nStatus[item.status] || '',
-        paid:             item.paid ? ' Оплачено' : 'Не оплачено',
-        documents:        generateDocuments(item.attachedFileList),
-        bank:             item.bank,
-        comment:          item.comment,
-        appraisalCompany: item.appraisalCompany,
-      }))
-      .forEach(( item, i ) => {
-        const $row = $(renderRow(item));
-        $rows.append($row);
-        $row.on('click', () => {
-          const $rowEl = $row.find('.profile-table__row');
-          const height = $rowEl.hasClass('profile-table__row--active')
-            ? 0
-            : $row.find('.profile-table__info').outerHeight();
-          $row.find('.profile-table__info-wrapper').css('max-height', height);
-          $rowEl.toggleClass('profile-table__row--active');
-        })
-      });
+    const summary = statuses.reduce(( obj, key ) => {
+      obj[key] = 0;
+      return obj;
+    }, {});
 
-    items.forEach(item => summary[item.status]++);
-    statuses.forEach(( status ) => $summary.append(renderSummary(l10nStatus[status], summary[status])))
-    // statuses.forEach((status) => $summary.append(renderSummary(l10nStatus[status], 123)))
-  });
+    getOrderList(Auth.token).done(( items ) => {
+      $rows.html('');
+      $pagination.html('');
+      items
+        .map(( item, i ) => ({
+          index:            i + 1,
+          date:             '',
+          show:             `${dateFormatter(item.inspectionDate)} ${l10nTimeBlock[item.timeBlock] || ''}`,
+          address:          `${item.address} кв. ${item.flat}`,
+          status:           l10nStatus[item.status] || item.status,
+          paid:             item.paid ? ' Оплачено' : 'Не оплачено',
+          documents:        generateDocuments(item.attachedFileList),
+          bank:             item.bankName || '',
+          comment:          item.comment || '',
+          appraisalCompany: item.appraisalCompanyName || '',
+        }))
+        .forEach(( item, i ) => {
+          const $row = $(renderRow(item));
+          $rows.append($row);
+          $row.on('click', () => {
+            const $rowEl = $row.find('.profile-table__row');
+            const height = $rowEl.hasClass('profile-table__row--active')
+              ? 0
+              : $row.find('.profile-table__info').outerHeight();
+            $row.find('.profile-table__info-wrapper').css('max-height', height);
+            $rowEl.toggleClass('profile-table__row--active');
+          })
+        });
+
+      items.forEach(item => summary[item.status]++);
+      statuses.forEach(( status ) => $summary.append(renderSummary(l10nStatus[status], summary[status])))
+      // statuses.forEach((status) => $summary.append(renderSummary(l10nStatus[status], 123)))
+    });
+  }
 
   function generateDocuments( fileList ) {
     if (!Array.isArray(fileList)) return '';
@@ -101,7 +107,7 @@ if ($table.length) {
 
     types.forEach(( type ) => {
       if (!docs[type]) return;
-      result += type + '<br>';
+      result += `<b>${l10nTypes[type]}:</b><br>`;
       docs[type].forEach(filename => result += filename + '<br>');
     });
 

@@ -9,10 +9,10 @@ if ($invoice.length) {
   $.when(
     Auth.getProfile(),
   ).then(( profile ) => {
-    $invoice.on('submit', (e) => {
+    $('#toDocs').on('click', (e) => {
       e.preventDefault();
-      window.location.href = `${$invoice.prop('action')}?order=${orderId}`;
+      window.location.href = `${$('#toDocs').prop('href')}?order=${orderId}`;
     });
-    API.getOrderInvoice(orderId, Auth.token).then(console.log);
+    // API.getOrderInvoice(orderId, Auth.token).then(console.log);
   });
 }

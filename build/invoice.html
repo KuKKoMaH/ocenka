@@ -10,9 +10,8 @@
     <!--link(rel="shortcut icon" href="/favicon.ico")-->
   </head>
   <body>
-    <form class="form" id="invoice" action="order_step3.html" novalidate="order_step3.html">
-      <button class="form__button">К загрузке документов</button>
-    </form>
+    <div class="invoice"><img class="invoice__image" src="https://placehold.it/1654x2339"></div>
+    <div class="form invoice__form" id="invoice"><a class="form__button form__button--primary" href="https://placehold.it/1654x2339" target="blank">Скачать квитанцию</a><a class="form__button" id="toDocs" href="order_step3.html">К загрузке документов</a></div>
     <div class="popups">
             <div class="popup" id="popup-register">
               <div class="popup__close"></div>
@@ -20,13 +19,14 @@
               <form novalidate="" action="profile.html">
                 <div class="popup__input">
                         <div class="input">
-                          <input class="input__input" value="" required="" type="phone">
+                          <input class="input__input" value="" required="" type="phone" id="auth-phone">
                           <label class="input__label">Телефон</label>
                           <div class="input__error"></div>
                         </div>
                 </div>
                       <input class="button button--block" type="submit" value="Войти">
                       
+                <div class="popup__error"></div>
               </form>
             </div>
             <div class="popup" id="popup-confirm">

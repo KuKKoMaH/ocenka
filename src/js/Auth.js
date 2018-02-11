@@ -19,7 +19,10 @@ class Auth {
             this.profile = profile;
             this.profileDef.resolve(profile);
           },
-          err => this.setToken(null, null)
+          () => {
+            this.setToken(null, null);
+            this.profileDef.reject('auth_expired');
+          }
         );
       }
     } else {
@@ -28,7 +31,7 @@ class Auth {
   }
 
   getProfile() {
-    if (this.profile) return $.Deferred.reslove(this.profile);
+    if (this.profile) return $.Deferred().resolve(this.profile);
     return this.profileDef;
   }
 
@@ -47,12 +50,61 @@ class Auth {
   setToken( phone, token ) {
     if (!phone || !token) {
       Cookies.remove('auth');
-      return null;
+    } else {
+      Cookies.set('auth', `${token}|${phone}`, { expires: 365 });
     }
-    Cookies.set('auth', `${token}|${phone}`, { expires: 365 });
     this.token = token;
     this.phone = phone;
     return token;
+  }
+
+  showLoginPopup() {
+    const $popup = $('#popup-register');
+    const $form = $popup.find('form');
+    const $phone = $popup.find('.input__input');
+    const $error = $popup.find('.popup__error');
+    const def = $.Deferred();
+    let success = false;
+
+    $.magnificPopup.open({
+      items:     {
+        src:  '#popup-register',
+        type: 'inline'
+      },
+      callbacks: {
+        close:      () => {
+          $form.off('submit.confirm');
+          if (!success) def.reject('auth_reject');
+        },
+        beforeOpen: function () {
+          if ($(window).width() < 700) {
+            this.st.focus = false;
+          } else {
+            this.st.focus = '#auth-phone';
+          }
+        },
+      },
+    });
+
+    $form.on('submit.confirm', ( e ) => {
+      e.preventDefault();
+      const phone = $phone.val();
+      $error.html('');
+      return login(phone).then(
+        resp => {
+          success = true;
+          $.magnificPopup.close();
+
+          return this.showConfirmPopup(resp.id);
+        },
+        err => $error.html(err.responseJSON.message)
+      )
+        .then(token => this.setToken(phone, token))
+        .then(def.resolve, def.reject);
+
+    });
+
+    return def;
   }
 
   /**
@@ -87,14 +139,19 @@ class Auth {
       }
     }, 0);
 
+    let token;
     $form.on('submit.confirm', ( e ) => {
       e.preventDefault();
       $error.html('');
       confirm(userId, $code.val()).then(( res ) => {
         if (!res.correct) return $error.html('Введен неверный код');
         success = true;
+        token = res.token;
+        return getProfile(res.token);
+      }).then(profile => {
         $.magnificPopup.close();
-        def.resolve(res.token);
+        this.profileDef = $.Deferred().resolve(profile);
+        def.resolve(token);
       });
     });
 

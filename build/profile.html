@@ -29,7 +29,7 @@
         <div class="profile-table__header">
           <div class="profile-table__toggle"></div>
           <div class="profile-table__number">№</div>
-          <div class="profile-table__date">Дата регистрации заказа</div>
+          <!--.profile-table__date Дата регистрации заказа-->
           <div class="profile-table__address">Адрес объекта недвижимости</div>
           <div class="profile-table__show">Дата и время показа</div>
           <div class="profile-table__status">Статус заказа</div>
@@ -45,10 +45,9 @@
                 <div class="profile-table__label">№</div>
                 <div class="profile-table__value">{{index}}</div>
               </div>
-              <div class="profile-table__cell profile-table__date">
-                <div class="profile-table__label">Дата регистрации заказа</div>
-                <div class="profile-table__value">{{date}}</div>
-              </div>
+              <!--.profile-table__cell.profile-table__date-->
+              <!--  .profile-table__label Дата регистрации заказа-->
+              <!--  .profile-table__value {{date}}-->
               <div class="profile-table__cell profile-table__address">
                 <div class="profile-table__label">Адрес объекта недвижимости</div>
                 <div class="profile-table__value">{{address}}</div>
@@ -77,29 +76,26 @@
                     <div class="profile-table__info-label">Банк:</div>
                     <div class="profile-table__info-value">{{bank}}</div>
                   </div>
-                  <div class="profile-table__info-row">
-                    <div class="profile-table__info-label">Тип оценки:</div>
-                    <div class="profile-table__info-value">Простая</div>
-                  </div>
+                  <!--.profile-table__info-row-->
+                  <!--  .profile-table__info-label Тип оценки:-->
+                  <!--  .profile-table__info-value Простая-->
                   <div class="profile-table__info-row">
                     <div class="profile-table__info-label">Оценочная компания:</div>
                     <div class="profile-table__info-value">{{appraisalCompany}}</div>
-                  </div>
-                </div>
-                <div class="profile-table__info-col">
-                  <div class="profile-table__info-row">
-                    <div class="profile-table__info-label">Контакты оценочной компании:</div>
-                    <div class="profile-table__info-value">84 Osinski Circle Apt. 992</div>
                   </div>
                   <div class="profile-table__info-row">
                     <div class="profile-table__info-label">Комментарий:</div>
                     <div class="profile-table__info-value">{{comment}}</div>
                   </div>
-                  <div class="profile-table__info-row">
-                    <div class="profile-table__info-label">Срок:</div>
-                    <div class="profile-table__info-value">03-25-2017</div>
-                  </div>
                 </div>
+                <!--.profile-table__info-col
+                //.profile-table__info-row
+                //  .profile-table__info-label Контакты оценочной компании:
+                //  .profile-table__info-value 84 Osinski Circle Apt. 992
+                //.profile-table__info-row
+                //  .profile-table__info-label Срок:
+                //  .profile-table__info-value 03-25-2017
+                -->
               </div>
             </div>
           </div>
@@ -121,13 +117,14 @@
               <form novalidate="" action="profile.html">
                 <div class="popup__input">
                         <div class="input">
-                          <input class="input__input" value="" required="" type="phone">
+                          <input class="input__input" value="" required="" type="phone" id="auth-phone">
                           <label class="input__label">Телефон</label>
                           <div class="input__error"></div>
                         </div>
                 </div>
                       <input class="button button--block" type="submit" value="Войти">
                       
+                <div class="popup__error"></div>
               </form>
             </div>
             <div class="popup" id="popup-confirm">

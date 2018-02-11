@@ -4,8 +4,6 @@ include ../form/form
   .form__spinner
   .form__error Заказ не найден
   form#form-order(action='order_step3.html' novalidate).form__form
-    .form__order Заказ № 3333
-
     .form__label
       | Введите данные объекта
       .form__mark: .form__mark-content Время показа объекта будет дополнительно согласовано с Вами нашим специалистом.
@@ -13,30 +11,27 @@ include ../form/form
       .form__address: +input('Адрес')(id='form-address' disabled)
       .form__apart: +input('Квартира')(id='form-flat' disabled)
 
-    .form__row.form__container
-      .form__bank
-        .form__label Выберите банк-кредитор
-        +input('Выберите банк', false, true)(id='form-bank')
-      .form__company
-        .form__label Выберите оценочную компанию
-        +input('Выберите оценочную компанию', false, true)(id='form-evaluating-company')
+    .form__label Тип объекта
+    .form__row: +input('Выберите тип объекта', false, true)(id='form-cost')
 
-    .form__label
-      |Данные заказчика оценки
-      span.form__aside.form__checkbox
+    div#bank
+      .form__label Выберите банк-кредитор
+      .form__row: +input('Выберите банк', false, true)(id='form-bank')
+
+    .form__label Выберите оценочную компанию
+    .form__row: +input('Выберите оценочную компанию', false, true)(id='form-evaluating-company')
+
+    .form__label Данные заказчика оценки
+    .form__row.form__container
+      .form__x2: +input('ФИО')(id='form-customer-name')
+      div: +input('Серия и номер паспорта')(id='form-customer-passport')
+
+    .form__label Данные заемщика
+    .form__row.form__container
+      .form__x2: +input('ФИО')(id='form-borrower-name')
+      span.form__checkbox
         input(type='checkbox' id='form-customer-borrower-same')
         label(for='form-customer-borrower-same') Заказчик и заемщик одно лицо
-    .form__row.form__container
-      div: +input('ФИО')(id='form-customer-name')
-      div: +input('Серия и номер паспорта')(id='form-customer-passport')
-      div: +input('Номер телефона')(type='phone' id='form-customer-phone' disabled)
-
-    #borrower
-      .form__label Данные заемщика
-      .form__row.form__container
-        div: +input('ФИО')(id='form-borrower-name')
-        div: +input('Серия и номер паспорта')(id='form-borrower-passport')
-        div: +input('Номер телефона')(type='phone' id='form-borrower-phone')
 
     .form__row.form__container
       .form__time
@@ -48,22 +43,18 @@ include ../form/form
             option(value='FROM_9_TO_12') С 9 до 12
             option(value='FROM_12_TO_16') С 12 до 16
             option(value='FROM_16_TO_19') С 16 до 19
-      .form__purchasePrice: +input('Предполагаемая цена продажи')(id='form-purchasePrice')
-
-    .form__label Комментарий к заказу
-    .form__row: +input('Введите ваш коментарий', false, false, true)(id='form-comment')
-
+      div
+        .form__label Комментарий к заказу
+        +input('Введите ваш коментарий', false, false, true)(id='form-comment')
 
     .form__row: .form__checkbox
       input(type='checkbox' id='form-offer')
       label(for='form-offer') Текст для оферты
 
     .form__row.form__container
-      .form__half
-        .form__label Тип объекта
-        +input('Выберите тип объекта', false, true)(id='form-cost')
+      .form__price Стоимость услуги: #[span#price ] руб.
       .form__buttons
         button.form__button.form__button--primary#form-pay Оплатить картой
-        button.form__button#form-paybank Оплатить в отделении банка
+        button.form__button#form-paybank(data-link='invoice.html') Оплатить в отделении банка
     .form__row
       .form__response

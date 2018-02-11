@@ -5,7 +5,7 @@ export const login = ( phone ) => {
 };
 
 export const sendCode = ( id, phone ) => {
-  return fetch({ method: 'GET', url: 'customer/smscode', data: { id, phone } });
+  return fetch({ method: 'GET', url: 'customer/resetPassword', data: { id, phone } });
 };
 
 export const confirm = ( id, code ) => {
