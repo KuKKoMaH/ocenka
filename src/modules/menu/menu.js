@@ -1,16 +1,10 @@
 import Auth from '../../js/Auth';
 
 $('.menu__cabinet').on('click', ( e ) => {
-  console.log(e.target.href);
   e.preventDefault();
   Auth.getProfile().then(
     () => (window.location = e.target.href),
-    () => $.magnificPopup.open({
-      items: {
-        src:  '#popup-register',
-        type: 'inline'
-      }
-    })
+    () => Auth.showLoginPopup().then(() => (window.location = e.target.href))
   );
 });
 

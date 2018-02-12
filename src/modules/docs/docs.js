@@ -31,14 +31,15 @@ if ($form.length) {
     );
   }
 
-  function processOrder(order) {
+  function processOrder( order ) {
     const id = getParam('id');
     const operation = getParam('operation');
     const reference = getParam('reference');
     if (id && operation && reference) API.confirmPayment(id, operation, reference, true, Auth.token);
 
-    $('.form__spinner').hide()
+    $('.form__spinner').hide();
     $('.form__form').show();
+    $('.docs__error').html('');
 
     $form.on('submit', ( e ) => {
       e.preventDefault();
@@ -50,6 +51,7 @@ if ($form.length) {
       // };
       API.createOrder(orderId, Auth.token)
         .then(() => (window.location.href = $form.attr('action')))
+        .catch(err => $('.docs__error').html(err.responseJSON.error));
     });
 
     if (Array.isArray(order.attachedFileList)) {

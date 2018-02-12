@@ -144,9 +144,9 @@ if ($form.length) {
       if (order.realtyType) $cost.setValue(order.realtyType);
     });
     API.getBanksList().then(banks => {
-      if (banks.length > 1) $('#bank').slideDown();
-      if (banks.length === 1) setBank(banks[0].id);
       $bank.setOptions(banks);
+      if (banks.length > 1) $('#bank').slideDown();
+      if (banks.length === 1) $bank.setValue(banks[0].id);
       if (order.bankId) $bank.setValue(order.bankId);
     });
     if (order.objectType) $cost.setValue(order.objectType);
@@ -174,6 +174,7 @@ if ($form.length) {
     // const $borrower = $('#borrower');
 
     $buttons.attr('disabled', !$offer.prop('checked'));
+    $button_pay.hide();
     $offer.on('change', () => {
       $button_pay.attr('disabled', !$offer.prop('checked'));
       $bank_bonus.attr('disabled', !$offer.prop('checked'));
@@ -183,7 +184,10 @@ if ($form.length) {
     let customerBorrowerSame = null;
     const onChangeCustomerBorrowerSame = () => {
       customerBorrowerSame = $customerBorrowerSame.prop('checked');
-      if (customerBorrowerSame) $borrowerName.setValue($customerName.getValue());
+      if (customerBorrowerSame) {
+        $borrowerName.setValue($customerName.getValue());
+        $borrowerName.validate();
+      }
       $borrowerName.$input.attr('disabled', customerBorrowerSame);
 
     };
@@ -197,6 +201,7 @@ if ($form.length) {
       e.preventDefault();
       const data = collectOrder();
       if (!data) return;
+
       API.updateDraft(data, Auth.token)
         .then(() => (window.location.href = $bank_bonus.data('link') + '?order=' + data.id))
         .catch(err => {
@@ -211,13 +216,15 @@ if ($form.length) {
 
     $form.on('submit', ( e ) => {
       e.preventDefault();
+      const appraisalCompany = getAppraisalCompany();
+      if (!appraisalCompany || !appraisalCompany.canBePaidByCard) return;
 
       const data = collectOrder();
       if (!data) return;
       const url = `${$form.prop('action')}`;
       const successUrl = url + '?success=true';
       const failUrl = url + '?success=false';
-      console.log(successUrl, failUrl);
+
       API.updateDraft(data, Auth.token)
         .then(() => API.payOrder(data.id, successUrl, failUrl, Auth.token))
         .then(( redirect ) => (window.location.href = redirect.url))
@@ -229,25 +236,32 @@ if ($form.length) {
 
     function setBank( bankId ) {
       API.getCompaniesList(getAddress(), bankId).then(companies => {
-        console.log(companies);
         appraisalCompanies = companies;
         $evaluatingCompany.setOptions(companies);
+        if (order.appraisalCompanyId) $evaluatingCompany.setValue(order.appraisalCompanyId);
       });
     }
 
     function setPrice() {
       const $price = $("#price");
       const $priceContainer = $(".form__price");
-      const appraisalCompanyId = +$evaluatingCompany.getValue();
+      const appraisalCompany = getAppraisalCompany();
       const type = $cost.getValue();
+      $button_pay.hide();
 
-      if (!appraisalCompanies || !appraisalCompanyId || !type) {
+      if (!appraisalCompanies || !appraisalCompany || !type) {
         $priceContainer.hide();
         return;
       }
-      const appraisalCompany = appraisalCompanies.find(c => c.id === +appraisalCompanyId);
       $priceContainer.show();
       $price.html(appraisalCompany.price[type]);
+      if (appraisalCompany.canBePaidByCard) $button_pay.show();
+    }
+
+    function getAppraisalCompany() {
+      const appraisalCompanyId = +$evaluatingCompany.getValue();
+      if (!appraisalCompanyId) return undefined;
+      return appraisalCompanies.find(c => c.id === +appraisalCompanyId);
     }
 
     function collectOrder() {

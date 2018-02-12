@@ -1,5 +1,4 @@
 import * as API from "../../js/api";
-import { getOrderList } from '../../js/api';
 import Auth from '../../js/Auth';
 import dateFormatter from "../../js/dateFormatter";
 
@@ -59,7 +58,7 @@ if ($table.length) {
       return obj;
     }, {});
 
-    getOrderList(Auth.token).done(( items ) => {
+    API.getOrderList(Auth.token).done(( items ) => {
       $rows.html('');
       $pagination.html('');
       items

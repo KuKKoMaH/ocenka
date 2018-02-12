@@ -1,8 +1,9 @@
 include ../popup/popup
 
 +popup()#popup-confirm
-  .popup__text Подтвердите номера телефона
-  .popup__desc На указанный номер отправлено беслпатное СМС-сообшение с кодом проверки подлинности номера.
+  .popup__text Введите пароль
+  .popup__desc#not_activated На Ваш телефон был отправлен пароль для входа в систему.
+  .popup__desc#activated Введите пароль, который ранее был отправлен Вам в СМС-сообщении
   form(novalidate)
     .popup__input: +input('Пароль')(id='auth-password')
     +button('input', true)(value='Подтвердить')

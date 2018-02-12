@@ -92,10 +92,12 @@ class Auth {
       $error.html('');
       return login(phone).then(
         resp => {
+          this.phone = phone;
+          this.userId = resp.id;
           success = true;
           $.magnificPopup.close();
 
-          return this.showConfirmPopup(resp.id);
+          return this.showConfirmPopup(resp.id, resp.activated);
         },
         err => $error.html(err.responseJSON.message)
       )
@@ -110,9 +112,10 @@ class Auth {
   /**
    * Возвращает токен
    * @param {string} userId
+   * @param {boolean} activated
    * @return {Promise.<string>}
    */
-  showConfirmPopup( userId ) {
+  showConfirmPopup( userId, activated ) {
     this.userId = userId;
     const def = $.Deferred();
     const $popup = $('#popup-confirm');
@@ -120,6 +123,9 @@ class Auth {
     const $code = $popup.find('.input__input');
     const $error = $popup.find('.popup__error');
     let success = false;
+
+    $popup.find('.popup__desc').hide();
+    $popup.find(activated ? '#activated' : '#not_activated').show();
 
     $.magnificPopup.open({
       items:     { src: '#popup-confirm' },
@@ -135,7 +141,7 @@ class Auth {
           } else {
             this.st.focus = '#auth-password';
           }
-        }
+        },
       }
     }, 0);
 
@@ -147,11 +153,11 @@ class Auth {
         if (!res.correct) return $error.html('Введен неверный код');
         success = true;
         token = res.token;
-        return getProfile(res.token);
-      }).then(profile => {
-        $.magnificPopup.close();
-        this.profileDef = $.Deferred().resolve(profile);
-        def.resolve(token);
+        return getProfile(res.token).then(profile => {
+          $.magnificPopup.close();
+          this.profileDef = $.Deferred().resolve(profile);
+          def.resolve(token);
+        });
       });
     });
 
