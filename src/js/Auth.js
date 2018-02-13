@@ -125,7 +125,8 @@ class Auth {
     let success = false;
 
     $popup.find('.popup__desc').hide();
-    $popup.find(activated ? '#activated' : '#not_activated').show();
+    $popup.find('.popup__resend').hide();
+    $popup.find(activated ? '.activated' : '.not_activated').show();
 
     $.magnificPopup.open({
       items:     { src: '#popup-confirm' },
