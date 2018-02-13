@@ -44,6 +44,10 @@ export const updateDraft = ( data, token ) => {
   return fetch({ method: 'PUT', url: `order/draft/${data.id}`, data: { ...data }, options: { token } });
 };
 
+export const changePayStatus = (draftId, data, token) => {
+  return fetch({ method: 'PUT', url: `order/${draftId}/changePayStatus`, data: { ...data }, options: { token } })
+};
+
 export const updateOrder = ( data, token ) => {
   return fetch({ method: 'POST', url: `order/${data.id}/appendDetails`, data, options: { token } });
 };

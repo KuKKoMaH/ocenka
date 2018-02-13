@@ -27,7 +27,7 @@ if ($form.length) {
     );
   }
 
-  function processOrder( order ) {
+  function processOrder(order) {
     let appraisalCompanies = null;
     const $errorContainer = $('.form__response');
 
@@ -63,7 +63,7 @@ if ($form.length) {
       type:      'select',
       load:      API.getBanksList,
       validator: { 'Выберите банк': val => !!val },
-      onChange:  ( value ) => {
+      onChange:  (value) => {
         if (!value) return $evaluatingCompany.setOptions([]);
         setBank(value);
       }
@@ -73,7 +73,7 @@ if ($form.length) {
       $el:       $('#form-evaluating-company').parent(),
       type:      'select',
       render:    {
-        option: ( item, escape ) => {
+        option: (item, escape) => {
           return `<div class="option">${escape(item.name)}<span class="option__rating">рейтинг: ${item.rating}</span></div>`;
         }
       },
@@ -197,12 +197,13 @@ if ($form.length) {
 
     setPrice();
 
-    $bank_bonus.on('click', ( e ) => {
+    $bank_bonus.on('click', (e) => {
       e.preventDefault();
       const data = collectOrder();
       if (!data) return;
 
       API.updateDraft(data, Auth.token)
+        .then(() => API.changePayStatus(data.id, { payment_type: 'INVOICE' }, Auth.token))
         .then(() => (window.location.href = $bank_bonus.data('link') + '?order=' + data.id))
         .catch(err => {
           const errorText = err && err.responseJSON && err.responseJSON.message || 'Неизвестная ошибка';
@@ -214,7 +215,7 @@ if ($form.length) {
       // .then(console.log);
     });
 
-    $form.on('submit', ( e ) => {
+    $form.on('submit', (e) => {
       e.preventDefault();
       const appraisalCompany = getAppraisalCompany();
       if (!appraisalCompany || !appraisalCompany.canBePaidByCard) return;
@@ -227,14 +228,14 @@ if ($form.length) {
 
       API.updateDraft(data, Auth.token)
         .then(() => API.payOrder(data.id, successUrl, failUrl, Auth.token))
-        .then(( redirect ) => (window.location.href = redirect.url))
+        .then((redirect) => (window.location.href = redirect.url))
         .catch(err => {
           const errorText = err && err.responseJSON && err.responseJSON.message || 'Неизвестная ошибка';
           $errorContainer.html(errorText);
         })
     });
 
-    function setBank( bankId ) {
+    function setBank(bankId) {
       API.getCompaniesList(getAddress(), bankId).then(companies => {
         appraisalCompanies = companies;
         $evaluatingCompany.setOptions(companies);

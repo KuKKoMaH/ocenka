@@ -21,7 +21,7 @@ if ($form.length) {
     });
 
   function loadOrder() {
-    const orderId = getParam('order');
+    const orderId = getParam('order') || getParam('reference');
     API.getDraft(orderId, Auth.token).then(
       processOrder,
       () => {
