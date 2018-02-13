@@ -40,7 +40,7 @@ $('.header__form').on('submit', ( e ) => {
     address:        currentAddress.value,
     houseNumber:    currentAddress.data.house,
     flatNumber:     +$flat.getValue(),
-    fiasGuid:       currentAddress.data.fias_id,
+    fiasGuid:       currentAddress.data.street_fias_id,
     fiasRegionGuid: currentAddress.data.region_fias_id,
     lat:            +currentAddress.data.geo_lat,
     lon:            +currentAddress.data.geo_lon,
