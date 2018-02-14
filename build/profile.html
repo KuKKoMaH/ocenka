@@ -35,6 +35,7 @@
           <div class="profile-table__status">Статус заказа</div>
           <div class="profile-table__payment">Оплата</div>
           <div class="profile-table__documents">Документы</div>
+          <div class="profile-table__cancel"></div>
         </div>
         <div class="profile-table__body"></div>
         <div class="profile-table__template">
@@ -68,6 +69,9 @@
                 <div class="profile-table__label">Документы</div>
                 <div class="profile-table__value">{{documents}}</div>
               </div>
+              <div class="profile-table__cell profile-table__cancel">
+                <div class="profile-table__value">{{cancel}}</div>
+              </div>
             </div>
             <div class="profile-table__info-wrapper">
               <div class="profile-table__info">
@@ -76,9 +80,6 @@
                     <div class="profile-table__info-label">Банк:</div>
                     <div class="profile-table__info-value">{{bank}}</div>
                   </div>
-                  <!--.profile-table__info-row-->
-                  <!--  .profile-table__info-label Тип оценки:-->
-                  <!--  .profile-table__info-value Простая-->
                   <div class="profile-table__info-row">
                     <div class="profile-table__info-label">Оценочная компания:</div>
                     <div class="profile-table__info-value">{{appraisalCompany}}</div>
@@ -88,14 +89,6 @@
                     <div class="profile-table__info-value">{{comment}}</div>
                   </div>
                 </div>
-                <!--.profile-table__info-col
-                //.profile-table__info-row
-                //  .profile-table__info-label Контакты оценочной компании:
-                //  .profile-table__info-value 84 Osinski Circle Apt. 992
-                //.profile-table__info-row
-                //  .profile-table__info-label Срок:
-                //  .profile-table__info-value 03-25-2017
-                -->
               </div>
             </div>
           </div>

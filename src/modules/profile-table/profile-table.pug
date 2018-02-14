@@ -8,6 +8,7 @@
     .profile-table__status Статус заказа
     .profile-table__payment Оплата
     .profile-table__documents Документы
+    .profile-table__cancel
 
   .profile-table__body
 
@@ -36,25 +37,17 @@
         .profile-table__cell.profile-table__documents
           .profile-table__label Документы
           .profile-table__value {{documents}}
+        .profile-table__cell.profile-table__cancel
+          .profile-table__value {{cancel}}
       .profile-table__info-wrapper
         .profile-table__info
           .profile-table__info-col
             .profile-table__info-row
               .profile-table__info-label Банк:
               .profile-table__info-value {{bank}}
-            //.profile-table__info-row
-            //  .profile-table__info-label Тип оценки:
-            //  .profile-table__info-value Простая
             .profile-table__info-row
               .profile-table__info-label Оценочная компания:
               .profile-table__info-value {{appraisalCompany}}
             .profile-table__info-row
               .profile-table__info-label Комментарий:
               .profile-table__info-value {{comment}}
-          //.profile-table__info-col
-            //.profile-table__info-row
-            //  .profile-table__info-label Контакты оценочной компании:
-            //  .profile-table__info-value 84 Osinski Circle Apt. 992
-            //.profile-table__info-row
-            //  .profile-table__info-label Срок:
-            //  .profile-table__info-value 03-25-2017

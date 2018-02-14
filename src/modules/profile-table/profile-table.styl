@@ -109,6 +109,29 @@
       @media (max-width: $breakpoint-sm - 1)
         font-size: 12px
 
+  &__button
+    vertical-align: bottom
+    border: 1px solid #898989
+    background: transparent
+    color: #898989
+    height: 20px
+    line-height: 18px
+    display: inline-block
+    border-radius: 4px
+    font-size: 11px
+    font-weight: bold
+    text-align: center
+    //text-transform: uppercase
+    padding: 0 5px
+    cursor: pointer
+    outline: 0
+    anim(.15s)
+
+    &:hover
+      border: 1px solid #898989
+      background: #898989
+      color: #ffffff
+
   &__toggle
     width: 30px
     position: relative
@@ -149,3 +172,6 @@
     width: 80px
   &__documents
     width: 150px
+  &__buttons
+    width: 150px
+    text-align: right

@@ -203,7 +203,7 @@ if ($form.length) {
       if (!data) return;
 
       API.updateDraft(data, Auth.token)
-        .then(() => API.changePayStatus(data.id, { payment_type: 'INVOICE' }, Auth.token))
+        .then(() => API.payWithInvoice(data.id, Auth.token))
         .then(() => (window.location.href = $bank_bonus.data('link') + '?order=' + data.id))
         .catch(err => {
           const errorText = err && err.responseJSON && err.responseJSON.message || 'Неизвестная ошибка';

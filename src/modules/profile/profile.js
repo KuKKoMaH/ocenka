@@ -7,7 +7,7 @@ const $table = $('#profile-table');
 const $rows = $table.find('.profile-table__body');
 const $pagination = $('.pagination');
 
-$logout.on('click', ( e ) => {
+$logout.on('click', (e) => {
   Auth.logout();
 });
 
@@ -40,29 +40,34 @@ if ($table.length) {
       );
     });
 
-  function process( profile ) {
+  function process(profile) {
     $('.profile__name').html(`${profile.surname || ''} ${profile.name || ''}`);
+    loadOrders();
+  }
 
+  function loadOrders() {
     const template = $('.profile-table__template').html();
     const $summary = $('.profile__stats');
-    const renderSummary = ( status, count ) => $(`
+    const renderSummary = (status, count) => $(`
       <div class="profile__stat-row">
         <span class="profile__stat">${status}</span>
         <span class="profile__count">${count}</span>
       </div>
     `);
-    const renderRow = ( data ) => template.replace(/{{(.*?)}}/g, ( placeholder, field ) => data[field]);
+    const renderRow = (data) => template.replace(/{{(.*?)}}/g, (placeholder, field) => data[field]);
 
-    const summary = statuses.reduce(( obj, key ) => {
+    const summary = statuses.reduce((obj, key) => {
       obj[key] = 0;
       return obj;
     }, {});
 
-    API.getOrderList(Auth.token).done(( items ) => {
+    API.getOrderList(Auth.token).done((items) => {
       $rows.html('');
+      $summary.html('');
       $pagination.html('');
       items
-        .map(( item, i ) => ({
+        .map((item, i) => ({
+          id:               item.id,
           index:            i + 1,
           date:             '',
           show:             `${dateFormatter(item.inspectionDate)} ${l10nTimeBlock[item.timeBlock] || ''}`,
@@ -73,8 +78,9 @@ if ($table.length) {
           bank:             item.bankName || '',
           comment:          item.comment || '',
           appraisalCompany: item.appraisalCompanyName || '',
+          cancel:           '<button class="profile-table__button">Отменить</button>'
         }))
-        .forEach(( item, i ) => {
+        .forEach((item, i) => {
           const $row = $(renderRow(item));
           $rows.append($row);
           $row.on('click', () => {
@@ -84,32 +90,47 @@ if ($table.length) {
               : $row.find('.profile-table__info').outerHeight();
             $row.find('.profile-table__info-wrapper').css('max-height', height);
             $rowEl.toggleClass('profile-table__row--active');
+          });
+          $row.find('.profile-table__button').on('click', (e) => {
+            e.stopPropagation();
+            cancelOrder(item.id);
           })
         });
 
       items.forEach(item => summary[item.status]++);
-      statuses.forEach(( status ) => $summary.append(renderSummary(l10nStatus[status], summary[status])))
+      statuses.forEach((status) => $summary.append(renderSummary(l10nStatus[status], summary[status])))
       // statuses.forEach((status) => $summary.append(renderSummary(l10nStatus[status], 123)))
     });
   }
 
-  function generateDocuments( fileList ) {
+  function generateDocuments(fileList) {
     if (!Array.isArray(fileList)) return '';
     const docs = {};
     let result = '';
 
-    fileList.forEach(( file ) => {
+    fileList.forEach((file) => {
       const { fileType, originalFilename } = file;
       if (!docs[fileType]) docs[fileType] = [];
       docs[fileType].push(originalFilename);
     });
 
-    types.forEach(( type ) => {
+    types.forEach((type) => {
       if (!docs[type]) return;
       result += `<b>${l10nTypes[type]}:</b><br>`;
       docs[type].forEach(filename => result += filename + '<br>');
     });
 
     return result;
+  }
+
+  function cancelOrder(orderId) {
+    if (window.confirm('Вы действительно хотите отменить заказ?'))
+      API.cancelOrder(orderId, Auth.token).then(
+        loadOrders,
+        (err) => {
+          loadOrders();
+          alert(err.responseJSON.error);
+        }
+      );
   }
 }
