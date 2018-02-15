@@ -1,3 +1,4 @@
+import swal from 'sweetalert2';
 import * as API from "../../js/api";
 import Auth from '../../js/Auth';
 import dateFormatter from "../../js/dateFormatter";
@@ -124,13 +125,30 @@ if ($table.length) {
   }
 
   function cancelOrder(orderId) {
-    if (window.confirm('Вы действительно хотите отменить заказ?'))
-      API.cancelOrder(orderId, Auth.token).then(
-        loadOrders,
-        (err) => {
-          loadOrders();
-          alert(err.responseJSON.error);
-        }
-      );
+    swal({
+      type:                'question',
+      title:               'Вы действительно хотите отменить заказ?',
+      showCancelButton:    true,
+      reverseButtons:      true,
+      showCloseButton:     true,
+      confirmButtonText:   'Отменить',
+      cancelButtonText:    'Нет',
+      showLoaderOnConfirm: true,
+      preConfirm:          () => API.cancelOrder(orderId, Auth.token),
+    }).then(result => {
+      console.log(result);
+      if (result.value) {
+        swal({
+          type:  'success',
+          title: 'Заказ успешно отменен',
+        });
+      } else {
+        swal({
+          type:  'error',
+          title: result.err.responseJSON.error,
+        });
+      }
+      loadOrders();
+    });
   }
 }

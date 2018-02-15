@@ -1,3 +1,4 @@
+import swal from 'sweetalert2';
 import Input from '../input/input';
 import * as API from '../../js/api';
 import { getParam } from '../../js/history';
@@ -28,6 +29,19 @@ if ($form.length) {
   }
 
   function processOrder(order) {
+    const id = getParam('id');
+    const operation = getParam('operation');
+    const reference = getParam('reference');
+    if (id && operation && reference) {
+      const message = $('.form__payment');
+      swal({
+        type:  'error',
+        title: message.data('title'),
+        text:  message.data('message'),
+      });
+      API.confirmPayment(id, operation, reference, false, Auth.token);
+    }
+
     let appraisalCompanies = null;
     const $errorContainer = $('.form__response');
 
@@ -224,7 +238,7 @@ if ($form.length) {
       if (!data) return;
       const url = `${$form.prop('action')}`;
       const successUrl = url + '?success=true';
-      const failUrl = window.location.href + '&success=false';
+      const failUrl = window.location.href;
 
       API.updateDraft(data, Auth.token)
         .then(() => API.payOrder(data.id, successUrl, failUrl, Auth.token))

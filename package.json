@@ -61,6 +61,7 @@
     "smooth-scroll": "^12.1.5",
     "snapsvg": "^0.5.1",
     "suggestions-jquery": "^17.5.0",
+    "sweetalert2": "^7.12.2",
     "webpack": "^3.5.5"
   }
 }
