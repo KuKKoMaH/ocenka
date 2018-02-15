@@ -49,7 +49,7 @@ export const changePayStatus = (draftId, data, token) => {
 };
 
 export const payWithInvoice = (draftId, token) => {
-  return fetch({ method: 'POST', url: `order/${draftId}/payByInvoice`, options: { token } })
+  return fetch({ method: 'PUT', url: `order/${draftId}/payByInvoice`, options: { token } })
 };
 
 export const updateOrder = (data, token) => {

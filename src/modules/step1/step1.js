@@ -224,7 +224,7 @@ if ($form.length) {
       if (!data) return;
       const url = `${$form.prop('action')}`;
       const successUrl = url + '?success=true';
-      const failUrl = url + '?success=false';
+      const failUrl = window.location.href + '&success=false';
 
       API.updateDraft(data, Auth.token)
         .then(() => API.payOrder(data.id, successUrl, failUrl, Auth.token))

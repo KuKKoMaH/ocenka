@@ -39,7 +39,7 @@ class Auth {
     this.phone = phone;
     // if (this.token && this.phone === phone) return $.Deferred().resolve(this.token);
     return login(phone)
-      .then(resp => this.showConfirmPopup(resp.id))
+      .then(resp => this.showConfirmPopup(resp.id, resp.activated))
       .then(token => this.setToken(phone, token))
   }
 
