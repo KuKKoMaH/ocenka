@@ -12,13 +12,6 @@ $logout.on('click', (e) => {
   Auth.logout();
 });
 
-const l10nStatus = {
-  CREATION:   'Кол-во заказов',
-  INSPECTION: 'Заказов готово',
-  DONE:       'Заказов в работе',
-};
-const statuses = Object.keys(l10nStatus);
-
 const l10nTimeBlock = {
   FROM_9_TO_12:  "с 9 до 12",
   FROM_12_TO_16: "с 12 до 16",
@@ -47,6 +40,7 @@ if ($table.length) {
   }
 
   function loadOrders() {
+
     const template = $('.profile-table__template').html();
     const $summary = $('.profile__stats');
     const renderSummary = (status, count) => $(`
@@ -57,14 +51,13 @@ if ($table.length) {
     `);
     const renderRow = (data) => template.replace(/{{(.*?)}}/g, (placeholder, field) => data[field]);
 
-    const summary = statuses.reduce((obj, key) => {
-      obj[key] = 0;
-      return obj;
-    }, {});
+    API.getOrdersStat(Auth.token).then(stat => {
+      $summary.html('');
+      for (let i in stat) $summary.append(renderSummary(i, stat[i]));
+    });
 
     API.getOrderList(Auth.token).done((items) => {
       $rows.html('');
-      $summary.html('');
       $pagination.html('');
       items
         .map((item, i) => ({
@@ -73,13 +66,13 @@ if ($table.length) {
           date:             '',
           show:             `${dateFormatter(item.inspectionDate)} ${l10nTimeBlock[item.timeBlock] || ''}`,
           address:          `${item.address} кв. ${item.flat}`,
-          status:           l10nStatus[item.status] || item.status,
+          status:           item.status,
           paid:             item.paid ? ' Оплачено' : 'Не оплачено',
           documents:        generateDocuments(item.attachedFileList),
           bank:             item.bankName || '',
           comment:          item.comment || '',
           appraisalCompany: item.appraisalCompanyName || '',
-          cancel:           '<button class="profile-table__button">Отменить</button>'
+          cancel:           item.canBeCancelled ? '<button class="profile-table__button">Отменить</button>' : '',
         }))
         .forEach((item, i) => {
           const $row = $(renderRow(item));
@@ -98,9 +91,6 @@ if ($table.length) {
           })
         });
 
-      items.forEach(item => summary[item.status]++);
-      statuses.forEach((status) => $summary.append(renderSummary(l10nStatus[status], summary[status])))
-      // statuses.forEach((status) => $summary.append(renderSummary(l10nStatus[status], 123)))
     });
   }
 

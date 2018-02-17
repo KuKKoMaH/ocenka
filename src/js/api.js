@@ -32,6 +32,10 @@ export const getOrderList = (token) => {
   return fetch({ method: 'GET', url: `order/list`, options: { token } });
 };
 
+export const getOrdersStat = (token) => {
+  return fetch({ method: 'GET', url: `order/stat`, options: { token } });
+};
+
 export const createOrder = (draftId, token) => {
   return fetch({ method: 'POST', url: `order/${draftId}`, options: { token } });
 };
