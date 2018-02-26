@@ -64,7 +64,7 @@ if ($table.length) {
           id:               item.id,
           index:            i + 1,
           date:             '',
-          show:             `${dateFormatter(item.inspectionDate)} ${l10nTimeBlock[item.timeBlock] || ''}`,
+          show:             `${dateFormatter(item.realInspectionDateTime || item.inspectionDate)} ${l10nTimeBlock[item.timeBlock] || ''}`,
           address:          `${item.address} кв. ${item.flat}`,
           status:           item.status,
           paid:             item.paid ? ' Оплачено' : 'Не оплачено',
@@ -72,7 +72,10 @@ if ($table.length) {
           bank:             item.bankName || '',
           comment:          item.comment || '',
           appraisalCompany: item.appraisalCompanyName || '',
-          cancel:           item.canBeCancelled ? '<button class="profile-table__button">Отменить</button>' : '',
+          cancel:           `
+            ${item.status === 'Готово' ? `<button class="profile-table__button report">Скачать&nbsp;отчет</button><br>` : ''}
+            ${item.canBeCancelled ? `<button class="profile-table__button cancel">Отменить</button>` : ''}
+          `,
         }))
         .forEach((item, i) => {
           const $row = $(renderRow(item));
@@ -85,12 +88,16 @@ if ($table.length) {
             $row.find('.profile-table__info-wrapper').css('max-height', height);
             $rowEl.toggleClass('profile-table__row--active');
           });
-          $row.find('.profile-table__button').on('click', (e) => {
+          $row.find('.cancel').on('click', (e) => {
             e.stopPropagation();
             cancelOrder(item.id);
-          })
+          });
+          $row.find('.report').on('click', (e) => {
+            e.stopPropagation();
+            const reportLink = $row.find('.profile-table__buttons').data('report-link');
+            window.open(reportLink + '?id=' + item.id)
+          });
         });
-
     });
   }
 

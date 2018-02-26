@@ -117,3 +117,7 @@ export const getTypes = (token) => {
     }));
   });
 };
+
+export const getReport = (orderId, token) => {
+  return fetch({ method: 'GET', url: `order/${orderId}/report`, options: { token } });
+};

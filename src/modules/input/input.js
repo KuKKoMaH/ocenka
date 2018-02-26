@@ -3,7 +3,7 @@ import 'selectize';
 import Cleave from 'cleave.js';
 
 export default class Input {
-  constructor( { $el, type, onSelect, onChange, validator, render, suggestType, suggestBounds } ) {
+  constructor({ $el, type, onSelect, onChange, validator, render, suggestType, suggestBounds }) {
     this.validator = validator;
     this.$el = $el;
     this.type = type;
@@ -26,7 +26,7 @@ export default class Input {
         type:            suggestType || 'ADDRESS',
         bounds:          suggestBounds || 'city-house',
         mobileWidth:     767,
-        onSelect:        ( suggest ) => {
+        onSelect:        (suggest) => {
           if (onSelect) onSelect(suggest);
           this.validate();
         }
@@ -54,7 +54,7 @@ export default class Input {
 
     if (type === 'select') {
       this.selectize = this.$input.selectize({
-        onChange:    ( value ) => {
+        onChange:    (value) => {
           this.validate();
           if (onChange) onChange(this.getValue());
         },
@@ -89,11 +89,18 @@ export default class Input {
       });
     }
 
+    if (type === 'number') {
+      new Cleave(this.$input, {
+        numericOnly: true,
+        blocks:      [4],
+      });
+    }
+
     this.$input.on('blur', this.validate);
     this.$input.on('input', this.onInput);
   }
 
-  onInput( e ) {
+  onInput(e) {
     if (this.dirty) this.validate();
     if (this.onChange) this.onChange(this.$input.val());
   }
@@ -120,7 +127,7 @@ export default class Input {
     return this.$input.val();
   }
 
-  setValue( value ) {
+  setValue(value) {
     if (this.type === 'select') return this.selectize[0].selectize.setValue(value);
     this.$input.val(value);
   }
@@ -129,7 +136,7 @@ export default class Input {
     return !this.errors.length;
   }
 
-  setOptions( options ) {
+  setOptions(options) {
     const selectize = this.selectize[0].selectize;
     if (options.length) {
       selectize.load(callback => callback(options));
