@@ -1,5 +1,5 @@
 import Cookies from 'js-cookie';
-import { login, confirm, getProfile, sendCode } from './api';
+import * as API from './api';
 
 class Auth {
   constructor() {
@@ -14,7 +14,7 @@ class Auth {
         this.token = token;
         this.phone = phone;
 
-        getProfile(token).then(
+        API.getProfile(token).then(
           profile => {
             this.profile = profile;
             this.profileDef.resolve(profile);
@@ -35,10 +35,8 @@ class Auth {
     return this.profileDef;
   }
 
-  auth( phone ) {
-    this.phone = phone;
-    // if (this.token && this.phone === phone) return $.Deferred().resolve(this.token);
-    return login(phone)
+  auth(phone) {
+    return API.login(phone)
       .then(resp => this.showConfirmPopup(resp.id, resp.activated))
       .then(token => this.setToken(phone, token))
   }
@@ -47,7 +45,7 @@ class Auth {
     this.setToken(null, null);
   }
 
-  setToken( phone, token ) {
+  setToken(phone, token) {
     if (!phone || !token) {
       Cookies.remove('auth');
     } else {
@@ -86,11 +84,11 @@ class Auth {
       },
     });
 
-    $form.on('submit.confirm', ( e ) => {
+    $form.on('submit.confirm', (e) => {
       e.preventDefault();
       const phone = $phone.val();
       $error.html('');
-      return login(phone).then(
+      return API.login(phone).then(
         resp => {
           this.phone = phone;
           this.userId = resp.id;
@@ -115,7 +113,7 @@ class Auth {
    * @param {boolean} activated
    * @return {Promise.<string>}
    */
-  showConfirmPopup( userId, activated ) {
+  showConfirmPopup(userId, activated) {
     this.userId = userId;
     const def = $.Deferred();
     const $popup = $('#popup-confirm');
@@ -147,14 +145,14 @@ class Auth {
     }, 0);
 
     let token;
-    $form.on('submit.confirm', ( e ) => {
+    $form.on('submit.confirm', (e) => {
       e.preventDefault();
       $error.html('');
-      confirm(userId, $code.val()).then(( res ) => {
+      API.confirm(userId, $code.val()).then((res) => {
         if (!res.correct) return $error.html('Введен неверный код');
         success = true;
         token = res.token;
-        return getProfile(res.token).then(profile => {
+        return API.getProfile(res.token).then(profile => {
           $.magnificPopup.close();
           this.profileDef = $.Deferred().resolve(profile);
           def.resolve(token);

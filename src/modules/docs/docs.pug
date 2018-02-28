@@ -21,15 +21,7 @@ include ../form/form
         .docs__upload
           input.docs__input(type='file')
           |Прикрепить#[br]документы
-        //.docs__item
-        //  |Договор 2017.doc
-        //  button.docs__delete
-        //.docs__item
-        //  |Договор 2017.doc Договор 2017.doc Договор 2017.doc
-        //  button.docs__delete
-        //.docs__item
-        //  |Договор 2017.doc
-        //  button.docs__delete
+          .docs__progress: .docs__progressbar
     .docs__row
       .docs__wrapper
         .docs__title Технические документы
@@ -47,6 +39,7 @@ include ../form/form
         .docs__upload
           input.docs__input(type='file')
           |Прикрепить#[br]документы
+          .docs__progress: .docs__progressbar
     .docs__row
       .docs__wrapper
       .docs__aside

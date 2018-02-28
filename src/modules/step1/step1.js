@@ -86,11 +86,11 @@ if ($form.length) {
     const $evaluatingCompany = new Input({
       $el:       $('#form-evaluating-company').parent(),
       type:      'select',
-      render:    {
-        option: (item, escape) => {
-          return `<div class="option">${escape(item.name)}<span class="option__rating">рейтинг: ${item.rating}</span></div>`;
-        }
-      },
+      // render:    {
+      //   option: (item, escape) => {
+      //     return `<div class="option">${escape(item.name)}<span class="option__rating">рейтинг: ${item.rating}</span></div>`;
+      //   }
+      // },
       validator: { 'Выберите компанию': val => !!val },
       onChange:  setPrice,
     });
@@ -187,12 +187,12 @@ if ($form.length) {
     const $customerBorrowerSame = $('#form-customer-borrower-same');
     // const $borrower = $('#borrower');
 
-    $buttons.attr('disabled', !$offer.prop('checked'));
+    // $buttons.attr('disabled', !$offer.prop('checked'));
     $button_pay.hide();
     $offer.on('change', () => {
-      $button_pay.attr('disabled', !$offer.prop('checked'));
-      $bank_bonus.attr('disabled', !$offer.prop('checked'));
-      // if (profile.bonus > 0) $button_bonus.attr('disabled', !$offer.prop('checked'));
+      $offer.prop('checked')
+        ? $offer.removeClass('form__error')
+        : $offer.addClass('form__error');
     });
 
     let customerBorrowerSame = null;
@@ -280,9 +280,14 @@ if ($form.length) {
     }
 
     function collectOrder() {
-      if (!$offer.prop('checked')) return null;
+      const isAccepted = $offer.prop('checked');
+      isAccepted
+        ? $offer.removeClass('form__error')
+        : $offer.addClass('form__error');
+
       fields.forEach(field => field.validate());
       if (fields.some(field => !field.isValid())) return null;
+      if (!isAccepted) return null;
 
       return {
         id:                  order.id,

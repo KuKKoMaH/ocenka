@@ -7,8 +7,8 @@
     .profile-table__show Дата и время показа
     .profile-table__status Статус заказа
     .profile-table__payment Оплата
-    .profile-table__documents Документы
-    .profile-table__cancel
+    //.profile-table__documents Документы
+    .profile-table__buttons
 
   .profile-table__body
 
@@ -34,9 +34,9 @@
         .profile-table__cell.profile-table__payment
           .profile-table__label Оплата
           .profile-table__value {{paid}}
-        .profile-table__cell.profile-table__documents
-          .profile-table__label Документы
-          .profile-table__value {{documents}}
+        //.profile-table__cell.profile-table__documents
+        //  .profile-table__label Документы
+        //  .profile-table__value {{documents}}
         .profile-table__cell.profile-table__buttons(data-report-link='report.html')
           .profile-table__value {{cancel}}
       .profile-table__info-wrapper
@@ -51,3 +51,6 @@
             .profile-table__info-row
               .profile-table__info-label Комментарий:
               .profile-table__info-value {{comment}}
+            .profile-table__info-row
+              .profile-table__info-label Документы:
+              .profile-table__info-value {{documents}}

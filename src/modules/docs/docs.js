@@ -1,3 +1,4 @@
+import swal from 'sweetalert2';
 import { getParam } from '../../js/history';
 import * as API from '../../js/api';
 import Auth from '../../js/Auth';
@@ -31,7 +32,7 @@ if ($form.length) {
     );
   }
 
-  function processOrder( order ) {
+  function processOrder(order) {
     const id = getParam('id');
     const operation = getParam('operation');
     const reference = getParam('reference');
@@ -41,7 +42,7 @@ if ($form.length) {
     $('.form__form').show();
     $('.docs__error').html('');
 
-    $form.on('submit', ( e ) => {
+    $form.on('submit', (e) => {
       e.preventDefault();
       // const data = {
       //   id:                 orderId,
@@ -55,9 +56,9 @@ if ($form.length) {
     });
 
     if (Array.isArray(order.attachedFileList)) {
-      types.forEach(( type ) => {
+      types.forEach((type) => {
         const $el = $(`#${type}`);
-        order.attachedFileList.forEach(( file ) => {
+        order.attachedFileList.forEach((file) => {
           if (file.fileType !== type) return;
           $el.append(createFile(file));
         });
@@ -68,28 +69,51 @@ if ($form.length) {
   require.ensure([], () => {
     require('blueimp-file-upload');
 
-    types.forEach(( type ) => {
+    types.forEach((type) => {
       const $el = $(`#${type}`);
+      const $progress = $el.find('.docs__progress');
+      const $bar = $el.find('.docs__progressbar');
 
       $el.find('.docs__input').fileupload({
-        url:       `${API_URL}order/${orderId}/file/${type}`,
-        headers:   {
+        url:         `${API_URL}order/${orderId}/file/${type}`,
+        headers:     {
           token: Auth.token,
         },
-        paramName: 'file',
-        done:      ( e, data ) => {
+        paramName:   'file',
+        submit:      () => {
+          $progress.show();
+          $bar.css('width', 'auto');
+        },
+        add:         (e, data) => {
+          const file = data.files[0];
+          if (file.size > 25 * 1024 * 1024) return swal({
+            type:  'error',
+            title: 'Размер файла слишком большой. Максимальный размер 25 Мб',
+          });
+
+          data.process().then(() => data.submit());
+        },
+        progressall: (e, data) => {
+          const progress = parseInt(data.loaded / data.total * 100, 10);
+          $bar.css('width', progress + '%');
+        },
+        done:        (e, data) => {
           const response = data.result;
           response.files.map(file => $el.append(createFile(file)));
+          $progress.hide();
         },
+        fail:        (e, data) => {
+          $progress.hide();
+l        }
       });
 
     });
   });
 
-  function createFile( file ) {
+  function createFile(file) {
     const $button = $('<button class="docs__delete"></button>');
     const $el = $(`<div class="docs__item">${file.originalFilename}</div>`);
-    $button.on('click', ( e ) => {
+    $button.on('click', (e) => {
       e.preventDefault();
       API.deleteFile(file.filePath, Auth.token).then(() => $el.remove());
     });

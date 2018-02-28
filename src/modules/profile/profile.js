@@ -62,12 +62,12 @@ if ($table.length) {
       items
         .map((item, i) => ({
           id:               item.id,
-          index:            i + 1,
+          index:            item.id,
           date:             '',
           show:             `${dateFormatter(item.realInspectionDateTime || item.inspectionDate)} ${l10nTimeBlock[item.timeBlock] || ''}`,
           address:          `${item.address} кв. ${item.flat}`,
           status:           item.status,
-          paid:             item.paid ? ' Оплачено' : 'Не оплачено',
+          paid:             item.paid,
           documents:        generateDocuments(item.attachedFileList),
           bank:             item.bankName || '',
           comment:          item.comment || '',

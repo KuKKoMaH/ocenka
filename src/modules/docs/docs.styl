@@ -77,6 +77,7 @@
     position: relative
     padding-right: 15px
     margin-bottom: 8px
+    word-break: break-all
 
   &__delete
     position: absolute
@@ -98,4 +99,24 @@
       background-image: url(sprite-delete.svg)
 
   &__error
-    color: #e94c36;
+    color: #e94c36
+
+  &__progress
+    position: absolute
+    width: 90%
+    left: 5%
+    right: 5%
+    height: 20px
+    background: #ebebeb
+    border-radius: 4px
+    bottom: 5%
+    overflow: hidden
+    display: none
+
+  &__progressbar
+    position: absolute
+    background: #e94c36
+    left: 0
+    width: 0
+    height: 100%
+    transition: all .1s ease-out

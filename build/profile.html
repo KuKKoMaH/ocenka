@@ -17,7 +17,7 @@
       </div>
       <div class="profile__wrapper">
         <div class="profile__info">
-          <div class="profile__avatar"><img src="img/modules-profile-avatar.jpg"></div>
+          <!--.profile__avatar: img(src='modules/profile/avatar.jpg')-->
           <div class="profile__profile">
             <div class="profile__name"></div>
             <!--.profile__text Бонусные баллы: #[span.profile__bonus]-->
@@ -34,8 +34,8 @@
           <div class="profile-table__show">Дата и время показа</div>
           <div class="profile-table__status">Статус заказа</div>
           <div class="profile-table__payment">Оплата</div>
-          <div class="profile-table__documents">Документы</div>
-          <div class="profile-table__cancel"></div>
+          <!--.profile-table__documents Документы-->
+          <div class="profile-table__buttons"></div>
         </div>
         <div class="profile-table__body"></div>
         <div class="profile-table__template">
@@ -65,10 +65,9 @@
                 <div class="profile-table__label">Оплата</div>
                 <div class="profile-table__value">{{paid}}</div>
               </div>
-              <div class="profile-table__cell profile-table__documents">
-                <div class="profile-table__label">Документы</div>
-                <div class="profile-table__value">{{documents}}</div>
-              </div>
+              <!--.profile-table__cell.profile-table__documents-->
+              <!--  .profile-table__label Документы-->
+              <!--  .profile-table__value {{documents}}-->
               <div class="profile-table__cell profile-table__buttons" data-report-link="report.html">
                 <div class="profile-table__value">{{cancel}}</div>
               </div>
@@ -87,6 +86,10 @@
                   <div class="profile-table__info-row">
                     <div class="profile-table__info-label">Комментарий:</div>
                     <div class="profile-table__info-value">{{comment}}</div>
+                  </div>
+                  <div class="profile-table__info-row">
+                    <div class="profile-table__info-label">Документы:</div>
+                    <div class="profile-table__info-value">{{documents}}</div>
                   </div>
                 </div>
               </div>
