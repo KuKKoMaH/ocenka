@@ -16,10 +16,9 @@
         <div class="menu__wrapper">
           <button class="menu__close"></button>
           <ul class="menu__items">
-            <li class="menu__active"><a href="registry.html">Реестр партёров</a></li>
-            <li><a href="#works">Как это работает</a></li>
-            <li><a href="#advantages">Наши преимущества</a></li>
-          </ul><a class="menu__cabinet" href="profile.html">Личный кабинет</a>
+            <li><a href="/#works">Как это работает</a></li>
+            <li><a href="/#advantages">Наши преимущества</a></li>
+          </ul><a class="menu__cabinet" href="/profile">Личный кабинет</a>
         </div>
       </div>
     </div>
@@ -33,7 +32,7 @@
             <div class="form__body">
               <div class="form__spinner"></div>
               <div class="form__error">Заказ не найден</div>
-              <form class="form__form" id="form-docs" action="order_done.html" novalidate="order_done.html">
+              <form class="form__form" id="form-docs" action="/order_done" novalidate="">
                 <div class="docs__row">
                   <div class="docs__wrapper">
                     <div class="docs__title">Правоустанавливающие документы</div>
@@ -42,12 +41,12 @@
                       <div class="docs__desc">(выданное до 15.07.2016)</div>
                     </div>
                     <div class="docs__doc">
-                      <div class="docs__name">Основание / договор приеобретения</div>
-                      <div class="docs__desc">в том числе: договор кули продажи недвижимого имущества, договор участия в долевом строительстве, договор уступки прав требования по  договору участия в долевом строительстве, договор участия в жилищно-строительном кооперативе, инвестиционный договор, другие аналогичные договоры, а также договор дарения, договор меня, договор передачи (приватизация), решение суда, свидетельство о наследстве и пр.</div>
+                      <div class="docs__name">Основание / договор приобретения</div>
+                      <div class="docs__desc">в том числе: договор кули продажи недвижимого имущества, договор участия в долевом строительстве, договор уступки прав требования по договору участия в долевом строительстве, договор участия в жилищно-строительном кооперативе, инвестиционный договор, другие аналогичные договоры, а также договор дарения, договор меня, договор передачи (приватизация), решение суда, свидетельство о наследстве и пр.</div>
                     </div>
                     <div class="docs__doc">
                       <div class="docs__name">Иные правоустанавливающие документы</div>
-                      <div class="docs__desc">перечисленные в Свидетельстве а государственной регистрации права собственности на недвижимое имущество, или в Выписке из Единого государственного реестра прав на недвижимоеимущество и сделок с ним (далее – ЕГРП), или в Выписке из Единого государственного реестра недвижимости (далее – ЕГРН).</div>
+                      <div class="docs__desc">перечисленные в Свидетельстве а государственной регистрации права собственности на недвижимое имущество, или в Выписке из Единого государственного реестра прав на недвижимое имущество и сделок с ним (далее – ЕГРП), или в Выписке из Единого государственного реестра недвижимости (далее – ЕГРН).</div>
                     </div>
                   </div>
                   <div class="docs__aside" id="LEGAL_DOCUMENT">
@@ -64,7 +63,7 @@
                     <div class="docs__title">Технические документы</div>
                     <div class="docs__doc">
                       <div class="docs__name">Поэтажный план БТИ</div>
-                      <div class="docs__desc">(документ включает в себя все помещения, находящиеся в указанной квартире с отмеченными на нем несущими стенами, проемами (оконнымы и дверными), перегородками и др.)</div>
+                      <div class="docs__desc">(документ включает в себя все помещения, находящиеся в указанной квартире с отмеченными на нем несущими стенами, проемами (оконными и дверными), перегородками и др.)</div>
                     </div>
                     <div class="docs__doc">
                       <div class="docs__name">Экспликация</div>
@@ -72,7 +71,7 @@
                     </div>
                     <div class="docs__doc">
                       <div class="docs__name">Технический паспорт</div>
-                      <div class="docs__desc">Документ, содержащий в себе поэтажный план квартиры и список всех помещений с указанием их площади и назначения.</div>
+                      <div class="docs__desc">(документ, содержащий в себе поэтажный план квартиры и список всех помещений с указанием их площади и назначения)</div>
                     </div>
                   </div>
                   <div class="docs__aside" id="TECHNICAL_DOCUMENT">
@@ -98,16 +97,16 @@
     <footer class="footer">
       <div class="w">
         <div class="footer__left">
-          <div class="footer__copyright">© 2017 «Экспресс Оценка», «ВТБ», все права защищены</div>
+          <div class="footer__copyright">© 2018 «Экспресс Оценка», все права защищены</div>
         </div>
-        <div class="footer__links"><a class="footer__link" href="#">О компании</a> <a class="footer__link" href="#">Пользовательское соглашение</a> <a class="footer__link" href="#">Политика конфиденциальности</a> <a class="footer__link" href="#">Способы оплаты</a></div>
+        <div class="footer__links"><a class="footer__link" href="/terms">Пользовательское соглашение</a> <a class="footer__link" href="/privacy">Политика конфиденциальности</a></div>
       </div>
     </footer>
     <div class="popups">
             <div class="popup" id="popup-register">
               <div class="popup__close"></div>
               <div class="popup__text">Войти в личный кабинет</div>
-              <form novalidate="" action="profile.html">
+              <form novalidate="" action="/profile">
                 <div class="popup__input">
                         <div class="input">
                           <input class="input__input" value="" required="" type="phone" id="auth-phone">

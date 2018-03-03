@@ -1,4 +1,3 @@
-import * as API from '../../js/api';
 import { getParam } from '../../js/history';
 import Auth from '../../js/Auth';
 
@@ -8,7 +7,10 @@ const $invoice = $('#invoice');
 if ($invoice.length) {
   $.when(
     Auth.getProfile(),
-  ).then(( profile ) => {
+  ).then((profile) => {
+    const invoiceUrl = `/invoice?id=${orderId}`;
+    $('.invoice__image').attr('src', invoiceUrl);
+    $('#toInvoice').attr('href', invoiceUrl);
     $('#toDocs').on('click', (e) => {
       e.preventDefault();
       window.location.href = `${$('#toDocs').prop('href')}?order=${orderId}`;

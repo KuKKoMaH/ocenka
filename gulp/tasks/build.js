@@ -9,7 +9,7 @@ function build (cb) {
     'html',
     'js',
     'images',
-    // 'copy',
+    'copy',
     cb
   );
 }

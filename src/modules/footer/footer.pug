@@ -3,12 +3,8 @@ mixin footer(with_line)
     .footer__left
       if(with_line)
         .footer__logo
-      .footer__copyright © 2017 «Экспресс Оценка», «ВТБ», все права защищены
+      .footer__copyright © 2018 «Экспресс Оценка», все права защищены
     .footer__links
-      a.footer__link(href='#') О компании
+      a.footer__link(href='/terms') Пользовательское соглашение
       |!{' '}
-      a.footer__link(href='#') Пользовательское соглашение
-      |!{' '}
-      a.footer__link(href='#') Политика конфиденциальности
-      |!{' '}
-      a.footer__link(href='#') Способы оплаты
+      a.footer__link(href='/privacy') Политика конфиденциальности

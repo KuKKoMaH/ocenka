@@ -10,10 +10,10 @@
     <!--link(rel="shortcut icon" href="/favicon.ico")-->
   </head>
   <body>
-    <div class="profile"><a class="profile__logo" href="index.html"></a>
-      <div class="profile__top"><a class="profile__logout" href="index.html">Выйти</a></div>
+    <div class="profile"><a class="profile__logo" href="/"></a>
+      <div class="profile__top"><a class="profile__logout" href="/">Выйти</a></div>
       <div class="profile__menu">
-        <div class="profile__title">Личный кабинет</div><a class="profile__button" href="index.html">Заказать</a>
+        <div class="profile__title">Личный кабинет</div><a class="profile__button" href="/">Заказать</a>
       </div>
       <div class="profile__wrapper">
         <div class="profile__info">
@@ -68,7 +68,7 @@
               <!--.profile-table__cell.profile-table__documents-->
               <!--  .profile-table__label Документы-->
               <!--  .profile-table__value {{documents}}-->
-              <div class="profile-table__cell profile-table__buttons" data-report-link="report.html">
+              <div class="profile-table__cell profile-table__buttons">
                 <div class="profile-table__value">{{cancel}}</div>
               </div>
             </div>
@@ -101,16 +101,16 @@
     <footer class="footer">
       <div class="w">
         <div class="footer__left">
-          <div class="footer__copyright">© 2017 «Экспресс Оценка», «ВТБ», все права защищены</div>
+          <div class="footer__copyright">© 2018 «Экспресс Оценка», все права защищены</div>
         </div>
-        <div class="footer__links"><a class="footer__link" href="#">О компании</a> <a class="footer__link" href="#">Пользовательское соглашение</a> <a class="footer__link" href="#">Политика конфиденциальности</a> <a class="footer__link" href="#">Способы оплаты</a></div>
+        <div class="footer__links"><a class="footer__link" href="/terms">Пользовательское соглашение</a> <a class="footer__link" href="/privacy">Политика конфиденциальности</a></div>
       </div>
     </footer>
     <div class="popups">
             <div class="popup" id="popup-register">
               <div class="popup__close"></div>
               <div class="popup__text">Войти в личный кабинет</div>
-              <form novalidate="" action="profile.html">
+              <form novalidate="" action="/profile">
                 <div class="popup__input">
                         <div class="input">
                           <input class="input__input" value="" required="" type="phone" id="auth-phone">

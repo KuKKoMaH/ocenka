@@ -5,7 +5,8 @@ export default function fetch({ method = 'GET', url, data, options = {} }) {
   let fullUrl = API_URL + url;
 
   const params = {
-    method: upperMethod,
+    method:  upperMethod,
+    headers: { 'Content-Type': 'application/json', },
   };
 
   if (upperMethod === 'GET' || upperMethod === 'DELETE') {
@@ -19,10 +20,7 @@ export default function fetch({ method = 'GET', url, data, options = {} }) {
     params.data = data;
   }
 
-  params.headers = {
-    'Content-Type': 'application/json',
-  };
-  if(options.token) params.headers.token = options.token;
+  if (options.token) params.headers.token = options.token;
   params.url = fullUrl;
 
   return $.ajax(params);

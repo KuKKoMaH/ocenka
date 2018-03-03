@@ -2,6 +2,7 @@ import swal from 'sweetalert2';
 import * as API from "../../js/api";
 import Auth from '../../js/Auth';
 import dateFormatter from "../../js/dateFormatter";
+import decodeArrayBuffer from "../../js/decodeArrayBuffer";
 
 const $logout = $('.profile__logout');
 const $table = $('#profile-table');
@@ -40,7 +41,6 @@ if ($table.length) {
   }
 
   function loadOrders() {
-
     const template = $('.profile-table__template').html();
     const $summary = $('.profile__stats');
     const renderSummary = (status, count) => $(`
@@ -73,7 +73,7 @@ if ($table.length) {
           comment:          item.comment || '',
           appraisalCompany: item.appraisalCompanyName || '',
           cancel:           `
-            ${item.status === 'Готово' ? `<button class="profile-table__button report">Скачать&nbsp;отчет</button><br>` : ''}
+            ${item.status === 'Готово' ? `<a class="profile-table__button report">Скачать&nbsp;отчет<span class="progress"></span></a><br>` : ''}
             ${item.canBeCancelled ? `<button class="profile-table__button cancel">Отменить</button>` : ''}
           `,
         }))
@@ -93,9 +93,34 @@ if ($table.length) {
             cancelOrder(item.id);
           });
           $row.find('.report').on('click', (e) => {
-            e.stopPropagation();
-            const reportLink = $row.find('.profile-table__buttons').data('report-link');
-            window.open(reportLink + '?id=' + item.id)
+            e.preventDefault();
+            const $button = $(e.currentTarget);
+            const $progress = $button.find('.progress');
+            if ($button.hasClass('active')) return;
+
+            $button.addClass('active');
+            require.ensure([], () => {
+              const FileSaver = require('file-saver');
+              API.getReport(
+                item.id,
+                Auth.token,
+                (e) => $progress.css('width', parseInt(e.loaded / e.total * 100, 10)),
+                (request) => {
+                  console.log(request);
+                  $button.removeClass('active');
+                  if (request.status !== 200) {
+                    const response = JSON.parse(decodeArrayBuffer(request.response));
+                    return swal({
+                      type:  'error',
+                      title: response.error,
+                    });
+                  }
+                  const blob = new Blob([request.response], { type: request.getResponseHeader('content-type') });
+                  FileSaver.saveAs(blob, `report_${item.id}.docx`);
+                  //Access-Control-Expose-Headers: Location
+                },
+              );
+            });
           });
         });
     });

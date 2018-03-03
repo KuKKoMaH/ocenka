@@ -1,0 +1,9 @@
+extends ../../pug/_layout
+include ../menu/menu
+include ../footer/footer
+
+block body
+  +menu()
+  .w: .static-page
+    block content
+  +footer()

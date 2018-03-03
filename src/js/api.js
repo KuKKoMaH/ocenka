@@ -115,9 +115,18 @@ export const getTypes = (token) => {
       id:   typeId,
       name: types[typeId],
     }));
-  });
+  });{}
 };
 
-export const getReport = (orderId, token) => {
-  return fetch({ method: 'GET', url: `order/${orderId}/report`, options: { token } });
+export const getReport = (orderId, token, onProgress, onDone) => {
+  const request = new XMLHttpRequest();
+  request.open("GET", API_URL + `order/${orderId}/report`, true);
+  request.responseType = "arraybuffer";
+  request.setRequestHeader('token', token);
+
+  request.onprogress = onProgress;
+  request.onload = () => onDone(request);
+
+  request.send();
+  // return fetch({ method: 'GET', url: `order/${orderId}/report`, options: { token, file: true } });
 };

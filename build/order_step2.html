@@ -10,13 +10,13 @@
     <!--link(rel="shortcut icon" href="/favicon.ico")-->
   </head>
   <body>
-    <div class="invoice"><img class="invoice__image" src="https://placehold.it/1654x2339"></div>
-    <div class="form invoice__form" id="invoice"><a class="form__button form__button--primary" href="https://placehold.it/1654x2339" target="blank">Скачать квитанцию</a><a class="form__button" id="toDocs" href="order_step3.html">К загрузке документов</a></div>
+    <div class="invoice"><img class="invoice__image"></div>
+    <div class="form invoice__form" id="invoice"><a class="form__button form__button--primary" id="toInvoice" target="blank">Скачать квитанцию</a><a class="form__button" id="toDocs" href="/order_step3">К загрузке документов</a></div>
     <div class="popups">
             <div class="popup" id="popup-register">
               <div class="popup__close"></div>
               <div class="popup__text">Войти в личный кабинет</div>
-              <form novalidate="" action="profile.html">
+              <form novalidate="" action="/profile">
                 <div class="popup__input">
                         <div class="input">
                           <input class="input__input" value="" required="" type="phone" id="auth-phone">

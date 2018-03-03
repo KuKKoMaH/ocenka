@@ -4,10 +4,10 @@ include ../form/form
   .form__spinner
   .form__error Заказ не найден
   .form__payment(data-title='Во время оплаты произошла ошибка.' data-message='Попробуйте еще раз.')
-  form#form-order(action='order_step3.html' novalidate).form__form
+  form#form-order(action='order_step3' novalidate).form__form
     .form__label
       | Введите данные объекта
-      .form__mark: .form__mark-content Время показа объекта будет дополнительно согласовано с Вами нашим специалистом.
+      //.form__mark: .form__mark-content Время показа объекта будет дополнительно согласовано с Вами нашим специалистом.
     .form__row.form__container
       .form__address: +input('Адрес')(id='form-address' disabled)
       .form__apart: +input('Квартира')(id='form-flat' disabled)
@@ -50,12 +50,12 @@ include ../form/form
 
     .form__row: .form__checkbox
       input(type='checkbox' id='form-offer')
-      label(for='form-offer') Текст для оферты
+      label(for='form-offer') Согласен с #[a(href='/terms') Договором оферты]
 
     .form__row.form__container
       .form__price Стоимость услуги: #[span#price ] руб.
       .form__buttons
         button.form__button.form__button--primary#form-pay Оплатить картой
-        button.form__button#form-paybank(data-link='invoice.html') Оплатить в отделении банка
+        button.form__button#form-paybank(data-link='order_step2') Оплатить в отделении банка
     .form__row
       .form__response

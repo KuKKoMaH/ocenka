@@ -7,6 +7,12 @@ gulp.task('copy:img', function() {
     .pipe(gulp.dest('build/img'));
 });
 
+gulp.task('copy:invoice', function() {
+  return gulp
+    .src('src/invoice/*')
+    .pipe(gulp.dest('build/invoice'));
+});
+
 gulp.task('copy:fonts', function() {
   return gulp
     .src(config.src.fonts + '/*.{ttf,eot,woff,woff2}')
@@ -14,8 +20,9 @@ gulp.task('copy:fonts', function() {
 });
 
 gulp.task('copy', [
-  'copy:img',
-  'copy:fonts'
+  // 'copy:img',
+  // 'copy:fonts',
+  'copy:invoice'
 ]);
 gulp.task('copy:watch', function() {
   gulp.watch('src/**/*.{jpg,png,jpeg,svg,gif}', ['copy']);
