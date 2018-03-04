@@ -5,9 +5,16 @@ const orderId = getParam('order');
 const $invoice = $('#invoice');
 
 if ($invoice.length) {
-  $.when(
-    Auth.getProfile(),
-  ).then((profile) => {
+  Auth.getProfile()
+    .then(getInvoice)
+    .catch(() => {
+      Auth.showLoginPopup().then(
+        getInvoice,
+        () => (window.location = '.')
+      );
+    });
+
+  function getInvoice() {
     const invoiceUrl = `/invoice?id=${orderId}`;
     $('.invoice__image').attr('src', invoiceUrl);
     $('#toInvoice').attr('href', invoiceUrl);
@@ -16,5 +23,5 @@ if ($invoice.length) {
       window.location.href = `${$('#toDocs').prop('href')}?order=${orderId}`;
     });
     // API.getOrderInvoice(orderId, Auth.token).then(console.log);
-  });
+  };
 }
