@@ -1,7 +1,6 @@
-include ../input/input
-- var items = ['1. Оформление заказа', '2. оплата', '3. загрузка документов']
-
 mixin form(step)
+  include ../input/input
+  - var items = ['1. Оформление заказа', '2. оплата', '3. загрузка документов']
   .form
     .form__wrapper
       .form__header

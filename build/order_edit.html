@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,700&amp;amp;subset=cyrillic" rel="stylesheet">
+    <link rel="stylesheet" media="all" href="style.css">
+    <!--link(rel="shortcut icon" href="/favicon.ico")-->
+  </head>
+  <body>
+    <div class="menu">
+      <div class="w"><a class="menu__logo" href=".."></a>
+        <button class="menu__hamburger"></button>
+        <div class="menu__wrapper">
+          <button class="menu__close"></button>
+          <ul class="menu__items">
+            <li><a href="/#works">Как это работает</a></li>
+            <li><a href="/#advantages">Наши преимущества</a></li>
+          </ul><a class="menu__cabinet" href="/profile">Личный кабинет</a>
+        </div>
+      </div>
+    </div>
+    <div class="form" id="order_edit">
+      <div class="form__wrapper">
+        <div class="form__body">
+          <div class="form__spinner"></div>
+          <div class="form__error">Заказ не найден</div>
+              <form class="form__form" id="form-order" action="order_step3" novalidate="" data-edit="true">
+                <p>Статус заказа: <b id="orderStatus"></b></p>
+                <div class="form__label">Введите данные объекта
+                  <!--.form__mark: .form__mark-content Время показа объекта будет дополнительно согласовано с Вами нашим специалистом.-->
+                </div>
+                <div class="form__row form__container">
+                  <div class="form__address">
+                    <div class="input">
+                      <input class="input__input" value="" required="required" id="form-address" disabled="disabled">
+                      <label class="input__label">Адрес</label>
+                      <div class="input__error"></div>
+                    </div>
+                  </div>
+                  <div class="form__apart">
+                    <div class="input">
+                      <input class="input__input" value="" required="required" id="form-flat" disabled="disabled">
+                      <label class="input__label">Квартира</label>
+                      <div class="input__error"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form__label">Тип объекта</div>
+                <div class="form__row">
+                  <div class="input input--select">
+                    <select class="input__select" required="required" id="form-cost">
+                    </select>
+                    <label class="input__label">Выберите тип объекта</label>
+                    <div class="input__error"></div>
+                  </div>
+                </div>
+                <div id="bank">
+                  <div class="form__label">Выберите банк-кредитор</div>
+                  <div class="form__row">
+                    <div class="input input--select">
+                      <select class="input__select" required="required" id="form-bank">
+                      </select>
+                      <label class="input__label">Выберите банк</label>
+                      <div class="input__error"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form__label">Выберите оценочную компанию</div>
+                <div class="form__row">
+                  <div class="input input--select">
+                    <select class="input__select" required="required" id="form-evaluating-company">
+                    </select>
+                    <label class="input__label">Выберите оценочную компанию</label>
+                    <div class="input__error"></div>
+                  </div>
+                </div>
+                <div class="form__label">Данные заказчика оценки</div>
+                <div class="form__row form__container">
+                  <div class="form__x2">
+                    <div class="input">
+                      <input class="input__input" value="" required="required" id="form-customer-name">
+                      <label class="input__label">ФИО</label>
+                      <div class="input__error"></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="input">
+                      <input class="input__input" value="" required="required" id="form-customer-passport">
+                      <label class="input__label">Серия и номер паспорта</label>
+                      <div class="input__error"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form__label">Данные заемщика</div>
+                <div class="form__row form__container">
+                  <div class="form__x2">
+                    <div class="input">
+                      <input class="input__input" value="" required="required" id="form-borrower-name">
+                      <label class="input__label">ФИО</label>
+                      <div class="input__error"></div>
+                    </div>
+                  </div><span class="form__checkbox">
+                    <input type="checkbox" id="form-customer-borrower-same">
+                    <label for="form-customer-borrower-same">Заказчик и заемщик одно лицо</label></span>
+                </div>
+                <div class="form__row form__container">
+                  <div class="form__time">
+                    <div class="form__label">Время показа объекта</div>
+                    <div class="form__container">
+                      <div class="form__half">
+                        <div class="input">
+                          <input class="input__input" value="" required="required" id="form-date">
+                          <label class="input__label">Дата</label>
+                          <div class="input__error"></div>
+                        </div>
+                      </div>
+                      <div class="form__half">
+                        <div class="input input--select">
+                          <select class="input__select" required="required" id="form-time">
+                            <option value=""></option>
+                            <option value="FROM_9_TO_12">С 9 до 12</option>
+                            <option value="FROM_12_TO_16">С 12 до 16</option>
+                            <option value="FROM_16_TO_19">С 16 до 19</option>
+                          </select>
+                          <label class="input__label">Время</label>
+                          <div class="input__error"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="form__label">Комментарий к заказу</div>
+                    <div class="input input--textarea">
+                      <textarea class="input__textarea" required="required" id="form-comment"></textarea>
+                      <label class="input__label">Введите ваш коментарий</label>
+                      <div class="input__error"></div>
+                    </div>
+                  </div>
+                </div>
+                <p>Статус оплаты: <b id="orderPayStatus"></b></p>
+                <div class="form__row form__container">
+                  <div class="form__price">Стоимость услуги: <span id="price"></span> руб.</div>
+                  <div class="form__buttons">
+                    <button class="form__button form__button--primary" id="form-pay">Оплатить картой</button>
+                    <button class="form__button" id="form-paybank" data-link="order_step2">Оплатить в отделении банка</button>
+                  </div>
+                </div>
+                <div class="form__row">
+                  <div class="form__response"></div>
+                </div>
+              </form>
+          <form class="form__form form__form--edit" id="form-docs" action="/order_done" novalidate="novalidate" data-edit="true">
+            <div class="docs__row">
+              <div class="docs__wrapper">
+                <div class="docs__title">Правоустанавливающие документы
+                  <div class="form__mark">
+                    <div class="form__mark-content form__mark-content--wide">
+                      <div class="docs__doc">
+                        <div class="docs__name">Свидетельство о государственной регистрации права</div>
+                        <div class="docs__desc">(выданное до 15.07.2016)</div>
+                      </div>
+                      <div class="docs__doc">
+                        <div class="docs__name">Основание / договор приобретения</div>
+                        <div class="docs__desc">в том числе: договор кули продажи недвижимого имущества, договор участия в долевом строительстве, договор уступки прав требования по договору участия в долевом строительстве, договор участия в жилищно-строительном кооперативе, инвестиционный договор, другие аналогичные договоры, а также договор дарения, договор меня, договор передачи (приватизация), решение суда, свидетельство о наследстве и пр.</div>
+                      </div>
+                      <div class="docs__doc">
+                        <div class="docs__name">Иные правоустанавливающие документы</div>
+                        <div class="docs__desc">перечисленные в Свидетельстве а государственной регистрации права собственности на недвижимое имущество, или в Выписке из Единого государственного реестра прав на недвижимое имущество и сделок с ним (далее – ЕГРП), или в Выписке из Единого государственного реестра недвижимости (далее – ЕГРН).</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="LEGAL_DOCUMENT_LIST"></div>
+              </div>
+              <div class="docs__aside" id="LEGAL_DOCUMENT">
+                <div class="docs__upload docs__upload--small">
+                  <input class="docs__input" type="file">Прикрепить&nbsp;документы
+                  <div class="docs__progress">
+                    <div class="docs__progressbar"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="docs__row">
+              <div class="docs__wrapper">
+                <div class="docs__title">Технические документы
+                  <div class="form__mark">
+                    <div class="form__mark-content form__mark-content--wide">
+                      <div class="docs__doc">
+                        <div class="docs__name">Поэтажный план БТИ</div>
+                        <div class="docs__desc">(документ включает в себя все помещения, находящиеся в указанной квартире с отмеченными на нем несущими стенами, проемами (оконными и дверными), перегородками и др.)</div>
+                      </div>
+                      <div class="docs__doc">
+                        <div class="docs__name">Экспликация</div>
+                        <div class="docs__desc">(документ в виде таблицы, в котором расписаны наименование и площади всех помещений)</div>
+                      </div>
+                      <div class="docs__doc">
+                        <div class="docs__name">Технический паспорт</div>
+                        <div class="docs__desc">(документ, содержащий в себе поэтажный план квартиры и список всех помещений с указанием их площади и назначения)</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="TECHNICAL_DOCUMENT_LIST"></div>
+              </div>
+              <div class="docs__aside" id="TECHNICAL_DOCUMENT">
+                <div class="docs__upload docs__upload--small">
+                  <input class="docs__input" type="file">Прикрепить &nbsp;документы
+                  <div class="docs__progress">
+                    <div class="docs__progressbar"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+          <div class="form__row form__container" id="edit_buttons" style="display: none;">
+            <div class="form__buttons">
+              <button class="form__button" id="download_report">Скачать отчет</button>
+              <button class="form__button" id="change_company">Сменить оценочную компанию</button>
+              <button class="form__button" id="cancel_order">Отменить заказ</button>
+              <button class="form__button form__button--primary" id="done">Готово</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="footer">
+      <div class="w">
+        <div class="footer__left">
+          <div class="footer__copyright">© 2018 «Экспресс Оценка», все права защищены</div>
+        </div>
+        <div class="footer__links"><a class="footer__link" href="/terms">Пользовательское соглашение</a> <a class="footer__link" href="/privacy">Политика конфиденциальности</a></div>
+      </div>
+    </footer>
+    <div class="popups">
+            <div class="popup" id="popup-register">
+              <div class="popup__close"></div>
+              <div class="popup__text">Войти в личный кабинет</div>
+              <form novalidate="" action="/profile">
+                <div class="popup__input">
+                        <div class="input">
+                          <input class="input__input" value="" required="" type="phone" id="auth-phone">
+                          <label class="input__label">Телефон</label>
+                          <div class="input__error"></div>
+                        </div>
+                </div>
+                      <input class="button button--block" type="submit" value="Войти">
+                      
+                <div class="popup__error"></div>
+              </form>
+            </div>
+            <div class="popup" id="popup-confirm">
+              <div class="popup__close"></div>
+              <div class="popup__text">Введите пароль</div>
+              <div class="popup__desc not_activated">На Ваш телефон был отправлен пароль для входа в систему.</div>
+              <div class="popup__desc activated">Введите пароль, который ранее был отправлен Вам в СМС-сообщении</div>
+              <form novalidate="">
+                <div class="popup__input">
+                        <div class="input">
+                          <input class="input__input" value="" required="" id="auth-password">
+                          <label class="input__label">Пароль</label>
+                          <div class="input__error"></div>
+                        </div>
+                </div>
+                      <input class="button button--block" type="submit" value="Подтвердить">
+                      
+                <div class="popup__error"></div>
+              </form>
+              <div class="popup__footer"><a class="popup__resend not_activated">Отправить повторно</a><a class="popup__resend activated">Сбросить пароль</a></div>
+            </div>
+    </div>
+  </body>
+  <script>
+    var JS_PUBLIC_PATH = 'js/';
+    var SUGGEST_KEY = "fdd27007fe8069d376aa269885162a16ef0e55d4";
+    var API_URL = 'https://test-fa.srg-it.ru/';
+    // var API_URL = 'https://fa.srg-it.ru/';
+    var ITEMS_PER_PAGE = 20;
+    var PARTNERS = { 1: "TEST", 2: "TEST2", 3: "TEST3" }
+  </script>
+  <script src="js/app.js"></script>
+</html>

@@ -2,8 +2,10 @@ extends pug/_layout
 include modules/popup/popup
 include modules/menu/menu
 include modules/footer/footer
+include modules/step1/step1
+include modules/docs/docs
 
 block body
   +menu(true)
-  include modules/order_step1/order_step1
+  include modules/order_edit/order_edit
   +footer()

@@ -1,6 +1,6 @@
 .profile-table#profile-table
   .profile-table__header
-    .profile-table__toggle
+    //.profile-table__toggle
     .profile-table__number №
     //.profile-table__date Дата регистрации заказа
     .profile-table__address Адрес объекта недвижимости
@@ -8,14 +8,14 @@
     .profile-table__status Статус заказа
     .profile-table__payment Оплата
     //.profile-table__documents Документы
-    .profile-table__buttons
+    //.profile-table__buttons
 
   .profile-table__body
 
   .profile-table__template
     .profile-table__item
-      .profile-table__row
-        .profile-table__cell.profile-table__toggle
+      a.profile-table__row(href='/order_edit?order={{id}}')
+        //.profile-table__cell.profile-table__toggle
         .profile-table__cell.profile-table__number
           .profile-table__label №
           .profile-table__value {{index}}
@@ -37,9 +37,9 @@
         //.profile-table__cell.profile-table__documents
         //  .profile-table__label Документы
         //  .profile-table__value {{documents}}
-        .profile-table__cell.profile-table__buttons
-          .profile-table__value {{cancel}}
-      .profile-table__info-wrapper
+        //.profile-table__cell.profile-table__buttons
+        //  .profile-table__value {{cancel}}
+      //.profile-table__info-wrapper
         .profile-table__info
           .profile-table__info-col
             .profile-table__info-row

@@ -32,65 +32,69 @@
             <div class="form__body">
               <div class="form__spinner"></div>
               <div class="form__error">Заказ не найден</div>
-              <form class="form__form" id="form-docs" action="/order_done" novalidate="">
-                <div class="docs__row">
-                  <div class="docs__wrapper">
-                    <div class="docs__title">Правоустанавливающие документы</div>
-                    <div class="docs__doc">
-                      <div class="docs__name">Свидетельство о государственной регистрации права</div>
-                      <div class="docs__desc">(выданное до 15.07.2016)</div>
-                    </div>
-                    <div class="docs__doc">
-                      <div class="docs__name">Основание / договор приобретения</div>
-                      <div class="docs__desc">в том числе: договор кули продажи недвижимого имущества, договор участия в долевом строительстве, договор уступки прав требования по договору участия в долевом строительстве, договор участия в жилищно-строительном кооперативе, инвестиционный договор, другие аналогичные договоры, а также договор дарения, договор меня, договор передачи (приватизация), решение суда, свидетельство о наследстве и пр.</div>
-                    </div>
-                    <div class="docs__doc">
-                      <div class="docs__name">Иные правоустанавливающие документы</div>
-                      <div class="docs__desc">перечисленные в Свидетельстве а государственной регистрации права собственности на недвижимое имущество, или в Выписке из Единого государственного реестра прав на недвижимое имущество и сделок с ним (далее – ЕГРП), или в Выписке из Единого государственного реестра недвижимости (далее – ЕГРН).</div>
-                    </div>
-                  </div>
-                  <div class="docs__aside" id="LEGAL_DOCUMENT">
-                    <div class="docs__upload">
-                      <input class="docs__input" type="file">Прикрепить<br>документы
-                      <div class="docs__progress">
-                        <div class="docs__progressbar"></div>
+                  <form class="form__form" id="form-docs" action="/order_done" novalidate="" data-edit="false">
+                    <div class="docs__row">
+                      <div class="docs__wrapper">
+                        <div class="docs__title">Правоустанавливающие документы
+                        </div>
+                            <div class="docs__doc">
+                              <div class="docs__name">Свидетельство о государственной регистрации права</div>
+                              <div class="docs__desc">(выданное до 15.07.2016)</div>
+                            </div>
+                            <div class="docs__doc">
+                              <div class="docs__name">Основание / договор приобретения</div>
+                              <div class="docs__desc">в том числе: договор кули продажи недвижимого имущества, договор участия в долевом строительстве, договор уступки прав требования по договору участия в долевом строительстве, договор участия в жилищно-строительном кооперативе, инвестиционный договор, другие аналогичные договоры, а также договор дарения, договор меня, договор передачи (приватизация), решение суда, свидетельство о наследстве и пр.</div>
+                            </div>
+                            <div class="docs__doc">
+                              <div class="docs__name">Иные правоустанавливающие документы</div>
+                              <div class="docs__desc">перечисленные в Свидетельстве а государственной регистрации права собственности на недвижимое имущество, или в Выписке из Единого государственного реестра прав на недвижимое имущество и сделок с ним (далее – ЕГРП), или в Выписке из Единого государственного реестра недвижимости (далее – ЕГРН).</div>
+                            </div>
+                      </div>
+                      <div class="docs__aside" id="LEGAL_DOCUMENT">
+                        <div class="docs__upload">
+                          <input class="docs__input" type="file">Прикрепить<br>документы
+                          <div class="docs__progress">
+                            <div class="docs__progressbar"></div>
+                          </div>
+                        </div>
+                        <div id="LEGAL_DOCUMENT_LIST"></div>
                       </div>
                     </div>
-                  </div>
-                </div>
-                <div class="docs__row">
-                  <div class="docs__wrapper">
-                    <div class="docs__title">Технические документы</div>
-                    <div class="docs__doc">
-                      <div class="docs__name">Поэтажный план БТИ</div>
-                      <div class="docs__desc">(документ включает в себя все помещения, находящиеся в указанной квартире с отмеченными на нем несущими стенами, проемами (оконными и дверными), перегородками и др.)</div>
-                    </div>
-                    <div class="docs__doc">
-                      <div class="docs__name">Экспликация</div>
-                      <div class="docs__desc">(документ в виде таблицы, в котором расписаны наименование и площади всех помещений)</div>
-                    </div>
-                    <div class="docs__doc">
-                      <div class="docs__name">Технический паспорт</div>
-                      <div class="docs__desc">(документ, содержащий в себе поэтажный план квартиры и список всех помещений с указанием их площади и назначения)</div>
-                    </div>
-                  </div>
-                  <div class="docs__aside" id="TECHNICAL_DOCUMENT">
-                    <div class="docs__upload">
-                      <input class="docs__input" type="file">Прикрепить<br>документы
-                      <div class="docs__progress">
-                        <div class="docs__progressbar"></div>
+                    <div class="docs__row">
+                      <div class="docs__wrapper">
+                        <div class="docs__title">Технические документы
+                        </div>
+                            <div class="docs__doc">
+                              <div class="docs__name">Поэтажный план БТИ</div>
+                              <div class="docs__desc">(документ включает в себя все помещения, находящиеся в указанной квартире с отмеченными на нем несущими стенами, проемами (оконными и дверными), перегородками и др.)</div>
+                            </div>
+                            <div class="docs__doc">
+                              <div class="docs__name">Экспликация</div>
+                              <div class="docs__desc">(документ в виде таблицы, в котором расписаны наименование и площади всех помещений)</div>
+                            </div>
+                            <div class="docs__doc">
+                              <div class="docs__name">Технический паспорт</div>
+                              <div class="docs__desc">(документ, содержащий в себе поэтажный план квартиры и список всех помещений с указанием их площади и назначения)</div>
+                            </div>
+                      </div>
+                      <div class="docs__aside" id="TECHNICAL_DOCUMENT">
+                        <div class="docs__upload">
+                          <input class="docs__input" type="file">Прикрепить <br>документы
+                          <div class="docs__progress">
+                            <div class="docs__progressbar"></div>
+                          </div>
+                        </div>
+                        <div id="TECHNICAL_DOCUMENT_LIST"></div>
                       </div>
                     </div>
-                  </div>
-                </div>
-                <div class="docs__row">
-                  <div class="docs__wrapper"></div>
-                  <div class="docs__aside">
-                    <button class="form__button form__button--primary" id="form-confirm">Готово</button>
-                    <div class="docs__error"></div>
-                  </div>
-                </div>
-              </form>
+                    <div class="docs__row">
+                      <div class="docs__wrapper"></div>
+                      <div class="docs__aside">
+                        <button class="form__button form__button--primary" id="form-confirm">Готово</button>
+                        <div class="docs__error"></div>
+                      </div>
+                    </div>
+                  </form>
             </div>
           </div>
         </div>

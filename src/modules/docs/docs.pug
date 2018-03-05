@@ -1,47 +1,81 @@
 include ../form/form
 
-+form(2)
-  .form__spinner
-  .form__error Заказ не найден
-  form#form-docs.form__form(action='/order_done' novalidate)
+mixin legalInfo()
+  .docs__doc
+    .docs__name Свидетельство о государственной регистрации права
+    .docs__desc (выданное до 15.07.2016)
+  .docs__doc
+    .docs__name Основание / договор приобретения
+    .docs__desc в том числе: договор кули продажи недвижимого имущества, договор участия в долевом строительстве, договор уступки прав требования по договору участия в долевом строительстве, договор участия в жилищно-строительном кооперативе, инвестиционный договор, другие аналогичные договоры, а также договор дарения, договор меня, договор передачи (приватизация), решение суда, свидетельство о наследстве и пр.
+  .docs__doc
+    .docs__name Иные правоустанавливающие документы
+    .docs__desc перечисленные в Свидетельстве а государственной регистрации права собственности на недвижимое имущество, или в Выписке из Единого государственного реестра прав на недвижимое имущество и сделок с ним (далее – ЕГРП), или в Выписке из Единого государственного реестра недвижимости (далее – ЕГРН).
+
+mixin technicalInfo()
+  .docs__doc
+    .docs__name Поэтажный план БТИ
+    .docs__desc (документ включает в себя все помещения, находящиеся в указанной квартире с отмеченными на нем несущими стенами, проемами (оконными и дверными), перегородками и др.)
+  .docs__doc
+    .docs__name Экспликация
+    .docs__desc (документ в виде таблицы, в котором расписаны наименование и площади всех помещений)
+  .docs__doc
+    .docs__name Технический паспорт
+    .docs__desc (документ, содержащий в себе поэтажный план квартиры и список всех помещений с указанием их площади и назначения)
+
+
+mixin docs(edit)
+  form#form-docs.form__form(class=edit && 'form__form--edit' action='/order_done' novalidate data-edit=''+(!!edit))
     .docs__row
       .docs__wrapper
         .docs__title Правоустанавливающие документы
-        .docs__doc
-          .docs__name Свидетельство о государственной регистрации права
-          .docs__desc (выданное до 15.07.2016)
-        .docs__doc
-          .docs__name Основание / договор приобретения
-          .docs__desc в том числе: договор кули продажи недвижимого имущества, договор участия в долевом строительстве, договор уступки прав требования по договору участия в долевом строительстве, договор участия в жилищно-строительном кооперативе, инвестиционный договор, другие аналогичные договоры, а также договор дарения, договор меня, договор передачи (приватизация), решение суда, свидетельство о наследстве и пр.
-        .docs__doc
-          .docs__name Иные правоустанавливающие документы
-          .docs__desc перечисленные в Свидетельстве а государственной регистрации права собственности на недвижимое имущество, или в Выписке из Единого государственного реестра прав на недвижимое имущество и сделок с ним (далее – ЕГРП), или в Выписке из Единого государственного реестра недвижимости (далее – ЕГРН).
+          if(edit)
+            .form__mark: .form__mark-content.form__mark-content--wide: +legalInfo()
+        if(!edit)
+          +legalInfo()
+        if(edit)
+          #LEGAL_DOCUMENT_LIST
+
 
       .docs__aside#LEGAL_DOCUMENT
-        .docs__upload
+        .docs__upload(class=edit && 'docs__upload--small')
           input.docs__input(type='file')
-          |Прикрепить#[br]документы
+          | Прикрепить
+          if(edit)
+            | &nbsp;
+          else
+            br
+          | документы
           .docs__progress: .docs__progressbar
+        if(!edit)
+          #LEGAL_DOCUMENT_LIST
+
     .docs__row
       .docs__wrapper
         .docs__title Технические документы
-        .docs__doc
-          .docs__name Поэтажный план БТИ
-          .docs__desc (документ включает в себя все помещения, находящиеся в указанной квартире с отмеченными на нем несущими стенами, проемами (оконными и дверными), перегородками и др.)
-        .docs__doc
-          .docs__name Экспликация
-          .docs__desc (документ в виде таблицы, в котором расписаны наименование и площади всех помещений)
-        .docs__doc
-          .docs__name Технический паспорт
-          .docs__desc (документ, содержащий в себе поэтажный план квартиры и список всех помещений с указанием их площади и назначения)
+          if(edit)
+            .form__mark: .form__mark-content.form__mark-content--wide: +technicalInfo()
+
+        if(!edit)
+          +technicalInfo()
+        if(edit)
+          #TECHNICAL_DOCUMENT_LIST
 
       .docs__aside#TECHNICAL_DOCUMENT
-        .docs__upload
+        .docs__upload(class=edit && 'docs__upload--small')
           input.docs__input(type='file')
-          |Прикрепить#[br]документы
+          | Прикрепить#{' '}
+          if(edit)
+            | &nbsp;
+          else
+            br
+          | документы
           .docs__progress: .docs__progressbar
-    .docs__row
-      .docs__wrapper
-      .docs__aside
-        button.form__button.form__button--primary#form-confirm Готово
-        .docs__error
+        if(!edit)
+          #TECHNICAL_DOCUMENT_LIST
+
+    if(!edit)
+      .docs__row
+        .docs__wrapper
+        .docs__aside
+          button.form__button.form__button--primary#form-confirm Готово
+          .docs__error

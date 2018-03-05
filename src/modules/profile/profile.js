@@ -1,8 +1,6 @@
-import swal from 'sweetalert2';
 import * as API from "../../js/api";
 import Auth from '../../js/Auth';
 import dateFormatter from "../../js/dateFormatter";
-import decodeArrayBuffer from "../../js/decodeArrayBuffer";
 
 const $logout = $('.profile__logout');
 const $table = $('#profile-table');
@@ -72,56 +70,10 @@ if ($table.length) {
           bank:             item.bankName || '',
           comment:          item.comment || '',
           appraisalCompany: item.appraisalCompanyName || '',
-          cancel:           `
-            ${item.status === 'Готово' ? `<a class="profile-table__button report">Скачать&nbsp;отчет<span class="progress"></span></a><br>` : ''}
-            ${item.canBeCancelled ? `<button class="profile-table__button cancel">Отменить</button>` : ''}
-          `,
         }))
         .forEach((item, i) => {
           const $row = $(renderRow(item));
           $rows.append($row);
-          $row.on('click', () => {
-            const $rowEl = $row.find('.profile-table__row');
-            const height = $rowEl.hasClass('profile-table__row--active')
-              ? 0
-              : $row.find('.profile-table__info').outerHeight();
-            $row.find('.profile-table__info-wrapper').css('max-height', height);
-            $rowEl.toggleClass('profile-table__row--active');
-          });
-          $row.find('.cancel').on('click', (e) => {
-            e.stopPropagation();
-            cancelOrder(item.id);
-          });
-          $row.find('.report').on('click', (e) => {
-            e.preventDefault();
-            const $button = $(e.currentTarget);
-            const $progress = $button.find('.progress');
-            if ($button.hasClass('active')) return;
-
-            $button.addClass('active');
-            require.ensure([], () => {
-              const FileSaver = require('file-saver');
-              API.getReport(
-                item.id,
-                Auth.token,
-                (e) => $progress.css('width', parseInt(e.loaded / e.total * 100, 10)),
-                (request) => {
-                  console.log(request);
-                  $button.removeClass('active');
-                  if (request.status !== 200) {
-                    const response = JSON.parse(decodeArrayBuffer(request.response));
-                    return swal({
-                      type:  'error',
-                      title: response.error,
-                    });
-                  }
-                  const blob = new Blob([request.response], { type: request.getResponseHeader('content-type') });
-                  FileSaver.saveAs(blob, `report_${item.id}.docx`);
-                  //Access-Control-Expose-Headers: Location
-                },
-              );
-            });
-          });
         });
     });
   }
@@ -146,31 +98,5 @@ if ($table.length) {
     return result;
   }
 
-  function cancelOrder(orderId) {
-    swal({
-      type:                'question',
-      title:               'Вы действительно хотите отменить заказ?',
-      showCancelButton:    true,
-      reverseButtons:      true,
-      showCloseButton:     true,
-      confirmButtonText:   'Отменить',
-      cancelButtonText:    'Нет',
-      showLoaderOnConfirm: true,
-      preConfirm:          () => API.cancelOrder(orderId, Auth.token),
-    }).then(result => {
-      console.log(result);
-      if (result.value) {
-        swal({
-          type:  'success',
-          title: 'Заказ успешно отменен',
-        });
-      } else {
-        swal({
-          type:  'error',
-          title: result.err.responseJSON.error,
-        });
-      }
-      loadOrders();
-    });
-  }
+
 }

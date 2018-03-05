@@ -76,6 +76,9 @@
         opacity: 1
         pointer-events: all
 
+    @media (max-width: $breakpoint-sm - 1)
+      display: none
+
     &-content
       position: absolute
       background: #ffffff
@@ -91,6 +94,9 @@
       margin-top: -10px
       margin-left: 12px
       anim()
+
+      &--wide
+        width: auto
 
   &__container
     display: flex
@@ -231,6 +237,10 @@
 
       a
         text-decoration: underline
+
+  &__form
+    &--edit
+      margin-top: 70px
 
   &__form,
   &__error

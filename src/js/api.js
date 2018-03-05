@@ -130,3 +130,7 @@ export const getReport = (orderId, token, onProgress, onDone) => {
   request.send();
   // return fetch({ method: 'GET', url: `order/${orderId}/report`, options: { token, file: true } });
 };
+
+export const changeCompany = (orderId, token) => {
+  return fetch({ method: 'GET', url: `order/${orderId}/changeAc`, options: { token } });
+};
