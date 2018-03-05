@@ -90,7 +90,7 @@ if ($form.length) {
 
   function changeCompany(orderId) {
     API.changeCompany(orderId, Auth.token).then((order) => {
-      window.location.href = '/order?order=' + order.id;
+      window.location.href = '/order_step1?order=' + order.id;
     })
   }
 
