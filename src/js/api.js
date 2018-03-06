@@ -105,9 +105,18 @@ export const getBanksList = () => {
   })));
 };
 
-export const getOrderInvoice = (orderId, token) => {
-  return fetch({ method: 'GET', url: `order/${orderId}/invoice`, options: { token } });
-};
+export const getOrderInvoice = (orderId, token) => new Promise((resolve) => {
+  const request = new XMLHttpRequest();
+  request.open("GET", API_URL + `order/${orderId}/invoice/png`, true);
+  request.responseType = "blob";
+  request.setRequestHeader('token', token);
+
+  request.onload = () => resolve(request);
+
+  request.send();
+
+});
+// return fetch({ method: 'GET', url: `order/${orderId}/invoice/png`, options: { token } });
 
 export const getTypes = (token) => {
   return fetch({ method: 'GET', url: `order/select/type`, options: { token } }).then(types => {
@@ -115,7 +124,8 @@ export const getTypes = (token) => {
       id:   typeId,
       name: types[typeId],
     }));
-  });{}
+  });
+  {}
 };
 
 export const getReport = (orderId, token, onProgress, onDone) => {

@@ -89,7 +89,7 @@ class Auth {
       const phone = $phone.val();
       $error.html('');
       return API.login(phone).then(
-        resp => {
+        (resp) => {
           this.phone = phone;
           this.userId = resp.id;
           success = true;
@@ -97,7 +97,10 @@ class Auth {
 
           return this.showConfirmPopup(resp.id, resp.activated);
         },
-        err => $error.html(err.responseJSON.message)
+        (err) => {
+          $error.html(err.responseJSON.message);
+          throw err;
+        }
       )
         .then(token => this.setToken(phone, token))
         .then(def.resolve, def.reject);
@@ -165,7 +168,7 @@ class Auth {
 
   resendCode() {
     if (!this.userId || !this.phone) return;
-    return sendCode(this.userId, this.phone);
+    return API.sendCode(this.userId, this.phone);
   }
 }
 
