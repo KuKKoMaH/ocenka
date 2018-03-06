@@ -17,13 +17,22 @@ if ($invoice.length) {
 
   function getInvoice() {
     API.getOrderInvoice(orderId, Auth.token).then(resp => {
-      console.log(resp);
-
       const urlCreator = window.URL || window.webkitURL;
       const imageUrl = urlCreator.createObjectURL(resp.response);
+
       $('.invoice__image').attr('src', imageUrl);
-      $('#toInvoice').attr('download', `invoice_${orderId}.png`);
       $('#toInvoice').attr('href', imageUrl);
+
+      // $('#toInvoice').attr('download', `invoice_${orderId}.png`);
+      // $('#toInvoice').on('click', (e) => {
+      //   e.preventDefault();
+
+      // window.open($('.invoice__image')[0].src, '_blank');
+
+      // var w = window.open("");
+      // w.document.write($('.invoice__image')[0].outerHTML);
+      // });
+
     });
 
     $('#toDocs').on('click', (e) => {
