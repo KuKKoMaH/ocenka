@@ -37,7 +37,11 @@ class Auth {
 
   auth(phone) {
     return API.login(phone)
-      .then(resp => this.showConfirmPopup(resp.id, resp.activated))
+      .then(resp => {
+        this.phone = phone;
+        this.userId = resp.id;
+        return this.showConfirmPopup(resp.id, resp.activated)
+      })
       .then(token => this.setToken(phone, token))
   }
 

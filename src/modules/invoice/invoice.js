@@ -16,14 +16,17 @@ if ($invoice.length) {
     });
 
   function getInvoice() {
-    API.getOrderInvoice(orderId, Auth.token).then(resp => {
+    API.getOrderInvoice(orderId, Auth.token).then(request => {
+      const contentDisposition = request.getResponseHeader('content-disposition');
+      const fileName = contentDisposition ? contentDisposition.split('=')[1] : `invoice_${orderId}.png`;
+
       const urlCreator = window.URL || window.webkitURL;
-      const imageUrl = urlCreator.createObjectURL(resp.response);
+      const imageUrl = urlCreator.createObjectURL(request.response);
 
       $('.invoice__image').attr('src', imageUrl);
       $('#toInvoice').attr('href', imageUrl);
+      $('#toInvoice').attr('download', fileName);
 
-      // $('#toInvoice').attr('download', `invoice_${orderId}.png`);
       // $('#toInvoice').on('click', (e) => {
       //   e.preventDefault();
 

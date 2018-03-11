@@ -28,7 +28,7 @@ if ($form.length) {
       if (order.status === 'Готово') {
         $downloadReportButton.show().on('click', (e) => {
           e.preventDefault();
-          downloadReport(order.id)
+          downloadReport(order.id);
         });
       }
 
@@ -71,7 +71,7 @@ if ($form.length) {
         Auth.token,
         (e) => $progress.css('width', parseInt(e.loaded / e.total * 100, 10)),
         (request) => {
-          console.log(request);
+          // console.log(request);
           $button.removeClass('active');
           if (request.status !== 200) {
             const response = JSON.parse(decodeArrayBuffer(request.response));
@@ -81,8 +81,9 @@ if ($form.length) {
             });
           }
           const blob = new Blob([request.response], { type: request.getResponseHeader('content-type') });
-          FileSaver.saveAs(blob, `report_${orderId}.docx`);
-          //Access-Control-Expose-Headers: Location
+          const contentDisposition = request.getResponseHeader('content-disposition');
+          const fileName = contentDisposition ? contentDisposition.split('=')[1] : `report_${orderId}.docx`;
+          FileSaver.saveAs(blob, fileName);
         },
       );
     });
