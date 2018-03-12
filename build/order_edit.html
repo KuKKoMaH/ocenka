@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Hello</title>
+    <title>Экспресс-оценка</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,7 +27,8 @@
         <div class="form__body">
           <div class="form__spinner"></div>
           <div class="form__error">Заказ не найден</div>
-              <form class="form__form" id="form-order" action="order_step3" novalidate="" data-edit="true">
+              <form class="form__form" id="form-order" action="order_edit" novalidate="" data-edit="true">
+                <div class="form__error">Заказ не найден</div>
                 <p>Статус заказа: <b id="orderStatus"></b></p>
                 <div class="form__label">Введите данные объекта
                   <!--.form__mark: .form__mark-content Время показа объекта будет дополнительно согласовано с Вами нашим специалистом.-->
@@ -51,7 +52,7 @@
                 <div class="form__label">Тип объекта</div>
                 <div class="form__row">
                   <div class="input input--select">
-                    <select class="input__select" required="required" id="form-cost">
+                    <select class="input__select" required="required" id="form-cost" disabled="disabled">
                     </select>
                     <label class="input__label">Выберите тип объекта</label>
                     <div class="input__error"></div>
@@ -61,7 +62,7 @@
                   <div class="form__label">Выберите банк-кредитор</div>
                   <div class="form__row">
                     <div class="input input--select">
-                      <select class="input__select" required="required" id="form-bank">
+                      <select class="input__select" required="required" id="form-bank" disabled="disabled">
                       </select>
                       <label class="input__label">Выберите банк</label>
                       <div class="input__error"></div>
@@ -71,7 +72,7 @@
                 <div class="form__label">Выберите оценочную компанию</div>
                 <div class="form__row">
                   <div class="input input--select">
-                    <select class="input__select" required="required" id="form-evaluating-company">
+                    <select class="input__select" required="required" id="form-evaluating-company" disabled="disabled">
                     </select>
                     <label class="input__label">Выберите оценочную компанию</label>
                     <div class="input__error"></div>
@@ -81,14 +82,14 @@
                 <div class="form__row form__container">
                   <div class="form__x2">
                     <div class="input">
-                      <input class="input__input" value="" required="required" id="form-customer-name">
+                      <input class="input__input" value="" required="required" id="form-customer-name" disabled="disabled">
                       <label class="input__label">ФИО</label>
                       <div class="input__error"></div>
                     </div>
                   </div>
                   <div>
                     <div class="input">
-                      <input class="input__input" value="" required="required" id="form-customer-passport">
+                      <input class="input__input" value="" required="required" id="form-customer-passport" disabled="disabled">
                       <label class="input__label">Серия и номер паспорта</label>
                       <div class="input__error"></div>
                     </div>
@@ -98,12 +99,12 @@
                 <div class="form__row form__container">
                   <div class="form__x2">
                     <div class="input">
-                      <input class="input__input" value="" required="required" id="form-borrower-name">
+                      <input class="input__input" value="" required="required" id="form-borrower-name" disabled="disabled">
                       <label class="input__label">ФИО</label>
                       <div class="input__error"></div>
                     </div>
                   </div><span class="form__checkbox">
-                    <input type="checkbox" id="form-customer-borrower-same">
+                    <input type="checkbox" id="form-customer-borrower-same" disabled="">
                     <label for="form-customer-borrower-same">Заказчик и заемщик одно лицо</label></span>
                 </div>
                 <div class="form__row form__container">
@@ -112,14 +113,14 @@
                     <div class="form__container">
                       <div class="form__half">
                         <div class="input">
-                          <input class="input__input" value="" required="required" id="form-date">
+                          <input class="input__input" value="" required="required" id="form-date" disabled="disabled">
                           <label class="input__label">Дата</label>
                           <div class="input__error"></div>
                         </div>
                       </div>
                       <div class="form__half">
                         <div class="input input--select">
-                          <select class="input__select" required="required" id="form-time">
+                          <select class="input__select" required="required" id="form-time" disabled="disabled">
                             <option value=""></option>
                             <option value="FROM_9_TO_12">С 9 до 12</option>
                             <option value="FROM_12_TO_16">С 12 до 16</option>
@@ -134,15 +135,15 @@
                   <div>
                     <div class="form__label">Комментарий к заказу</div>
                     <div class="input input--textarea">
-                      <textarea class="input__textarea" required="required" id="form-comment"></textarea>
+                      <textarea class="input__textarea" required="required" id="form-comment" disabled="disabled"></textarea>
                       <label class="input__label">Введите ваш коментарий</label>
                       <div class="input__error"></div>
                     </div>
                   </div>
                 </div>
                 <p>Статус оплаты: <b id="orderPayStatus"></b></p>
-                <div class="form__row form__container">
-                  <div class="form__price">Стоимость услуги: <span id="price"></span> руб.</div>
+                <div class="form__row form__container" id="pay_buttons">
+                  <div class="form__price">Стоимость услуги: <span id="price"></span>&nbsp;руб.</div>
                   <div class="form__buttons">
                     <button class="form__button form__button--primary" id="form-pay">Оплатить картой</button>
                     <button class="form__button" id="form-paybank" data-link="order_step2">Оплатить в отделении банка</button>
@@ -217,8 +218,8 @@
             </div>
           </form>
           <div class="form__row form__container" id="edit_buttons" style="display: none;">
-            <div class="form__buttons">
-              <button class="form__button" id="download_report">Скачать отчет</button>
+            <div class="form__buttons"><a class="form__button" id="download_report">Скачать отчет
+                <div class="progress"></div></a>
               <button class="form__button" id="change_company">Сменить оценочную компанию</button>
               <button class="form__button" id="cancel_order">Отменить заказ</button>
               <button class="form__button form__button--primary" id="done">Готово</button>

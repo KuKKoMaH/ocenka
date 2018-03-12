@@ -10,7 +10,9 @@ include ../step1/step1
       +docs(true)
       .form__row.form__container#edit_buttons(style='display: none')
         .form__buttons
-          button.form__button#download_report Скачать отчет
+          a.form__button#download_report
+            | Скачать отчет
+            .progress
           button.form__button#change_company Сменить оценочную компанию
           button.form__button#cancel_order Отменить заказ
           button.form__button.form__button--primary#done Готово

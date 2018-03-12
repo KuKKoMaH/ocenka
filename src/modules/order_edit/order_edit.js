@@ -25,12 +25,13 @@ if ($form.length) {
       docs(order);
 
       $editButtons.show();
-      if (order.status === 'Готово') {
-        $downloadReportButton.show().on('click', (e) => {
-          e.preventDefault();
-          downloadReport(order.id);
-        });
-      }
+
+      // if (order.status === 'Готово') {
+      $downloadReportButton.show().on('click', (e) => {
+        e.preventDefault();
+        downloadReport(order.id);
+      });
+      // }
 
       if (order.status === 'Смена оценочной компании') {
         $changeCompanyButton.show().on('click', (e) => {
@@ -59,20 +60,20 @@ if ($form.length) {
   );
 
   function downloadReport(orderId) {
-    const $button = $(e.currentTarget);
-    const $progress = $button.find('.progress');
-    if ($button.hasClass('active')) return;
+    const $progress = $downloadReportButton.find('.progress');
+    if ($downloadReportButton.hasClass('active')) return;
 
-    $button.addClass('active');
+    $downloadReportButton.addClass('active');
+    $progress.css('width', '0%');
     require.ensure([], () => {
       const FileSaver = require('file-saver');
       API.getReport(
         orderId,
         Auth.token,
-        (e) => $progress.css('width', parseInt(e.loaded / e.total * 100, 10)),
+        (e) => $progress.css('width', parseInt(e.loaded / e.total * 100, 10) + '%'),
         (request) => {
           // console.log(request);
-          $button.removeClass('active');
+          $downloadReportButton.removeClass('active');
           if (request.status !== 200) {
             const response = JSON.parse(decodeArrayBuffer(request.response));
             return swal({

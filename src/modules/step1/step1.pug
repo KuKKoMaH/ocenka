@@ -1,7 +1,8 @@
 include ../form/form
 
 mixin step1(edit)
-  form#form-order.form__form(action='order_step3' novalidate data-edit=''+(!!edit))
+  form#form-order.form__form(action=edit ? 'order_edit' : 'order_step3' novalidate data-edit='' + (!!edit))
+    .form__error Заказ не найден
     if(edit)
       p Статус заказа: #[b#orderStatus]
     .form__label
@@ -12,40 +13,40 @@ mixin step1(edit)
       .form__apart: +input('Квартира')(id='form-flat' disabled)
 
     .form__label Тип объекта
-    .form__row: +input('Выберите тип объекта', false, true)(id='form-cost')
+    .form__row: +input('Выберите тип объекта', false, true)(id='form-cost' disabled=edit)
 
     div#bank
       .form__label Выберите банк-кредитор
-      .form__row: +input('Выберите банк', false, true)(id='form-bank')
+      .form__row: +input('Выберите банк', false, true)(id='form-bank' disabled=edit)
 
     .form__label Выберите оценочную компанию
-    .form__row: +input('Выберите оценочную компанию', false, true)(id='form-evaluating-company')
+    .form__row: +input('Выберите оценочную компанию', false, true)(id='form-evaluating-company' disabled=edit)
 
     .form__label Данные заказчика оценки
     .form__row.form__container
-      .form__x2: +input('ФИО')(id='form-customer-name')
-      div: +input('Серия и номер паспорта')(id='form-customer-passport')
+      .form__x2: +input('ФИО')(id='form-customer-name' disabled=edit)
+      div: +input('Серия и номер паспорта')(id='form-customer-passport' disabled=edit)
 
     .form__label Данные заемщика
     .form__row.form__container
-      .form__x2: +input('ФИО')(id='form-borrower-name')
+      .form__x2: +input('ФИО')(id='form-borrower-name' disabled=edit)
       span.form__checkbox
-        input(type='checkbox' id='form-customer-borrower-same')
+        input(type='checkbox' id='form-customer-borrower-same' disabled=edit)
         label(for='form-customer-borrower-same') Заказчик и заемщик одно лицо
 
     .form__row.form__container
       .form__time
         .form__label Время показа объекта
         .form__container
-          .form__half: +input('Дата')(id='form-date')
-          .form__half: +input('Время', false, true)(id='form-time')
+          .form__half: +input('Дата')(id='form-date' disabled=edit)
+          .form__half: +input('Время', false, true)(id='form-time' disabled=edit)
             option(value='')
             option(value='FROM_9_TO_12') С 9 до 12
             option(value='FROM_12_TO_16') С 12 до 16
             option(value='FROM_16_TO_19') С 16 до 19
       div
         .form__label Комментарий к заказу
-        +input('Введите ваш коментарий', false, false, true)(id='form-comment')
+        +input('Введите ваш коментарий', false, false, true)(id='form-comment' disabled=edit)
 
     if(!edit)
       .form__row: .form__checkbox
@@ -55,8 +56,8 @@ mixin step1(edit)
     if(edit)
       p Статус оплаты: #[b#orderPayStatus]
 
-    .form__row.form__container
-      .form__price Стоимость услуги: #[span#price ] руб.
+    .form__row.form__container#pay_buttons
+      .form__price Стоимость услуги: #[span#price ]&nbsp;руб.
       .form__buttons
         button.form__button.form__button--primary#form-pay Оплатить картой
         button.form__button#form-paybank(data-link='order_step2') Оплатить в отделении банка

@@ -38,9 +38,17 @@ if ($invoice.length) {
 
     });
 
-    $('#toDocs').on('click', (e) => {
+    const isEdit = getParam('edit') === 'true';
+    if(isEdit) {
+      $('#toOrder').show();
+    }else {
+      $('#toDocs').show();
+    }
+
+    $('#toDocs, #toOrder').on('click', (e) => {
       e.preventDefault();
-      window.location.href = `${$('#toDocs').prop('href')}?order=${orderId}`;
+      const $button = $(e.currentTarget);
+      window.location.href = `${$button.prop('href')}?order=${orderId}`;
     });
   }
 }

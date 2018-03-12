@@ -6,17 +6,27 @@ import Auth from '../../js/Auth';
 
 export default function processOrder(order) {
   const $form = $('#form-order');
+  const isEdit = $form.data('edit');
+
   const id = getParam('id');
   const operation = getParam('operation');
   const reference = getParam('reference');
+  const error = getParam('error');
   if (id && operation && reference) {
-    const message = $('.form__payment');
-    swal({
-      type:  'error',
-      title: message.data('title'),
-      text:  message.data('message'),
-    });
-    API.confirmPayment(id, operation, reference, false, Auth.token);
+    if(error) {
+      swal({
+        type:  'error',
+        title: 'Во время оплаты произошла ошибка',
+        text:  'Попробуйте еще раз',
+      });
+    }else {
+      swal({
+        type:  'success',
+        title: 'Оплата успешно принята',
+      });
+
+    }
+    API.confirmPayment(id, operation, reference, !error, Auth.token);
   }
 
   let appraisalCompanies = null;
@@ -159,7 +169,11 @@ export default function processOrder(order) {
     $comment,
     $cost
   ];
-  const $buttons = $('.form__button');
+
+  if(order.payStatus === 'Оплачено') {
+    $('#pay_buttons').hide();
+  }
+
   const $button_pay = $('#form-pay');
   const $bank_bonus = $('#form-paybank');
   const $offer = $('#form-offer');
@@ -178,6 +192,7 @@ export default function processOrder(order) {
 
   let customerBorrowerSame = null;
   const onChangeCustomerBorrowerSame = () => {
+    if (isEdit) return;
     customerBorrowerSame = $customerBorrowerSame.prop('checked');
     if (customerBorrowerSame) {
       $borrowerName.setValue($customerName.getValue());
@@ -199,7 +214,7 @@ export default function processOrder(order) {
 
     API.updateDraft(data, Auth.token)
       .then(() => API.payWithInvoice(data.id, Auth.token))
-      .then(() => (window.location.href = $bank_bonus.data('link') + '?order=' + data.id))
+      .then(() => (window.location.href = $bank_bonus.data('link') + '?order=' + data.id + '&edit=' + !!isEdit))
       .catch(err => {
         const errorText = err && err.responseJSON && err.responseJSON.message || 'Неизвестная ошибка';
         $errorContainer.html(errorText);
@@ -218,7 +233,7 @@ export default function processOrder(order) {
     const data = collectOrder();
     if (!data) return;
     const url = `${$form.prop('action')}`;
-    const successUrl = url + '?success=true';
+    const successUrl = url + '?order=' + order.id;
     const failUrl = window.location.href;
 
     API.updateDraft(data, Auth.token)
