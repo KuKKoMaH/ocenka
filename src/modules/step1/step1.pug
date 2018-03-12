@@ -1,7 +1,7 @@
 include ../form/form
 
 mixin step1(edit)
-  form#form-order.form__form(action=edit ? 'order_edit' : 'order_step3' novalidate data-edit='' + (!!edit))
+  form#form-order.form__form(action=edit ? 'order_edit' : 'order_step3' novalidate data-edit='' + (!!edit) autocomplete="off")
     .form__error Заказ не найден
     if(edit)
       p Статус заказа: #[b#orderStatus]
