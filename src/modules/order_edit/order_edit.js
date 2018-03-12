@@ -26,12 +26,12 @@ if ($form.length) {
 
       $editButtons.show();
 
-      // if (order.status === 'Готово') {
-      $downloadReportButton.show().on('click', (e) => {
-        e.preventDefault();
-        downloadReport(order.id);
-      });
-      // }
+      if (order.status === 'Готово') {
+        $downloadReportButton.show().on('click', (e) => {
+          e.preventDefault();
+          downloadReport(order.id);
+        });
+      }
 
       if (order.status === 'Смена оценочной компании') {
         $changeCompanyButton.show().on('click', (e) => {
