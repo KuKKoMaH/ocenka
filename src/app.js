@@ -25,3 +25,9 @@ import './modules/order_edit/order_edit';
 
 // $('input[type="phone"]').mask("+7 (999) 999-99-99");
 new SmoothScroll('a[href*="#"]');
+
+window.onpageshow = function(event) {
+  if (event.persisted) {
+    window.location.reload()
+  }
+};
