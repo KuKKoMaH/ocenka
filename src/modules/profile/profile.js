@@ -62,7 +62,8 @@ if ($table.length) {
           id:               item.id,
           index:            item.id,
           date:             '',
-          show:             `${dateFormatter(item.realInspectionDateTime || item.inspectionDate)} ${l10nTimeBlock[item.timeBlock] || ''}`,
+          // show:             `${dateFormatter(item.realInspectionDateTime || item.inspectionDate)} ${l10nTimeBlock[item.timeBlock] || ''}`,
+          show:             item.realInspectionDateTime || item.inspectionTime,
           address:          `${item.address} кв. ${item.flat}`,
           status:           item.status,
           paid:             item.paid,
@@ -97,6 +98,5 @@ if ($table.length) {
 
     return result;
   }
-
 
 }
