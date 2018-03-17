@@ -3,7 +3,8 @@ import Auth from './Auth';
 
 const doRequest = (params) => {
   return fetch(params).catch((err) => {
-    if (err.responseJSON.message === 'Token expired') {
+    const skipCheckExpired = params && params.skipCheckExpired;
+    if (!skipCheckExpired && err.responseJSON.message === 'Token expired') {
       return Auth.showLoginPopup().then(
         () => fetch({ ...params, options: { token: Auth.token } }),
         () => (window.location = '.')
@@ -25,8 +26,8 @@ export const confirm = (id, code) => {
   return doRequest({ method: 'GET', url: 'customer/checkcode', data: { id, code } });
 };
 
-export const getProfile = (token) => {
-  return doRequest({ method: 'GET', url: 'customer/profile', options: { token } });
+export const getProfile = (token, skipCheckExpired) => {
+  return doRequest({ method: 'GET', url: 'customer/profile', options: { token, skipCheckExpired } });
 };
 
 export const getOrder = (orderId, token) => {

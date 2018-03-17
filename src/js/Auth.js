@@ -15,7 +15,7 @@ class Auth {
         this.phone = phone;
 
         setTimeout(() => {
-          API.getProfile(token).then(
+          API.getProfile(token, true).then(
             profile => {
               this.profile = profile;
               this.profileDef.resolve(profile);
