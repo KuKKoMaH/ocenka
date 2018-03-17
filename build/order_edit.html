@@ -52,7 +52,7 @@
                 <div class="form__label">Тип объекта</div>
                 <div class="form__row">
                   <div class="input input--select">
-                    <select class="input__select" required="required" id="form-cost" disabled="disabled">
+                    <select class="input__select" required="required" id="form-cost">
                     </select>
                     <label class="input__label">Выберите тип объекта</label>
                     <div class="input__error"></div>
@@ -62,7 +62,7 @@
                   <div class="form__label">Выберите банк-кредитор</div>
                   <div class="form__row">
                     <div class="input input--select">
-                      <select class="input__select" required="required" id="form-bank" disabled="disabled">
+                      <select class="input__select" required="required" id="form-bank">
                       </select>
                       <label class="input__label">Выберите банк</label>
                       <div class="input__error"></div>
@@ -72,7 +72,7 @@
                 <div class="form__label">Выберите оценочную компанию</div>
                 <div class="form__row">
                   <div class="input input--select">
-                    <select class="input__select" required="required" id="form-evaluating-company" disabled="disabled">
+                    <select class="input__select" required="required" id="form-evaluating-company">
                     </select>
                     <label class="input__label">Выберите оценочную компанию</label>
                     <div class="input__error"></div>
@@ -82,14 +82,14 @@
                 <div class="form__row form__container">
                   <div class="form__x2">
                     <div class="input">
-                      <input class="input__input" value="" required="required" id="form-customer-name" disabled="disabled">
+                      <input class="input__input" value="" required="required" id="form-customer-name">
                       <label class="input__label">ФИО</label>
                       <div class="input__error"></div>
                     </div>
                   </div>
                   <div>
                     <div class="input">
-                      <input class="input__input" value="" required="required" id="form-customer-passport" disabled="disabled">
+                      <input class="input__input" value="" required="required" id="form-customer-passport">
                       <label class="input__label">Серия и номер паспорта</label>
                       <div class="input__error"></div>
                     </div>
@@ -99,28 +99,28 @@
                 <div class="form__row form__container">
                   <div class="form__x2">
                     <div class="input">
-                      <input class="input__input" value="" required="required" id="form-borrower-name" disabled="disabled">
+                      <input class="input__input" value="" required="required" id="form-borrower-name">
                       <label class="input__label">ФИО</label>
                       <div class="input__error"></div>
                     </div>
                   </div><span class="form__checkbox">
-                    <input type="checkbox" id="form-customer-borrower-same" disabled="">
+                    <input type="checkbox" id="form-customer-borrower-same">
                     <label for="form-customer-borrower-same">Заказчик и заемщик одно лицо</label></span>
                 </div>
                 <div class="form__row form__container">
-                  <div class="form__time">
-                    <div class="form__label">Время показа объекта</div>
+                  <div class="form__time" id="editInspectionTime">
+                    <div class="form__label">Желаемое время осмотра</div>
                     <div class="form__container">
                       <div class="form__half">
                         <div class="input">
-                          <input class="input__input" value="" required="required" id="form-date" disabled="disabled">
+                          <input class="input__input" value="" required="required" id="form-date">
                           <label class="input__label">Дата</label>
                           <div class="input__error"></div>
                         </div>
                       </div>
                       <div class="form__half">
                         <div class="input input--select">
-                          <select class="input__select" required="required" id="form-time" disabled="disabled">
+                          <select class="input__select" required="required" id="form-time">
                             <option value=""></option>
                             <option value="FROM_9_TO_12">С 9 до 12</option>
                             <option value="FROM_12_TO_16">С 12 до 16</option>
@@ -132,10 +132,22 @@
                       </div>
                     </div>
                   </div>
+                  <div class="form__time" id="viewInspectionTime">
+                    <div class="form__label">Запланированное время осмотра</div>
+                    <div class="form__container">
+                      <div>
+                        <div class="input">
+                          <input class="input__input" value="" required="required" id="form-customer-inspection-time">
+                          <label class="input__label">Запланированное время осмотра</label>
+                          <div class="input__error"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                   <div>
                     <div class="form__label">Комментарий к заказу</div>
                     <div class="input input--textarea">
-                      <textarea class="input__textarea" required="required" id="form-comment" disabled="disabled"></textarea>
+                      <textarea class="input__textarea" required="required" id="form-comment"></textarea>
                       <label class="input__label">Введите ваш коментарий</label>
                       <div class="input__error"></div>
                     </div>

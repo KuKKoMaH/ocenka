@@ -1,3 +1,4 @@
+import swal from 'sweetalert2';
 import { getParam } from '../../js/history';
 import * as API from '../../js/api';
 import Auth from '../../js/Auth';
@@ -45,7 +46,18 @@ if ($invoice.length) {
       $('#toDocs').show();
     }
 
-    $('#toDocs, #toOrder').on('click', (e) => {
+    $('#toOrder').on('click', (e) => {
+      e.preventDefault();
+      const $button = $(e.currentTarget);
+      API.createOrder(orderId, Auth.token)
+        .then(() => (window.location.href = `${$button.prop('href')}?order=${orderId}`))
+        .catch(err => swal({
+          type:  'error',
+          title: err.responseJSON.error,
+        }));
+    });
+
+    $('#toDocs').on('click', (e) => {
       e.preventDefault();
       const $button = $(e.currentTarget);
       window.location.href = `${$button.prop('href')}?order=${orderId}`;

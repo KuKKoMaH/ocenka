@@ -14,16 +14,18 @@ class Auth {
         this.token = token;
         this.phone = phone;
 
-        API.getProfile(token).then(
-          profile => {
-            this.profile = profile;
-            this.profileDef.resolve(profile);
-          },
-          () => {
-            this.setToken(null, null);
-            this.profileDef.reject('auth_expired');
-          }
-        );
+        setTimeout(() => {
+          API.getProfile(token).then(
+            profile => {
+              this.profile = profile;
+              this.profileDef.resolve(profile);
+            },
+            () => {
+              this.setToken(null, null);
+              this.profileDef.reject('auth_expired');
+            }
+          );
+        }, 0);
       }
     } else {
       this.profileDef.reject('not_auth');

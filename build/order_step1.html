@@ -111,8 +111,8 @@
                         <label for="form-customer-borrower-same">Заказчик и заемщик одно лицо</label></span>
                     </div>
                     <div class="form__row form__container">
-                      <div class="form__time">
-                        <div class="form__label">Время показа объекта</div>
+                      <div class="form__time" id="editInspectionTime">
+                        <div class="form__label">Желаемое время осмотра</div>
                         <div class="form__container">
                           <div class="form__half">
                                 <div class="input">
@@ -130,6 +130,18 @@
                                     <option value="FROM_16_TO_19">С 16 до 19</option>
                                   </select>
                                   <label class="input__label">Время</label>
+                                  <div class="input__error"></div>
+                                </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form__time" id="viewInspectionTime">
+                        <div class="form__label">Запланированное время осмотра</div>
+                        <div class="form__container">
+                          <div>
+                                <div class="input">
+                                  <input class="input__input" value="" required="" id="form-customer-inspection-time">
+                                  <label class="input__label">Запланированное время осмотра</label>
                                   <div class="input__error"></div>
                                 </div>
                           </div>

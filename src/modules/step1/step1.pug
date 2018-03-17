@@ -13,40 +13,44 @@ mixin step1(edit)
       .form__apart: +input('Квартира')(id='form-flat' disabled)
 
     .form__label Тип объекта
-    .form__row: +input('Выберите тип объекта', false, true)(id='form-cost' disabled=edit)
+    .form__row: +input('Выберите тип объекта', false, true)(id='form-cost')
 
     div#bank
       .form__label Выберите банк-кредитор
-      .form__row: +input('Выберите банк', false, true)(id='form-bank' disabled=edit)
+      .form__row: +input('Выберите банк', false, true)(id='form-bank' )
 
     .form__label Выберите оценочную компанию
-    .form__row: +input('Выберите оценочную компанию', false, true)(id='form-evaluating-company' disabled=edit)
+    .form__row: +input('Выберите оценочную компанию', false, true)(id='form-evaluating-company')
 
     .form__label Данные заказчика оценки
     .form__row.form__container
-      .form__x2: +input('ФИО')(id='form-customer-name' disabled=edit)
-      div: +input('Серия и номер паспорта')(id='form-customer-passport' disabled=edit)
+      .form__x2: +input('ФИО')(id='form-customer-name' )
+      div: +input('Серия и номер паспорта')(id='form-customer-passport' )
 
     .form__label Данные заемщика
     .form__row.form__container
-      .form__x2: +input('ФИО')(id='form-borrower-name' disabled=edit)
+      .form__x2: +input('ФИО')(id='form-borrower-name' )
       span.form__checkbox
-        input(type='checkbox' id='form-customer-borrower-same' disabled=edit)
+        input(type='checkbox' id='form-customer-borrower-same')
         label(for='form-customer-borrower-same') Заказчик и заемщик одно лицо
 
     .form__row.form__container
-      .form__time
-        .form__label Время показа объекта
+      .form__time(id='editInspectionTime')
+        .form__label Желаемое время осмотра
         .form__container
-          .form__half: +input('Дата')(id='form-date' disabled=edit)
-          .form__half: +input('Время', false, true)(id='form-time' disabled=edit)
+          .form__half: +input('Дата')(id='form-date')
+          .form__half: +input('Время', false, true)(id='form-time')
             option(value='')
             option(value='FROM_9_TO_12') С 9 до 12
             option(value='FROM_12_TO_16') С 12 до 16
             option(value='FROM_16_TO_19') С 16 до 19
+      .form__time(id='viewInspectionTime')
+        .form__label Запланированное время осмотра
+        .form__container
+          div: +input('Запланированное время осмотра')(id='form-customer-inspection-time')
       div
         .form__label Комментарий к заказу
-        +input('Введите ваш коментарий', false, false, true)(id='form-comment' disabled=edit)
+        +input('Введите ваш коментарий', false, false, true)(id='form-comment')
 
     if(!edit)
       .form__row: .form__checkbox

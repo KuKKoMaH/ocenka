@@ -7,19 +7,20 @@ import Auth from '../../js/Auth';
 export default function processOrder(order) {
   const $form = $('#form-order');
   const isEdit = $form.data('edit');
+  const canChange = order.canChangeOrderForm;
 
   const id = getParam('id');
   const operation = getParam('operation');
   const reference = getParam('reference');
   const error = getParam('error');
   if (id && operation && reference) {
-    if(error) {
+    if (error) {
       swal({
         type:  'error',
         title: 'Во время оплаты произошла ошибка',
         text:  'Попробуйте еще раз',
       });
-    }else {
+    } else {
       swal({
         type:  'success',
         title: 'Оплата успешно принята',
@@ -42,17 +43,21 @@ export default function processOrder(order) {
 
   $('#form-customer-name').val(order.customerName);
   $('#form-customer-passport').val(order.customerPassport);
-  // $('#form-customer-phone').val(order.customerPhone).mask('+7 (999) 999-99-99');
 
   $('#form-borrower-name').val(order.borrowerName);
-  // $('#form-borrower-passport').val(order.borrowerPassport);
-  // $('#form-borrower-phone').val(order.borrowerPhone).mask('+7 (999) 999-99-99');
 
   if (order.inspectionDate) $('#form-date').val(order.inspectionDate);
   if (order.inspectionTimeBlock) $('#form-time').val(order.inspectionTimeBlock);
+  if (order.inspectionTime) $('#form-customer-inspection-time').val(order.inspectionTime);
 
-  // $('#form-purchasePrice').val(order.objectSalePrice);
   $('#form-comment').val(order.comment);
+
+  if (!canChange) {
+    $form.find('input, select, textarea, textarea').attr('disabled', true);
+    $('#editInspectionTime').hide();
+  } else {
+    $('#viewInspectionTime').hide();
+  }
 
   const $cost = new Input({
     $el:       $('#form-cost').parent(),
@@ -60,7 +65,6 @@ export default function processOrder(order) {
     validator: { 'Выберите тип объекта': val => !!val },
     onChange:  setPrice,
   });
-
   const $bank = new Input({
     $el:       $('#form-bank').parent(),
     type:      'select',
@@ -71,19 +75,12 @@ export default function processOrder(order) {
       setBank(value);
     }
   });
-
   const $evaluatingCompany = new Input({
     $el:       $('#form-evaluating-company').parent(),
     type:      'select',
-    // render:    {
-    //   option: (item, escape) => {
-    //     return `<div class="option">${escape(item.name)}<span class="option__rating">рейтинг: ${item.rating}</span></div>`;
-    //   }
-    // },
     validator: { 'Выберите компанию': val => !!val },
     onChange:  setPrice,
   });
-
   const $customerName = new Input({
     $el:         $('#form-customer-name').parent(),
     type:        'suggestions',
@@ -98,29 +95,12 @@ export default function processOrder(order) {
     type:      'papers',
     validator: { 'Введите паспортные данные': val => !!val },
   });
-  // const $customerPhone = new Input({
-  //   $el:       $('#form-customer-phone').parent(),
-  //   type:      'phone',
-  //   validator: { 'Введите номер телефона': val => !!val },
-  // });
-
   const $borrowerName = new Input({
     $el:         $('#form-borrower-name').parent(),
     type:        'suggestions',
     suggestType: 'NAME',
     validator:   { 'Введите ФИО': val => customerBorrowerSame || !!val },
   });
-  // const $borrowerPassport = new Input({
-  //   $el:       $('#form-borrower-passport').parent(),
-  //   type:      'papers',
-  //   validator: { 'Введите паспортные данные': val => customerBorrowerSame || !!val },
-  // });
-  // const $borrowerPhone = new Input({
-  //   $el:       $('#form-borrower-phone').parent(),
-  //   type:      'phone',
-  //   validator: { 'Введите номер телефона': val => customerBorrowerSame || !!val },
-  // });
-
   const $date = new Input({
     $el:       $('#form-date').parent(),
     type:      'date',
@@ -131,16 +111,22 @@ export default function processOrder(order) {
     type:      'select',
     validator: { 'Выберите время': val => !!val },
   });
-  // const $purchasePrice = new Input({
-  //   $el:       $('#form-purchasePrice').parent(),
-  //   type:      'currency',
-  //   validator: { 'Введите цену продажи': ( val ) => !!val },
-  // });
-
   const $comment = new Input({
     $el:  $('#form-comment').parent(),
     type: 'textarea',
   });
+
+  const fields = [
+    $evaluatingCompany,
+    $bank,
+    $customerName,
+    $customerPassport,
+    $borrowerName,
+    $date,
+    $time,
+    $comment,
+    $cost
+  ];
 
   API.getTypes(Auth.token).then(types => {
     $cost.setOptions(types);
@@ -154,23 +140,7 @@ export default function processOrder(order) {
   });
   if (order.objectType) $cost.setValue(order.objectType);
 
-  const fields = [
-    $bank,
-    // $purchasePrice,
-    $customerName,
-    $customerPassport,
-    // $customerPhone,
-    $borrowerName,
-    // $borrowerPassport,
-    // $borrowerPhone,
-    $date,
-    $time,
-    $evaluatingCompany,
-    $comment,
-    $cost
-  ];
-
-  if(order.payStatus === 'Оплачено') {
+  if (order.payStatus === 'Оплачено') {
     $('#pay_buttons').hide();
   }
 
