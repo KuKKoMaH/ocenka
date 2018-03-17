@@ -3,7 +3,7 @@ import Auth from './Auth';
 
 const doRequest = (params) => {
   return fetch(params).catch((err) => {
-    const skipCheckExpired = params && params.skipCheckExpired;
+    const skipCheckExpired = params.options && params.options.skipCheckExpired;
     if (!skipCheckExpired && err.responseJSON.message === 'Token expired') {
       return Auth.showLoginPopup().then(
         () => fetch({ ...params, options: { token: Auth.token } }),
