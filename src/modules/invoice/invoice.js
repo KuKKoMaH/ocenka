@@ -44,9 +44,10 @@ if ($invoice.length) {
       $('#toOrder').show();
     }else {
       $('#toDocs').show();
+      $('#toDone').show();
     }
 
-    $('#toOrder').on('click', (e) => {
+    $('#toDone').on('click', (e) => {
       e.preventDefault();
       const $button = $(e.currentTarget);
       API.createOrder(orderId, Auth.token)
@@ -57,7 +58,7 @@ if ($invoice.length) {
         }));
     });
 
-    $('#toDocs').on('click', (e) => {
+    $('#toDocs, #toOrder').on('click', (e) => {
       e.preventDefault();
       const $button = $(e.currentTarget);
       window.location.href = `${$button.prop('href')}?order=${orderId}`;
